@@ -139,16 +139,18 @@ direction TB
 	    +int attack
 	    +String name
 	    +int position
+	    +DefensiveEquipment defensiveEquipment
 	    +move()
+	    +useDefensiveEquip(defensiveEquipment)
     }
 
     class Warrior {
-	    Weapon weapon
+	    +Weapon weapon
 	    +equip(Weapon)
     }
 
     class Wizard {
-	    Spell spell
+	    +Spell spell
 	    +equip(Spell)
     }
 
