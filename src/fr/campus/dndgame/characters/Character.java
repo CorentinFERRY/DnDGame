@@ -15,10 +15,7 @@ public abstract class Character {
         this.name = name;
         this.health = health;
         this.attack = attack;
-        this.position = 1;
-
     }
-
     //Getter and Setter
     public String getType(){
         return type;
@@ -46,5 +43,9 @@ public abstract class Character {
     // Methode toString()
     public String toString() {
         return type + " '" + name + "' (Health: " + health + ", Attack: " + attack + ")";
+    }
+
+    public void move(){
+        this.position += 1;
     }
 }

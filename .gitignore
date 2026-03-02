@@ -1,9 +1,11 @@
 ### IntelliJ IDEA ###
+.idea/
+src/META-INF/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
-
+.iml
 ### Eclipse ###
 .apt_generated
 .classpath
