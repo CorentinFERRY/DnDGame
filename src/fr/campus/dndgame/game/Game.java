@@ -7,6 +7,13 @@ import fr.campus.dndgame.characters.Wizard;
 import fr.campus.dndgame.utils.Dice;
 import fr.campus.dndgame.utils.Menu;
 
+/**
+ * Classe principale gérant la logique du jeu Dond et Dragons.
+ * Gère le création des personnages, le déroulement des tours et la progression du jeu.
+ * 
+ * @author CorentinFERRY
+ * @version 1.0
+ */
 public class Game {
 
     private final Menu menu;
@@ -15,15 +22,22 @@ public class Game {
     private Character player;
     private boolean gameFinished = false;
 
+    /**
+     * Constructeur pour initialiser une nouvelle partie.
+     * Crée le menu, le plateau et le dé.
+     */
     public Game() {
         menu = new Menu();
         board = new Board(64);
         dice = new Dice(6);
     }
 
-    // -------------------------
-    // Menu principal
-    // -------------------------
+    // ========== GESTION PRINCIPALE ==========
+    
+    /**
+     * Démarre le jeu en affichant le menu principal.
+     * Boucle jusqu'à ce que l'utilisateur quitte.
+     */
     public void start() {
         menu.showMessage("Bienvenu sur mon jeu DnD !");
         boolean exit = false;
@@ -51,9 +65,12 @@ public class Game {
         }
     }
 
-    // -------------------------
-    // Commencer une nouvelle partie
-    // -------------------------
+    // ========== DÉMARRAGE ET RELANCE DE LA PARTIE ==========
+    
+    /**
+     * Démarre une nouvelle partie avec le personnage actuel.
+     * Vérifie qu'un personnage a été créé avant de commencer.
+     */
     private void startGame() {
         if (player == null) {
             menu.showMessage("Vous devez créer un personnage avant de commencer !");
@@ -72,9 +89,10 @@ public class Game {
         }
     }
 
-    // -------------------------
-    // Recommencer la partie
-    // -------------------------
+    /**
+     * Recommence une partie avec le personnage actuel et sa position initiale.
+     * Vérifie qu'un personnage existe avant de recommencer.
+     */
     private void restartGame() {
         if (player == null) {
             menu.showMessage("Aucun personnage. Créez-en un d'abord !");
@@ -92,9 +110,10 @@ public class Game {
         }
     }
 
-    // -------------------------
-    // Un tour : lancer le dé et avancer case par case
-    // -------------------------
+    /**
+     * Exécute un tour de jeu : lance le dé et avance le personnage.
+     * Cherche les cases spéciales et vérifie si le plateau est terminé.
+     */
     public void playTurn() {
         if (player == null) {
             menu.showMessage("Aucun personnage créé !");
@@ -125,9 +144,10 @@ public class Game {
         }
     }
 
-    // -------------------------
-    // Créer le personnage
-    // -------------------------
+    /**
+     * Crée un nouveau personnage en permettant au joueur de choisir le type et le nom.
+     * Types disponibles : Guerrier ou Magicien.
+     */
     private void createCharacter() {
         String[] types = {"Warrior", "Wizard"};
         int typeChoice = menu.displayMenu("Choisissez votre type de personnage", types);
@@ -142,13 +162,23 @@ public class Game {
                 player = new Wizard(name);
                 break;
         }
-
+    
         menu.showMessage("Personnage créé avec succès !");
     }
-
+    /**
+     * Retourne le personnage actuel du jeu.
+     *
+     * @return Le personnage joueur
+     */
     public Character getPlayer() {
         return player;
     }
+    
+    /**
+     * Vérifie si la partie est terminée.
+     *
+     * @return true si la partie est finie, false sinon
+     */
     public boolean isGameFinished() {
         return gameFinished;
     }
