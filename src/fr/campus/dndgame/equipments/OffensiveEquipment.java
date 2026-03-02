@@ -1,6 +1,6 @@
 package fr.campus.dndgame.equipments;
 
-public class OffensiveEquipment extends Equipment{
+public abstract class OffensiveEquipment extends Equipment{
 
     private final int attackBonus;
 
@@ -16,6 +16,6 @@ public class OffensiveEquipment extends Equipment{
 
     //Methode toString()
     public String toString(){
-        return super.toString() + " (Attaque: " + attackBonus + ")";
+        return " (Attaque: " + attackBonus + ")";
     }
 }

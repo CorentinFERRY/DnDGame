@@ -15,6 +15,7 @@ public class Board {
     public int getSize() {
         return size;
     }
+
     public Cell getCell(int position) {
         if (position < 1) {
             return cells[0];
