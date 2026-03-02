@@ -7,6 +7,7 @@ public abstract class Character {
     private final int health;
     private final int attack;
     private String name;
+    private int position;
 
 
     protected Character (String type, String name, int health, int attack){
@@ -14,6 +15,7 @@ public abstract class Character {
         this.name = name;
         this.health = health;
         this.attack = attack;
+        this.position = 1;
 
     }
 
@@ -34,6 +36,12 @@ public abstract class Character {
         this.name = name;
     }
     public abstract String getOffensiveInfo();
+    public int getPosition() {
+        return position;
+    }
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     // Methode toString()
     public String toString() {

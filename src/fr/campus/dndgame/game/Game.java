@@ -33,6 +33,9 @@ public class Game {
         menu.showMessage(player.toString() + " : " + player.getOffensiveInfo());
     }
 
+    public void playTurn(){
+
+    }
     private void createCharacter(){
         String[] types = {"Warrior", "Wizard"};
         int typeChoice = menu.displayMenu("Choisissez votre type de personnage", types);
