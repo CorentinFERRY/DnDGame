@@ -60,6 +60,7 @@ Ou directement depuis votre IDE, lancez la classe `Main.java`.
 - **Armes** : Augmentent les dégâts réservées au Warrior
 - **Sorts** : Capacités spéciales pour les wizards
 - **Potions** : Récupération de santé
+- **Shields** : Reduction de dommage 
 
 ### 🗺️ Plateau de jeu
 
@@ -69,7 +70,7 @@ Ou directement depuis votre IDE, lancez la classe `Main.java`.
 
 ### 🎲 Mécanique de hasard
 
-- Système de dés pour les probabilités
+- Système de dés
 - Boîte surprise avec récompenses aléatoires
 
 ---
