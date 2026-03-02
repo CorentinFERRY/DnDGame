@@ -205,6 +205,7 @@ direction TB
     Board -- Cell
     Game -- Dice
     Game -- Character
+    Character -- DefensiveEquipment
     Warrior --|> Character
     Wizard --|> Character
     OffensiveEQuipment --|> Equipment
