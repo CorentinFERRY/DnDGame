@@ -9,7 +9,7 @@ public class DefensiveEquipment extends Equipment{
     }
 
     //Getter & Setter
-    public int getAttackBonus(){
+    public int getEffect(){
         return effect;
     }
 

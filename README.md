@@ -88,4 +88,137 @@ src/fr/campus/dndgame/
 
 ---
 
+```mermaid
+classDiagram
+direction TB
+    class Menu {
+	    +getStringInput(message)
+	    +getIntInput(message,min,max))
+	    +showMessage(message)
+	    +displayMenu(title, options[])
+    }
+
+    class Game {
+	    +Menu menu
+	    +Board board
+	    +Dice dice
+	    +Character player
+	    +boolean gameFinished
+	    +start()
+	    +startGame()
+	    +restartGame()
+	    +playTurn()
+	    +createCharacter()
+	    +getCharacter()
+	    +isGameFinished()
+    }
+
+    class Board {
+	    +int size
+	    Cell[] cells
+	    +isLastCell()
+    }
+
+    class Cell {
+	    +Enemy enemy
+	    +SurpriseBox box
+	    +isEmpty()
+	    +removeEnemy()
+	    +removeBox()
+    }
+
+    class Dice {
+	    +Random random
+	    +int nbrFaces
+	    +roll()
+    }
+
+    class Character {
+	    +String type
+	    +int health
+	    +int attack
+	    +String name
+	    +int position
+	    +move()
+    }
+
+    class Warrior {
+	    Weapon weapon
+	    +equip(Weapon)
+    }
+
+    class Wizard {
+	    Spell spell
+	    +equip(Spell)
+    }
+
+    class Equipment {
+	    +String type
+	    +String name
+    }
+
+    class OffensiveEQuipment {
+	    +int attackBonus
+    }
+
+    class DefensiveEquipment {
+	    +int effect
+    }
+
+    class Weapon {
+    }
+
+    class Spell {
+    }
+
+    class Potion {
+	    +int lifeBonus
+    }
+
+    class Enemy {
+	    +String name
+	    +int attack
+	    +int health
+	    +attack(Character)
+	    +takeDamage(int)
+	    +isAlive()
+    }
+
+    class Sorcerer {
+    }
+
+    class Goblin {
+    }
+
+    class Dragon {
+    }
+
+    class SurpriseBox {
+	    +Equipment equipment
+	    +open()
+    }
+
+    Game -- Menu
+    Game -- Board
+    Board -- Cell
+    Game -- Dice
+    Game -- Character
+    Warrior --|> Character
+    Wizard --|> Character
+    OffensiveEQuipment --|> Equipment
+    DefensiveEquipment --|> Equipment
+    Weapon --|> OffensiveEQuipment
+    Spell --|> OffensiveEQuipment
+    Potion --|> DefensiveEquipment
+    Warrior -- Weapon
+    Wizard -- Spell
+    Cell -- Enemy
+    Sorcerer --|> Enemy
+    Goblin --|> Enemy
+    Dragon --|> Enemy
+    Cell -- SurpriseBox
+```
+
+---
+
 **Amusez-vous bien dans votre aventure ! 🗡️✨**
