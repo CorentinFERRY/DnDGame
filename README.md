@@ -10,6 +10,7 @@ Un jeu de rôle Donjon & Dragon en Java où vous dirigez un personnage dans des 
 
 - Java 11 ou supérieur
 - Un IDE Java (IntelliJ IDEA, Eclipse, etc.) ou compilateur Java
+- IDK Java SE 17 (LTS)
 
 ### Instructions
 
