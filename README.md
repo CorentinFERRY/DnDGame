@@ -35,6 +35,18 @@ Ou directement depuis votre IDE, lancez la classe `Main.java`.
 
 ---
 
+### Générer la Javadoc
+
+Pour générer la documentation Javadoc du projet :
+
+```bash
+javadoc -d docs/javadoc -sourcepath src fr.campus.dndgame fr.campus.dndgame.board fr.campus.dndgame.characters fr.campus.dndgame.enemies fr.campus.dndgame.equipments fr.campus.dndgame.game fr.campus.dndgame.utils
+```
+
+Cela crée un dossier `docs/javadoc` contenant la documentation HTML. Ouvrez `docs/javadoc/index.html` dans votre navigateur pour consulter la documentation.
+
+---
+
 ## ✨ Fonctionnalités
 
 ### 🎭 Créations de personnages
@@ -95,7 +107,7 @@ classDiagram
 direction TB
     class Menu {
 	    +getStringInput(message)
-	    +getIntInput(message,min,max))
+	    +getIntInput(message,min,max)
 	    +showMessage(message)
 	    +displayMenu(title, options[])
     }
