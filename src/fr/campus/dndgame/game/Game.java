@@ -171,6 +171,10 @@ public class Game {
 
     }
 
+    /**
+     * Modifie le nom d'un personnage créé après vérification d'un personnage existant
+     *
+     */
     private void updateCharacter(){
         if (isPlayerNotReady()) {
             menu.showMessage("Aucun personnage. Créez-en un d'abord !");
@@ -179,7 +183,7 @@ public class Game {
         String name = menu.getStringInput("Entrez le nouveau nom de votre personnage :");
         player.setName(name);
         menu.showMessage(player.toString() + " " + player.getOffensiveInfo() + ", " + player.getDefensiveInfo());
-        menu.showMessage("Personnage créé avec succès !");
+        menu.showMessage("Nom modifié avec succès !");
     }
     /**
      * Retourne le personnage actuel du jeu.
