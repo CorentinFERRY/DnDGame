@@ -28,8 +28,8 @@ public class Game {
      */
     public Game() {
         menu = new Menu();
-        board = new Board(64);
-        dice = new Dice(6);
+        board = new Board(5);
+        dice = new Dice(1);
     }
 
     // ========== GESTION PRINCIPALE ==========
@@ -40,6 +40,7 @@ public class Game {
      */
     public void start() {
         menu.showMessage("Bienvenu sur mon jeu DnD !");
+        board.initBoard();
         boolean exit = false;
 
         while (!exit) {
@@ -59,6 +60,7 @@ public class Game {
                 case 3 -> restartGame();
                 case 4 -> {
                     menu.showMessage("Au revoir !");
+                    menu.closeScanner();
                     exit = true;
                 }
             }
@@ -142,6 +144,8 @@ public class Game {
             menu.showMessage(player.getName() + " avance d'un case, nouvelle position : "
                     + player.getPosition() + " / " + board.getSize());
         }
+        // Affiche si la case contient un ennemi ou une boite surprise
+        menu.showMessage(board.getCell(player.getPosition()).toString());
     }
 
     /**
@@ -162,8 +166,10 @@ public class Game {
                 player = new Wizard(name);
                 break;
         }
-    
+
+        menu.showMessage(player.toString() + " " + player.getOffensiveInfo() + ", " + player.getDefensiveInfo());
         menu.showMessage("Personnage créé avec succès !");
+
     }
     /**
      * Retourne le personnage actuel du jeu.

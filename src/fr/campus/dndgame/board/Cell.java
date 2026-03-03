@@ -1,5 +1,8 @@
 package fr.campus.dndgame.board;
 
+import fr.campus.dndgame.enemies.Enemy;
+import fr.campus.dndgame.utils.SurpriseBox;
+
 /**
  * Classe représentant une case du plateau de jeu.
  * Chaque case a un numéro qui l'identifie.
@@ -9,7 +12,8 @@ package fr.campus.dndgame.board;
  */
 public class Cell {
     private int number;
-
+    private Enemy enemy = null;
+    private SurpriseBox box = null;
     /**
      * Constructeur pour créer une case.
      *
@@ -18,7 +22,7 @@ public class Cell {
     public Cell(int number){
         this.number = number;
     }
-    
+    // ========== GETTERS et SETTERS =========="
     /**
      * Retourne le numéro de la case.
      *
@@ -27,7 +31,6 @@ public class Cell {
     public int getNumber() {
         return number;
     }
-    
     /**
      * Définit le numéro de la case.
      *
@@ -36,13 +39,36 @@ public class Cell {
     public void setNumber(int number) {
         this.number = number;
     }
+    public Enemy getEnemy() {
+        return enemy;
+    }
+    public void setEnemy(Enemy enemy) {
+        this.enemy = enemy;
+    }
+    public SurpriseBox getBox() {
+        return box;
+    }
+    public void setBox(SurpriseBox box) {
+        this.box = box;
+    }
 
+    public boolean isEmpty(){
+        return (enemy==null & box==null);
+    }
     /**
      * Retourne une représentation textuelle de la case.
      *
-     * @return Une chaîne décrivant la case
+     * @return Une chaîne décrivant la case et son contenu
      */
     public String toString() {
-        return "Case n°: " + number;
+        if (enemy != null){
+            return "Case n°: " + number + ".\nVous tomber sur un ennemi : " + enemy.toString();
+        }
+        else if(box != null){
+            return "Case n°: " + number + ".\nVous dropez une box qui contient : " + box.toString();
+        }
+        else {
+            return "Case n°: " + number + ".\n";
+        }
     }
 }

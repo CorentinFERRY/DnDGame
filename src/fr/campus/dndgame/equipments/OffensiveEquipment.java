@@ -40,6 +40,6 @@ public abstract class OffensiveEquipment extends Equipment{
      * @return Une chaîne décrivant le bonus d'attaque
      */
     public String toString(){
-        return " (Attaque: " + attackBonus + ")";
+        return super.toString() + " (Attaque: " + attackBonus + ")";
     }
 }

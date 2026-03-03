@@ -23,6 +23,7 @@ public abstract class Character {
 
     /**
      * Constructeur protégé pour initialiser un personnage.
+     * Il défini également les points de vie maximum du personnage.
      *
      * @param type Le type de personnage (ex: "Warrior", "Wizard")
      * @param name Le nom du personnage
@@ -158,7 +159,7 @@ public abstract class Character {
      * @return Une chaîne de caractères décrivant le personnage
      */
     public String toString() {
-        return type + " '" + name + "' (Health: " + health + ", Attack: " + attack + ")";
+        return type + " '" + name + "' (Vie: " + health + ", Attaque: " + attack + ")";
     }
 
     /**

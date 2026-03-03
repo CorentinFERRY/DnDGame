@@ -1,5 +1,12 @@
 package fr.campus.dndgame.board;
 
+import fr.campus.dndgame.enemies.Dragon;
+import fr.campus.dndgame.equipments.Potion;
+import fr.campus.dndgame.equipments.Weapon;
+import fr.campus.dndgame.utils.SurpriseBox;
+
+import java.awt.*;
+
 /**
  * Classe représentant le plateau de jeu.
  * Le plateau est composé d'une série de cases que les personnages doivent traverser.
@@ -18,13 +25,25 @@ public class Board {
      */
     public Board(int size){
         this.size = size;
+    }
 
+    /**
+     * Initialise le plateau de jeu et ces cases
+     */
+    public void initBoard(){
+        Weapon weapon = new Weapon("Epée",10);
+        Potion potion = new Potion("Petite potion",2);
+        Dragon dragon = new Dragon();
+        SurpriseBox box1 = new SurpriseBox(weapon);
+        SurpriseBox box2 = new SurpriseBox(potion);
         cells = new Cell[size];
         for (int i =0 ; i < size; i++){
             cells[i] = new Cell(i+1);
         }
+        cells[1].setEnemy(dragon);
+        cells[2].setBox(box1);
+        cells[3].setBox(box2);
     }
-    
     /**
      * Retourne le nombre total de cases du plateau.
      *
