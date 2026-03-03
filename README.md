@@ -118,6 +118,7 @@ direction TB
     class Board {
 	    +int size
 	    Cell[] cells
+	    +initBoard()
 	    +isLastCell()
     }
 
@@ -138,10 +139,13 @@ direction TB
     class Character {
 	    +String type
 	    +int health
+	    +int maxHealth
 	    +int attack
 	    +String name
 	    +int position
 	    +DefensiveEquipment defensiveEquipment
+	    +getOffensiveInfo()
+	    +getDefensiveInfo()
 	    +move()
 	    +useDefensiveEquip(defensiveEquipment)
     }
@@ -166,7 +170,7 @@ direction TB
     }
 
     class DefensiveEquipment {
-	    +int effect
+        +use(Character)
     }
 
     class Weapon {
@@ -176,13 +180,20 @@ direction TB
     }
 
     class Potion {
-	    +int lifeBonus
+	    +int healAmount
+	    +use(Character)
+    }
+    
+    class Shield {
+        +int defenseBonus
+        +use(Character)
     }
 
     class Enemy {
 	    +String name
 	    +int attack
 	    +int health
+	    +int maxHealth
 	    +attack(Character)
 	    +takeDamage(int)
 	    +isAlive()
@@ -215,6 +226,7 @@ direction TB
     Weapon --|> OffensiveEQuipment
     Spell --|> OffensiveEQuipment
     Potion --|> DefensiveEquipment
+    Shield --|> DefensiveEquipment
     Warrior -- Weapon
     Wizard -- Spell
     Cell -- Enemy
