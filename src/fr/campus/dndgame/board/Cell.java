@@ -6,7 +6,8 @@ import fr.campus.dndgame.utils.SurpriseBox;
 /**
  * Classe représentant une case du plateau de jeu.
  * Chaque case a un numéro qui l'identifie.
- * 
+ * Un case peut etre vide (par default) avoir une boite surprise ou un ennemi
+ *
  * @author CorentinFERRY
  * @version 1.0
  */
@@ -39,19 +40,44 @@ public class Cell {
     public void setNumber(int number) {
         this.number = number;
     }
+    /**
+     * Retourne l'ennemi présent sur la case'.
+     *
+     * @return un ennemi
+     */
     public Enemy getEnemy() {
         return enemy;
     }
+    /**
+     * Définit un ennemi sur la case.
+     *
+     * @param enemy Le nouvel enemy
+     */
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
     }
+    /**
+     * Retourne la boite surprise présente sur la case'.
+     *
+     * @return une boite
+     */
     public SurpriseBox getBox() {
         return box;
     }
+    /**
+     * Définit une boite sur la case.
+     *
+     * @param box La nouvelle boite
+     */
     public void setBox(SurpriseBox box) {
         this.box = box;
     }
 
+    /**
+     * Vérifie si la case est vide ou non
+     *
+     * @return true si la case vie false sinon
+     */
     public boolean isEmpty(){
         return (enemy==null & box==null);
     }
