@@ -88,10 +88,10 @@ public class Cell {
      */
     public String toString() {
         if (enemy != null){
-            return "Case n°: " + number + ".\nVous tomber sur un ennemi : " + enemy.toString();
+            return "Case n°: " + number + ".\nVous tomber sur un ennemi : " + enemy;
         }
         else if(box != null){
-            return "Case n°: " + number + ".\nVous dropez une box qui contient : " + box.toString();
+            return "Case n°: " + number + ".\nVous dropez une box qui contient : " + box;
         }
         else {
             return "Case n°: " + number + ".\n";
