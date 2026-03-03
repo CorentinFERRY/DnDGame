@@ -68,38 +68,32 @@ public class Game {
     }
 
     // ========== DÉMARRAGE ET RELANCE DE LA PARTIE ==========
-    
     /**
      * Démarre une nouvelle partie avec le personnage actuel.
      * Vérifie qu'un personnage a été créé avant de commencer.
      */
     private void startGame() {
-        if (player == null) {
-            menu.showMessage("Vous devez créer un personnage avant de commencer !");
+        if (!isPlayerReady("Vous devez créer un personnage avant de commencer !")) {
             return;
         }
-
-        player.setPosition(1);
-        gameFinished = false;
-        menu.showMessage("\nLa partie commence !");
-        menu.showMessage("Position actuelle : " + player.getPosition() + " / " + board.getSize());
-
-        // Boucle tour par tour
-        while (!gameFinished) {
-            menu.getStringInput("\nAppuyez sur Entrée pour lancer le tour...");
-            playTurn();
-        }
+        launchGame();
     }
-
     /**
      * Recommence une partie avec le personnage actuel et sa position initiale.
      * Vérifie qu'un personnage existe avant de recommencer.
      */
     private void restartGame() {
-        if (player == null) {
-            menu.showMessage("Aucun personnage. Créez-en un d'abord !");
+        if (!isPlayerReady("Aucun personnage. Créez-en un d'abord !")) {
             return;
         }
+        launchGame();
+    }
+
+    /**
+     * Lance réellement la partie
+     *
+     */
+    private void launchGame(){
         player.setPosition(1);
         gameFinished = false;
         menu.showMessage("\nPartie recommencée !");
@@ -117,8 +111,7 @@ public class Game {
      * Affiche les cases spéciales et vérifie si le plateau est terminé.
      */
     public void playTurn() {
-        if (player == null) {
-            menu.showMessage("Aucun personnage créé !");
+        if (!isPlayerReady("Aucun personnage créé !")) {
             return;
         }
         if (gameFinished) {
@@ -187,5 +180,13 @@ public class Game {
      */
     public boolean isGameFinished() {
         return gameFinished;
+    }
+
+    private boolean isPlayerReady(String errorMessage){
+        if (player == null) {
+            menu.showMessage(errorMessage);
+            return false;
+        }
+        return true;
     }
 }

@@ -36,14 +36,14 @@ public class Board {
         Potion potion = new Potion("Petite potion",2);
         Dragon dragon = new Dragon();
         SurpriseBox box1 = new SurpriseBox(weapon);
+        SurpriseBox box2 = new SurpriseBox(potion);
         cells = new Cell[size];
         for (int i =0 ; i < size; i++){
             cells[i] = new Cell(i+1);
         }
         cells[1].setEnemy(dragon);
         cells[2].setBox(box1);
-        box1.setEquipment(potion);
-        cells[3].setBox(box1);
+        cells[3].setBox(box2);
     }
     /**
      * Retourne le nombre total de cases du plateau.
