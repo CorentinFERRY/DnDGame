@@ -114,7 +114,7 @@ public class Game {
 
     /**
      * Exécute un tour de jeu : lance le dé et avance le personnage.
-     * Cherche les cases spéciales et vérifie si le plateau est terminé.
+     * Affiche les cases spéciales et vérifie si le plateau est terminé.
      */
     public void playTurn() {
         if (player == null) {

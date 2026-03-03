@@ -52,6 +52,11 @@ public class Shield extends DefensiveEquipment {
                 " et gagne " + defenseBonus + " points de défense.");
     }
 
+    /**
+     * Retourne une représentation textuelle du bouclier.
+     *
+     * @return Une chaîne décrivant le bonus de defense
+     */
     @Override
     public String toString() {
         return super.toString() + " (" + defenseBonus + " de defense bonus)";

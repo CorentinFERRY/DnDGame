@@ -3,7 +3,7 @@ package fr.campus.dndgame.enemies;
 /**
  * Classe abstraite représentant un ennemi dans le jeu.
  * Les ennemies possèdent des caractéristiques comme la santé et l'attaque.
- * Ils sont défini par un nom
+ * Ils sont défini par un nom.
  *
  * @author CorentinFERRY
  * @version 1.0
@@ -29,7 +29,7 @@ public abstract class Enemy {
         this.maxHealth =health;
     }
 
-    // ========== GETTERS =========="
+    // ========== GETTERS & SETTERS ==========
     /**
      * Retourne le nom de l'ennemi.
      *
@@ -74,6 +74,11 @@ public abstract class Enemy {
         return maxHealth;
     }
 
+    /**
+     * Retourne une représentation textuelle de l'ennemi.
+     *
+     * @return Une chaîne de caractères décrivant l'ennemi.
+     */
     @Override
     public String toString() {
         return name + " (HP: " + health + " attaque: " + attack +")";

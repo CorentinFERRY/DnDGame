@@ -61,6 +61,11 @@ public class Potion extends DefensiveEquipment{
                 "PV actuels : " + character.getHealth());
     }
 
+    /**
+     * Retourne une représentation textuelle de la potion.
+     *
+     * @return Une chaîne décrivant le montant de soin
+     */
     public String toString(){
         return super.toString() + " (Soin de: " + healAmount+")";
     }

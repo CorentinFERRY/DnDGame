@@ -28,7 +28,5 @@ public abstract class DefensiveEquipment extends Equipment{
      * @param character Le personnage qui utilise l'équipement
      */
     public abstract void use(Character character);
-    public String toString(){
-        return super.toString();
-    }
+
 }

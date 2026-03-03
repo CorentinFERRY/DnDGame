@@ -39,7 +39,7 @@ public abstract class Character {
         this.defensiveEquipment = null;
     }
     
-    // ========== GETTERS et SETTERS =========="
+    // ========== GETTERS et SETTERS ==========
     /**
      * Retourne le type du personnage.
      *
@@ -151,8 +151,7 @@ public abstract class Character {
      * @return Informations sur l'équipement offensif
      */
     public abstract String getOffensiveInfo();
-    
-    // ========== MÉTHODES UTILITAIRES ==========
+
     /**
      * Retourne une représentation textuelle du personnage.
      *
@@ -162,6 +161,7 @@ public abstract class Character {
         return type + " '" + name + "' (Vie: " + health + ", Attaque: " + attack + ")";
     }
 
+    // ========== MÉTHODES UTILITAIRES ==========
     /**
      * Déplace le personnage d'une case sur le plateau.
      */
