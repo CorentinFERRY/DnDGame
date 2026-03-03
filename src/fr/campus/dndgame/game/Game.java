@@ -28,8 +28,8 @@ public class Game {
      */
     public Game() {
         menu = new Menu();
-        board = new Board(5);
-        dice = new Dice(1);
+        board = new Board(64);
+        dice = new Dice(6);
     }
 
     // ========== GESTION PRINCIPALE ==========
@@ -73,9 +73,11 @@ public class Game {
      * Vérifie qu'un personnage a été créé avant de commencer.
      */
     private void startGame() {
-        if (!isPlayerReady("Vous devez créer un personnage avant de commencer !")) {
+        if (isPlayerNotReady()) {
+            menu.showMessage("Vous devez créer un personnage avant de commencer !");
             return;
         }
+        menu.showMessage("\nDébut de la partie !");
         launchGame();
     }
     /**
@@ -83,9 +85,11 @@ public class Game {
      * Vérifie qu'un personnage existe avant de recommencer.
      */
     private void restartGame() {
-        if (!isPlayerReady("Aucun personnage. Créez-en un d'abord !")) {
+        if (isPlayerNotReady()) {
+            menu.showMessage("Aucun personnage. Créez-en un d'abord !");
             return;
         }
+        menu.showMessage("\nPartie recommencée !");
         launchGame();
     }
 
@@ -96,7 +100,6 @@ public class Game {
     private void launchGame(){
         player.setPosition(1);
         gameFinished = false;
-        menu.showMessage("\nPartie recommencée !");
         menu.showMessage("Position actuelle : " + player.getPosition() + " / " + board.getSize());
 
         // Rejouer tour par tour
@@ -111,7 +114,8 @@ public class Game {
      * Affiche les cases spéciales et vérifie si le plateau est terminé.
      */
     public void playTurn() {
-        if (!isPlayerReady("Aucun personnage créé !")) {
+        if (isPlayerNotReady()) {
+            menu.showMessage("Aucun personnage créé !");
             return;
         }
         if (gameFinished) {
@@ -182,11 +186,12 @@ public class Game {
         return gameFinished;
     }
 
-    private boolean isPlayerReady(String errorMessage){
-        if (player == null) {
-            menu.showMessage(errorMessage);
-            return false;
-        }
-        return true;
+    /**
+     * Vérifie qu'un personnage est crée
+     *
+     * @return true si le personnage n'existe pas sinon false
+     */
+    private boolean isPlayerNotReady(){
+        return player == null;
     }
 }
