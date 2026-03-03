@@ -39,7 +39,7 @@ public class Game {
      * Boucle jusqu'à ce que l'utilisateur quitte.
      */
     public void start() {
-        menu.showMessage("Bienvenu sur mon jeu DnD !");
+        menu.showMessage("Bienvenue sur mon jeu DnD !");
         board.initBoard();
         boolean exit = false;
 

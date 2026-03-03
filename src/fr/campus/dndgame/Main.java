@@ -1,5 +1,6 @@
 package fr.campus.dndgame;
 
+import fr.campus.dndgame.db.DatabaseConnection;
 import fr.campus.dndgame.game.Game;
 
 /**
@@ -17,7 +18,12 @@ public class Main {
      * @param args Arguments de la ligne de commande (non utilisés)
      */
     public static void main(String[] args) {
+        DatabaseConnection db = new DatabaseConnection();
+        db.testSelectAll();
+
         Game game = new Game();
         game.start();
+
+
     }
 }
