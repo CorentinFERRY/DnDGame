@@ -47,6 +47,7 @@ public class Game {
 
             String[] mainOptions = {
                     "Créer un personnage",
+                    "Modifier le personnage",
                     "Démarrer la partie",
                     "Recommencer la partie",
                     "Quitter le jeu"
@@ -56,9 +57,10 @@ public class Game {
 
             switch (choice) {
                 case 1 -> createCharacter();
-                case 2 -> startGame();
-                case 3 -> restartGame();
-                case 4 -> {
+                case 2 -> updateCharacter();
+                case 3 -> startGame();
+                case 4 -> restartGame();
+                case 5 -> {
                     menu.showMessage("Au revoir !");
                     menu.closeScanner();
                     exit = true;
@@ -167,6 +169,17 @@ public class Game {
         menu.showMessage(player.toString() + " " + player.getOffensiveInfo() + ", " + player.getDefensiveInfo());
         menu.showMessage("Personnage créé avec succès !");
 
+    }
+
+    private void updateCharacter(){
+        if (isPlayerNotReady()) {
+            menu.showMessage("Aucun personnage. Créez-en un d'abord !");
+            return;
+        }
+        String name = menu.getStringInput("Entrez le nouveau nom de votre personnage :");
+        player.setName(name);
+        menu.showMessage(player.toString() + " " + player.getOffensiveInfo() + ", " + player.getDefensiveInfo());
+        menu.showMessage("Personnage créé avec succès !");
     }
     /**
      * Retourne le personnage actuel du jeu.

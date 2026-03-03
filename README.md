@@ -121,10 +121,13 @@ direction TB
 	    +start()
 	    +startGame()
 	    +restartGame()
+	    +lauchGame()
 	    +playTurn()
 	    +createCharacter()
+	    +updateCharacter()
 	    +getCharacter()
 	    +isGameFinished()
+	    +playerIsNotReady()
     }
 
     class Board {
