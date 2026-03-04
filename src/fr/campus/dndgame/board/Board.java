@@ -15,7 +15,7 @@ import java.awt.*;
  * @version 1.0
  */
 public class Board {
-    private final int size;
+    private int size;
     private Cell[] cells;
 
     /**
@@ -69,6 +69,14 @@ public class Board {
             return cells[size - 1];
         }
         return cells[position - 1];
+    }
+
+    public Cell[] getCells() {
+        return cells;
+    }
+
+    public void setCells(Cell[] cells) {
+        this.cells = cells;
     }
 
     /**

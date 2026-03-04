@@ -14,10 +14,11 @@ import fr.campus.dndgame.equipments.DefensiveEquipment;
 public abstract class Character {
     private final String type;
     private int health;
-    private final int maxHealth;
-    private final int attack;
+    private int maxHealth;
+    private int attack;
     private String name;
     private int position;
+    private int defense;
     private DefensiveEquipment defensiveEquipment;
 
 
@@ -37,6 +38,7 @@ public abstract class Character {
         this.maxHealth = health;
         this.attack = attack;
         this.defensiveEquipment = null;
+        this.defense = 0;
     }
     
     // ========== GETTERS et SETTERS ==========
@@ -128,6 +130,22 @@ public abstract class Character {
      */
     public void setDefensiveEquipment(DefensiveEquipment equipment) {
         this.defensiveEquipment = equipment;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 
     // ========== MÉTHODES D'AFFICHAGE ==========
