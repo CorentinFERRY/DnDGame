@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class CellDaoImpl implements CellDao {
+public class CellDaoImpl implements CellDao {
     static Connection con = DatabaseConnection.getConnection();
 
     @Override
@@ -44,5 +44,20 @@ public abstract class CellDaoImpl implements CellDao {
             list.add(cell);
         }
         return list;
+    }
+
+    @Override
+    public int add(Cell cell) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public void delete(int id) throws SQLException {
+
+    }
+
+    @Override
+    public void update(Cell cell) throws SQLException {
+
     }
 }

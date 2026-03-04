@@ -8,8 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-public abstract class BoardDaoImpl implements BoardDao {
+public class BoardDaoImpl implements BoardDao {
     static Connection con = DatabaseConnection.getConnection();
 
     @Override
@@ -28,7 +29,22 @@ public abstract class BoardDaoImpl implements BoardDao {
     }
 
     @Override
+    public List<Board> getBoards() throws SQLException {
+        return List.of();
+    }
+
+    @Override
     public int add(Board board) throws SQLException {
         return 0;
+    }
+
+    @Override
+    public void delete(int id) throws SQLException {
+
+    }
+
+    @Override
+    public void update(Board board) throws SQLException {
+
     }
 }

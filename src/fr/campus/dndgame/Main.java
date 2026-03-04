@@ -1,7 +1,14 @@
 package fr.campus.dndgame;
 
+import fr.campus.dndgame.characters.Character;
+import fr.campus.dndgame.characters.Warrior;
+import fr.campus.dndgame.dao.impl.CharacterDaoImpl;
+import fr.campus.dndgame.dao.interfaces.CharacterDao;
 import fr.campus.dndgame.db.DatabaseConnection;
 import fr.campus.dndgame.game.Game;
+
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Classe principale pour lancer le jeu Donjons et Dragons.
@@ -19,6 +26,13 @@ public class Main {
      */
     public static void main(String[] args) {
         DatabaseConnection db = new DatabaseConnection();
+        Character test = new Warrior("test");
+        CharacterDaoImpl testAdd = new CharacterDaoImpl();
+        try {
+            testAdd.add(test);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         db.testSelectAll();
 
         Game game = new Game();
