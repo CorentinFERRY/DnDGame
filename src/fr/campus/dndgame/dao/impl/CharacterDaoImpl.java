@@ -43,9 +43,8 @@ public class CharacterDaoImpl implements CharacterDao {
             int position = rs.getInt("position");
             int attack = rs.getInt("attack");
             int defense = rs.getInt("defense");
-            Character hero = CharacterFactory.createFromDatabase(id, type, name, health, maxHealth, attack, defense,
+            return CharacterFactory.createFromDatabase(id, type, name, health, maxHealth, attack, defense,
                     position);
-            return hero;
         }
         return null;
     }
