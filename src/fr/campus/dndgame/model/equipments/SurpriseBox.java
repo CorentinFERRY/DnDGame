@@ -1,6 +1,4 @@
-package fr.campus.dndgame.model.utils;
-
-import fr.campus.dndgame.model.equipments.Equipment;
+package fr.campus.dndgame.model.equipments;
 
 /**
  * Classe représentant une boite surprise dans le jeu.
@@ -12,6 +10,7 @@ import fr.campus.dndgame.model.equipments.Equipment;
  */
 public class SurpriseBox {
     private int id;
+    private int name;
     private Equipment equipment;
 
 
@@ -35,6 +34,14 @@ public class SurpriseBox {
     }
 
     // ========== GETTERS & SETTERS ==========
+
+    public void setName(int name) {
+        this.name = name;
+    }
+
+    public int getName() {
+        return name;
+    }
 
     public int getId() {
         return id;

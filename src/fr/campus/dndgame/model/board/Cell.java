@@ -2,7 +2,7 @@ package fr.campus.dndgame.model.board;
 
 import fr.campus.dndgame.model.characters.Character;
 import fr.campus.dndgame.model.enemies.Enemy;
-import fr.campus.dndgame.model.utils.SurpriseBox;
+import fr.campus.dndgame.model.equipments.SurpriseBox;
 
 /**
  * Classe représentant une case du plateau de jeu.

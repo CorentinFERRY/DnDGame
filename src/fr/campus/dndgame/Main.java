@@ -4,7 +4,7 @@ import fr.campus.dndgame.model.characters.Character;
 import fr.campus.dndgame.model.characters.Warrior;
 import fr.campus.dndgame.dao.impl.CharacterDaoImpl;
 import fr.campus.dndgame.db.DatabaseConnection;
-import fr.campus.dndgame.model.game.Game;
+import fr.campus.dndgame.game.Game;
 
 import java.sql.SQLException;
 

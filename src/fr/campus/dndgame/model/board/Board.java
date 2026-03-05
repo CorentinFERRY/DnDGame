@@ -3,7 +3,7 @@ package fr.campus.dndgame.model.board;
 import fr.campus.dndgame.model.enemies.Dragon;
 import fr.campus.dndgame.model.equipments.Potion;
 import fr.campus.dndgame.model.equipments.Weapon;
-import fr.campus.dndgame.model.utils.SurpriseBox;
+import fr.campus.dndgame.model.equipments.SurpriseBox;
 
 import java.util.ArrayList;
 import java.util.List;

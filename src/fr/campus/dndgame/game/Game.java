@@ -1,12 +1,10 @@
-package fr.campus.dndgame.model.game;
+package fr.campus.dndgame.game;
 
 import fr.campus.dndgame.factory.CharacterFactory;
 import fr.campus.dndgame.model.board.Board;
 import fr.campus.dndgame.model.characters.Character;
-import fr.campus.dndgame.model.characters.Warrior;
-import fr.campus.dndgame.model.characters.Wizard;
-import fr.campus.dndgame.model.utils.Dice;
-import fr.campus.dndgame.model.utils.Menu;
+import fr.campus.dndgame.utils.Dice;
+import fr.campus.dndgame.utils.Menu;
 
 /**
  * Classe principale gérant la logique du jeu Dond et Dragons.
