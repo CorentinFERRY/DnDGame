@@ -1,11 +1,12 @@
-package fr.campus.dndgame.board;
+package fr.campus.dndgame.model.board;
 
-import fr.campus.dndgame.enemies.Dragon;
-import fr.campus.dndgame.equipments.Potion;
-import fr.campus.dndgame.equipments.Weapon;
-import fr.campus.dndgame.utils.SurpriseBox;
+import fr.campus.dndgame.model.enemies.Dragon;
+import fr.campus.dndgame.model.equipments.Potion;
+import fr.campus.dndgame.model.equipments.Weapon;
+import fr.campus.dndgame.model.utils.SurpriseBox;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe représentant le plateau de jeu.
@@ -15,8 +16,10 @@ import java.awt.*;
  * @version 1.0
  */
 public class Board {
+    private int id;
+    private String name;
     private int size;
-    private Cell[] cells;
+    private List<Cell> cells;
 
     /**
      * Constructeur pour créer un plateau de jeu.
@@ -25,6 +28,20 @@ public class Board {
      */
     public Board(int size){
         this.size = size;
+        this.cells = new ArrayList<>();
+    }
+
+    /**
+     * Constructeur pour créer un plateau de jeu depuis la BDD.
+     * @param id l'identifiant du plateau en BDD
+     * @param name Le nom du plateau de jeu
+     * @param size Nombre de cases du plateau
+     */
+    public Board(int id,int size,String name){
+        this.size = size;
+        this.id=id;
+        this.cells = new ArrayList<>();
+        this.name = name;
     }
 
     /**
@@ -37,14 +54,41 @@ public class Board {
         Dragon dragon = new Dragon();
         SurpriseBox box1 = new SurpriseBox(weapon);
         SurpriseBox box2 = new SurpriseBox(potion);
-        cells = new Cell[size];
+        cells.clear();
         for (int i =0 ; i < size; i++){
-            cells[i] = new Cell(i+1);
+            cells.add(new Cell(i+1));
         }
-        cells[1].setEnemy(dragon);
-        cells[2].setBox(box1);
-        cells[3].setBox(box2);
+        cells.get(1).setEnemy(dragon);
+        cells.get(2).setBox(box1);
+        cells.get(3).setBox(box2);
     }
+
+    /**
+     * Retourne l'id du plateau
+     *
+     * @return l'id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Défini un identifiant du plateau
+     *
+     * @param id identifiant en BDD du plateau
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /**
      * Retourne le nombre total de cases du plateau.
      *
@@ -63,19 +107,29 @@ public class Board {
      */
     public Cell getCell(int position) {
         if (position < 1) {
-            return cells[0];
+            return cells.get(0);
         }
         if (position > size) {
-            return cells[size - 1];
+            return cells.get(size - 1);
         }
-        return cells[position - 1];
+        return cells.get(position - 1);
     }
 
-    public Cell[] getCells() {
+    /**
+     * Retourne une collection de cellules
+     *
+     * @return List de cellules
+     */
+    public List<Cell> getCells() {
         return cells;
     }
 
-    public void setCells(Cell[] cells) {
+    /**
+     * Défini la liste de cellules du plateau
+     *
+     * @param cells un List de cellules
+     */
+    public void setCells(List<Cell> cells) {
         this.cells = cells;
     }
 

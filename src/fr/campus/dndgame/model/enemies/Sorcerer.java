@@ -1,4 +1,4 @@
-package fr.campus.dndgame.enemies;
+package fr.campus.dndgame.model.enemies;
 
 /**
  * Classe représentant un Sorcier dans le jeu.

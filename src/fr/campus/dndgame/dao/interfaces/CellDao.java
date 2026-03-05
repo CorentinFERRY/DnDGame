@@ -1,6 +1,6 @@
 package fr.campus.dndgame.dao.interfaces;
 
-import fr.campus.dndgame.board.Cell;
+import fr.campus.dndgame.model.board.Cell;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -11,4 +11,5 @@ public interface CellDao {
     public int add(Cell cell) throws SQLException;
     public void delete(int id) throws SQLException;
     public void update(Cell cell) throws SQLException;
+    public List<Cell> getCellsByBoardId(int board_id) throws SQLException;
 }

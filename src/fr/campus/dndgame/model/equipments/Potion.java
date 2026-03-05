@@ -1,6 +1,6 @@
-package fr.campus.dndgame.equipments;
+package fr.campus.dndgame.model.equipments;
 
-import fr.campus.dndgame.characters.Character;
+import fr.campus.dndgame.model.characters.Character;
 
 /**
  * Classe représentant une potion, un équipement défensif.

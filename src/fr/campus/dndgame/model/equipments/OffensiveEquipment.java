@@ -1,4 +1,4 @@
-package fr.campus.dndgame.equipments;
+package fr.campus.dndgame.model.equipments;
 
 /**
  * Classe abstraite représentant un équipement offensif.
@@ -9,7 +9,8 @@ package fr.campus.dndgame.equipments;
  */
 public abstract class OffensiveEquipment extends Equipment{
 
-    private final int attackBonus;
+    private int attackBonus;
+    private int id;
 
     /**
      * Constructeur protégé pour initialiser un équipement offensif.
@@ -32,6 +33,18 @@ public abstract class OffensiveEquipment extends Equipment{
      */
     public int getAttackBonus(){
         return attackBonus;
+    }
+
+    public void setAttackBonus(int attackBonus) {
+        this.attackBonus = attackBonus;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     /**

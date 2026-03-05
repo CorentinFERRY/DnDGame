@@ -1,4 +1,4 @@
-package fr.campus.dndgame.utils;
+package fr.campus.dndgame.model.utils;
 
 import java.util.Random;
 

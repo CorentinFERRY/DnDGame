@@ -1,6 +1,6 @@
 package fr.campus.dndgame.dao.interfaces;
 
-import fr.campus.dndgame.characters.Character;
+import fr.campus.dndgame.model.characters.Character;
 
 import java.sql.SQLException;
 import java.util.List;

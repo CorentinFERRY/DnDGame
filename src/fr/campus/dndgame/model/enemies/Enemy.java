@@ -1,4 +1,4 @@
-package fr.campus.dndgame.enemies;
+package fr.campus.dndgame.model.enemies;
 
 /**
  * Classe abstraite représentant un ennemi dans le jeu.
@@ -9,11 +9,12 @@ package fr.campus.dndgame.enemies;
  * @version 1.0
  */
 public abstract class Enemy {
+    private int id;
     private final String name;
-    private final int attack;
+    private int attack;
     private int health;
-    private final int maxHealth;
-
+    private int maxHealth;
+    private int defense;
     /**
      * Constructeur protégé pour initialiser un ennemi.
      * Il défini également les points de vie maximum de l'ennemi
@@ -27,6 +28,7 @@ public abstract class Enemy {
         this.attack = attack;
         this.health = health;
         this.maxHealth =health;
+        this.defense = 0;
     }
 
     // ========== GETTERS & SETTERS ==========
@@ -72,6 +74,30 @@ public abstract class Enemy {
      */
     public int getMaxHealth() {
         return maxHealth;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 
     /**

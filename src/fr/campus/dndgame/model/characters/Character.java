@@ -1,7 +1,7 @@
-package fr.campus.dndgame.characters;
+package fr.campus.dndgame.model.characters;
 
 
-import fr.campus.dndgame.equipments.DefensiveEquipment;
+import fr.campus.dndgame.model.equipments.DefensiveEquipment;
 
 /**
  * Classe abstraite représentant un personnage dans le jeu.
@@ -12,6 +12,7 @@ import fr.campus.dndgame.equipments.DefensiveEquipment;
  * @version 1.0
  */
 public abstract class Character {
+    private int id;
     private final String type;
     private int health;
     private int maxHealth;
@@ -40,8 +41,26 @@ public abstract class Character {
         this.defensiveEquipment = null;
         this.defense = 0;
     }
-    
     // ========== GETTERS et SETTERS ==========
+
+
+    /**
+     * Retourne l'identifiant du personnage
+     * @return l'id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Défini l'identifiant du personnage
+     *
+     * @param id l'id du personnage
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     /**
      * Retourne le type du personnage.
      *

@@ -1,7 +1,8 @@
-package fr.campus.dndgame.board;
+package fr.campus.dndgame.model.board;
 
-import fr.campus.dndgame.enemies.Enemy;
-import fr.campus.dndgame.utils.SurpriseBox;
+import fr.campus.dndgame.model.characters.Character;
+import fr.campus.dndgame.model.enemies.Enemy;
+import fr.campus.dndgame.model.utils.SurpriseBox;
 
 /**
  * Classe représentant une case du plateau de jeu.
@@ -12,9 +13,12 @@ import fr.campus.dndgame.utils.SurpriseBox;
  * @version 1.0
  */
 public class Cell {
+    private int id;
     private int number;
+    private int boardID;
     private Enemy enemy = null;
     private SurpriseBox box = null;
+    private Character character = null;
     /**
      * Constructeur pour créer une case.
      *
@@ -23,7 +27,51 @@ public class Cell {
     public Cell(int number){
         this.number = number;
     }
+
+    /**
+     * Constructeur pour créer une case depuis la BDD
+     *
+     * @param id L'identifiant de la cellule en BDD
+     * @param number Le numéro identifiant la case
+     */
+    public Cell(int id,int number){
+        this.id = id;
+        this.number = number;
+    }
     // ========== GETTERS et SETTERS =========="
+    /**
+     * Retourne l'identifiant de la cellule en BDD
+     *
+     * @return l'id de la cellule
+     */
+    public int getId() {
+        return id;
+    }
+    /**
+     * Défini l'identifiant de la cellule en BDD
+     *
+     * @param id l'identifiant en BDD
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getBoardId() {
+        return boardID;
+    }
+
+    public void setBoardID(int boardID) {
+        this.boardID = boardID;
+    }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
+
     /**
      * Retourne le numéro de la case.
      *
@@ -79,7 +127,7 @@ public class Cell {
      * @return true si la case vie false sinon
      */
     public boolean isEmpty(){
-        return (enemy==null & box==null);
+        return (enemy==null && box==null && character==null);
     }
     /**
      * Retourne une représentation textuelle de la case.

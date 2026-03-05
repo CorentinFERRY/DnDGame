@@ -1,4 +1,4 @@
-package fr.campus.dndgame.equipments;
+package fr.campus.dndgame.model.equipments;
 
 /**
  * Classe représentant un sort, un équipement offensif.

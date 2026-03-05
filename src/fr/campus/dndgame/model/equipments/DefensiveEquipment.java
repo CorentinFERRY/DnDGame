@@ -1,6 +1,6 @@
-package fr.campus.dndgame.equipments;
+package fr.campus.dndgame.model.equipments;
 
-import fr.campus.dndgame.characters.Character;
+import fr.campus.dndgame.model.characters.Character;
 
 /**
  * Classe abstraite représentant un équipement défensif.
@@ -11,6 +11,7 @@ import fr.campus.dndgame.characters.Character;
  */
 public abstract class DefensiveEquipment extends Equipment{
 
+    private int id;
     /**
      * Constructeur protégé pour initialiser un équipement défensif.
      *
@@ -19,6 +20,14 @@ public abstract class DefensiveEquipment extends Equipment{
      */
     protected DefensiveEquipment(String type,String name){
         super(type,name);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

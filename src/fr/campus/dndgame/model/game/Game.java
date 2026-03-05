@@ -1,11 +1,12 @@
-package fr.campus.dndgame.game;
+package fr.campus.dndgame.model.game;
 
-import fr.campus.dndgame.board.Board;
-import fr.campus.dndgame.characters.Character;
-import fr.campus.dndgame.characters.Warrior;
-import fr.campus.dndgame.characters.Wizard;
-import fr.campus.dndgame.utils.Dice;
-import fr.campus.dndgame.utils.Menu;
+import fr.campus.dndgame.factory.CharacterFactory;
+import fr.campus.dndgame.model.board.Board;
+import fr.campus.dndgame.model.characters.Character;
+import fr.campus.dndgame.model.characters.Warrior;
+import fr.campus.dndgame.model.characters.Wizard;
+import fr.campus.dndgame.model.utils.Dice;
+import fr.campus.dndgame.model.utils.Menu;
 
 /**
  * Classe principale gérant la logique du jeu Dond et Dragons.
@@ -157,16 +158,8 @@ public class Game {
 
         String name = menu.getStringInput("Entrez le nom de votre personnage :");
 
-        switch (typeChoice) {
-            case 1:
-                player = new Warrior(name);
-                break;
-            case 2:
-                player = new Wizard(name);
-                break;
-        }
-
-        menu.showMessage(player.toString() + " " + player.getOffensiveInfo() + ", " + player.getDefensiveInfo());
+        player = CharacterFactory.createNewCharacter(types[typeChoice-1],name);
+        menu.showMessage(player + " " + player.getOffensiveInfo() + ", " + player.getDefensiveInfo());
         menu.showMessage("Personnage créé avec succès !");
 
     }

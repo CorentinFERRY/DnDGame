@@ -1,4 +1,4 @@
-package fr.campus.dndgame.equipments;
+package fr.campus.dndgame.model.equipments;
 
 /**
  * Classe abstraite représentant un équipement dans le jeu.
@@ -8,7 +8,7 @@ package fr.campus.dndgame.equipments;
  * @version 1.0
  */
 public abstract class Equipment {
-    private final String type;
+    private String type;
     private String name;
 
     /**
@@ -23,7 +23,11 @@ public abstract class Equipment {
     }
 
     // ========== GETTERS & SETTERS ==========
-    
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     /**
      * Retourne le type de l'équipement.
      *
