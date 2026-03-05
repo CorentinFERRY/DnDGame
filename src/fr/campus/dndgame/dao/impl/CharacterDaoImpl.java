@@ -10,12 +10,27 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implémentation de l'interface CharacterDao pour la gestion des personnages en
+ * base de données.
+ * Fournit les opérations CRUD pour les personnages en utilisant JDBC.
+ * 
+ * @author CorentinFERRY
+ * @version 1.0
+ */
 public class CharacterDaoImpl implements CharacterDao {
 
     static Connection con = DatabaseConnection.getConnection();
 
+    /**
+     * Récupère un personnage par son identifiant depuis la base de données.
+     * 
+     * @param id L'identifiant du personnage
+     * @return Le personnage correspondant, ou null s'il n'existe pas
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
-    public Character getCharacter(int id) throws SQLException{
+    public Character getCharacter(int id) throws SQLException {
         String query = "SELECT * FROM characters WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, id);
@@ -28,20 +43,27 @@ public class CharacterDaoImpl implements CharacterDao {
             int position = rs.getInt("position");
             int attack = rs.getInt("attack");
             int defense = rs.getInt("defense");
-            Character hero = CharacterFactory.createFromDatabase(id,type,name,health,maxHealth,attack,defense,position);
+            Character hero = CharacterFactory.createFromDatabase(id, type, name, health, maxHealth, attack, defense,
+                    position);
             return hero;
         }
         return null;
     }
 
+    /**
+     * Récupère tous les personnages de la base de données.
+     * 
+     * @return Une liste contenant tous les personnages
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
-    public List<Character> getCharacters() throws SQLException{
+    public List<Character> getCharacters() throws SQLException {
         String query = "SELECT * FROM characters";
         PreparedStatement stmt = con.prepareStatement(query);
         ResultSet rs = stmt.executeQuery();
         List<Character> list = new ArrayList<>();
 
-        while(rs.next()){
+        while (rs.next()) {
             int id = rs.getInt("id");
             String type = rs.getString("type");
             String name = rs.getString("name");
@@ -50,7 +72,8 @@ public class CharacterDaoImpl implements CharacterDao {
             int position = rs.getInt("position");
             int attack = rs.getInt("attack");
             int defense = rs.getInt("defense");
-            Character hero = CharacterFactory.createFromDatabase(id,type,name,health,maxHealth,attack,defense,position);
+            Character hero = CharacterFactory.createFromDatabase(id, type, name, health, maxHealth, attack, defense,
+                    position);
             list.add(hero);
         }
         return list;
@@ -72,45 +95,44 @@ public class CharacterDaoImpl implements CharacterDao {
             ResultSet generatedKeys = stmt.getGeneratedKeys();
             if (generatedKeys.next()) {
                 int id = generatedKeys.getInt(1);
-                character.setId(id);  // Injection de l'id dans character
+                character.setId(id); // Injection de l'id dans character
             }
         }
         return affectedRows;
     }
 
     @Override
-    public void delete(int id) throws SQLException{
+    public void delete(int id) throws SQLException {
         String query = "DELETE FROM characters WHERE id = ?";
         PreparedStatement ps = con.prepareStatement(query);
-        ps.setInt(1,id);
+        ps.setInt(1, id);
         ps.executeUpdate();
     }
 
     @Override
-    public void update(Character character) throws SQLException{
+    public void update(Character character) throws SQLException {
         String query = "UPDATE characters SET name = ?, "
-                        + "health = ?, "
-                        + "attack = ?, "
-                        + "defense = ?, "
-                        + "position = ? WHERE id = ?";
+                + "health = ?, "
+                + "attack = ?, "
+                + "defense = ?, "
+                + "position = ? WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
-        stmt.setString(1,character.getName());
-        stmt.setInt(2,character.getHealth());
-        stmt.setInt(3,character.getAttack());
-        stmt.setInt(4,character.getDefense());
-        stmt.setInt(5,character.getPosition());
-        stmt.setInt(6,character.getId());
+        stmt.setString(1, character.getName());
+        stmt.setInt(2, character.getHealth());
+        stmt.setInt(3, character.getAttack());
+        stmt.setInt(4, character.getDefense());
+        stmt.setInt(5, character.getPosition());
+        stmt.setInt(6, character.getId());
         stmt.executeUpdate();
     }
 
     @Override
-    public void updateHealth(Character character) throws SQLException{
+    public void updateHealth(Character character) throws SQLException {
         String query = "UPDATE characters SET health = ? WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
-        stmt.setInt(1,character.getHealth());
-        stmt.setInt(2,character.getId());
+        stmt.setInt(1, character.getHealth());
+        stmt.setInt(2, character.getId());
         stmt.executeUpdate();
     }
-
 
 }

@@ -5,6 +5,15 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
+/**
+ * Classe gérant la connexion à la base de données.
+ * Établit une connexion statique à la base de données en utilisant les
+ * paramètres
+ * définis dans le fichier de configuration db.properties.
+ * 
+ * @author CorentinFERRY
+ * @version 1.0
+ */
 public class DatabaseConnection {
     private static Connection con = null;
     static {
@@ -26,23 +35,32 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Retourne la connexion à la base de données.
+     * 
+     * @return L'objet Connection statique vers la base de données
+     */
     public static Connection getConnection() {
         return con;
     }
 
+    /**
+     * Teste la connexion à la base de données en récupérant tous les personnages.
+     * Affiche les informations de chaque personnage après récupération.
+     */
     public void testSelectAll() {
         String query = "SELECT * FROM characters";
 
         try (Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+                ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 System.out.println(
-                    rs.getInt("id") +
-                    " | name: " + rs.getString("name") +
-                    " | vie: " + rs.getInt("health") +
-                    " | attaque: " + rs.getInt("attack")
-                );
+                        rs.getInt("id") +
+                                " | name: " + rs.getString("name") +
+                                " | vie: " + rs.getInt("health") +
+                                " | attaque: " + rs.getInt("attack"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -5,23 +5,70 @@ import fr.campus.dndgame.model.characters.Character;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Interface de données pour les opérations CRUD sur les personnages.
+ * Définit les méthodes pour ajouter, récupérer, mettre à jour et supprimer des
+ * personnages
+ * dans la base de données.
+ * 
+ * @author CorentinFERRY
+ * @version 1.0
+ */
 public interface CharacterDao {
 
+    /**
+     * Récupère un personnage par son identifiant.
+     * 
+     * @param id L'identifiant du personnage
+     * @return Le personnage correspondant, ou null s'il n'existe pas
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     public Character getCharacter(int id)
-        throws SQLException;
+            throws SQLException;
 
+    /**
+     * Récupère tous les personnages de la base de données.
+     * 
+     * @return Une liste contenant tous les personnages
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     public List<Character> getCharacters()
-        throws SQLException;
+            throws SQLException;
 
+    /**
+     * Ajoute un nouveau personnage à la base de données.
+     * 
+     * @param character Le personnage à ajouter
+     * @return L'identifiant généré du personnage ajouté
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     public int add(Character character)
-        throws SQLException;
+            throws SQLException;
 
+    /**
+     * Supprime un personnage de la base de données.
+     * 
+     * @param id L'identifiant du personnage à supprimer
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     public void delete(int id)
-        throws SQLException;
+            throws SQLException;
 
+    /**
+     * Met à jour un personnage existant dans la base de données.
+     * 
+     * @param character Le personnage avec les nouvelles données
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     public void update(Character character)
-        throws SQLException;
+            throws SQLException;
 
+    /**
+     * Met à jour la santé d'un personnage dans la base de données.
+     * 
+     * @param character Le personnage avec la nouvelle valeur de santé
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     public void updateHealth(Character character)
-        throws SQLException;
+            throws SQLException;
 }
