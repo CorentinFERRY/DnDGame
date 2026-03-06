@@ -69,12 +69,11 @@ public class Board {
         SurpriseBox boxLargePotion = new SurpriseBox(new LargePotion());
         SurpriseBox boxStandardPotion = new SurpriseBox(new StandardPotion());
         cells.clear();
-        for (int i =0 ; i < size; i++){
-            cells.add(new Cell(i+1));
-        }
         // On crée une liste de positions
         List<Integer> positions = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+
+        for (int i =0 ; i < size; i++){
+            cells.add(new Cell(i+1));
             positions.add(i);
         }
         // On mélange de manière aléatoire les positions
