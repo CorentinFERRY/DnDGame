@@ -9,6 +9,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implémentation DAO pour la gestion des boîtes surprises.
+ */
 public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
 
     static Connection con = DatabaseConnection.getConnection();

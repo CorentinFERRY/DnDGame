@@ -26,11 +26,21 @@ public class Potion extends DefensiveEquipment {
 
     // ========== GETTERS & SETTERS ==========
 
+    /**
+     * Définit l'effet de la potion.
+     *
+     * @param effect points de soin à appliquer
+     */
     @Override
     public void setEffect(int effect) {
         this.healAmount = effect;
     }
 
+    /**
+     * Retourne l'effet de la potion.
+     *
+     * @return points de soin
+     */
     @Override
     public int getEffect() {
         return healAmount;

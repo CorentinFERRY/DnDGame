@@ -76,26 +76,56 @@ public abstract class Enemy {
         return maxHealth;
     }
 
+    /**
+     * Définit l'identifiant de persistance de l'ennemi.
+     *
+     * @param id identifiant en base de données
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Retourne l'identifiant de persistance de l'ennemi.
+     *
+     * @return identifiant en base de données
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Définit la valeur d'attaque de l'ennemi.
+     *
+     * @param attack nouvelle valeur d'attaque
+     */
     public void setAttack(int attack) {
         this.attack = attack;
     }
 
+    /**
+     * Définit la santé maximale de l'ennemi.
+     *
+     * @param maxHealth nouvelle santé maximale
+     */
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }
 
+    /**
+     * Retourne la valeur de défense de l'ennemi.
+     *
+     * @return défense courante
+     */
     public int getDefense() {
         return defense;
     }
 
+    /**
+     * Définit la valeur de défense de l'ennemi.
+     *
+     * @param defense nouvelle valeur de défense
+     */
     public void setDefense(int defense) {
         this.defense = defense;
     }

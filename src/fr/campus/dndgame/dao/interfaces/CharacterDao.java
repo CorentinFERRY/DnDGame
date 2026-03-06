@@ -23,7 +23,7 @@ public interface CharacterDao {
      * @return Le personnage correspondant, ou null s'il n'existe pas
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public Character getCharacter(int id)
+    Character getCharacter(int id)
             throws SQLException;
 
     /**
@@ -32,7 +32,7 @@ public interface CharacterDao {
      * @return Une liste contenant tous les personnages
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public List<Character> getCharacters()
+    List<Character> getCharacters()
             throws SQLException;
 
     /**
@@ -42,7 +42,7 @@ public interface CharacterDao {
      * @return L'identifiant généré du personnage ajouté
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public int add(Character character)
+    int add(Character character)
             throws SQLException;
 
     /**
@@ -51,7 +51,7 @@ public interface CharacterDao {
      * @param id L'identifiant du personnage à supprimer
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public void delete(int id)
+    void delete(int id)
             throws SQLException;
 
     /**
@@ -60,7 +60,7 @@ public interface CharacterDao {
      * @param character Le personnage avec les nouvelles données
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public void update(Character character)
+    void update(Character character)
             throws SQLException;
 
     /**
@@ -69,6 +69,6 @@ public interface CharacterDao {
      * @param character Le personnage avec la nouvelle valeur de santé
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public void updateHealth(Character character)
+    void updateHealth(Character character)
             throws SQLException;
 }

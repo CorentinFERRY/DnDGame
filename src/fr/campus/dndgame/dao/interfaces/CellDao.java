@@ -22,7 +22,7 @@ public interface CellDao {
      * @return La case correspondante, ou null si elle n'existe pas
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public Cell getCell(int id) throws SQLException;
+    Cell getCell(int id) throws SQLException;
 
     /**
      * Récupère toutes les cases de la base de données.
@@ -30,7 +30,7 @@ public interface CellDao {
      * @return Une liste contenant toutes les cases
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public List<Cell> getCells() throws SQLException;
+    List<Cell> getCells() throws SQLException;
 
     /**
      * Ajoute une nouvelle case à la base de données.
@@ -39,7 +39,7 @@ public interface CellDao {
      * @return L'identifiant généré de la case ajoutée
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public int add(Cell cell) throws SQLException;
+    int add(Cell cell) throws SQLException;
 
     /**
      * Supprime une case de la base de données.
@@ -47,7 +47,7 @@ public interface CellDao {
      * @param id L'identifiant de la case à supprimer
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public void delete(int id) throws SQLException;
+    void delete(int id) throws SQLException;
 
     /**
      * Met à jour une case existante dans la base de données.
@@ -55,7 +55,7 @@ public interface CellDao {
      * @param cell La case avec les nouvelles données
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public void update(Cell cell) throws SQLException;
+    void update(Cell cell) throws SQLException;
 
     /**
      * Récupère toutes les cases appartenant à un plateau spécifique.
@@ -64,5 +64,5 @@ public interface CellDao {
      * @return Une liste contenant toutes les cases du plateau
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public List<Cell> getCellsByBoardId(int board_id) throws SQLException;
+    List<Cell> getCellsByBoardId(int board_id) throws SQLException;
 }

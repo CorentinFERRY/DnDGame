@@ -151,18 +151,38 @@ public abstract class Character {
         this.defensiveEquipment = equipment;
     }
 
+    /**
+     * Définit la valeur d'attaque du personnage.
+     *
+     * @param attack nouvelle valeur d'attaque
+     */
     public void setAttack(int attack) {
         this.attack = attack;
     }
 
+    /**
+     * Définit la santé maximale du personnage.
+     *
+     * @param maxHealth nouvelle santé maximale
+     */
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }
 
+    /**
+     * Retourne la valeur de défense du personnage.
+     *
+     * @return défense courante
+     */
     public int getDefense() {
         return defense;
     }
 
+    /**
+     * Définit la valeur de défense du personnage.
+     *
+     * @param defense nouvelle valeur de défense
+     */
     public void setDefense(int defense) {
         this.defense = defense;
     }

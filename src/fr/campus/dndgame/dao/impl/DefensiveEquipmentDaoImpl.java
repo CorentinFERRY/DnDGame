@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implémentation DAO pour les équipements défensifs.
+ */
 public class DefensiveEquipmentDaoImpl implements EquipmentDao {
 
     static Connection con = DatabaseConnection.getConnection();

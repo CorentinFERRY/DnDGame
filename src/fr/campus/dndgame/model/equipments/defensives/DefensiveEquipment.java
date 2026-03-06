@@ -23,14 +23,29 @@ public abstract class DefensiveEquipment extends Equipment {
         super(type,name);
     }
 
+    /**
+     * Retourne l'identifiant de persistance de l'équipement défensif.
+     *
+     * @return identifiant en base de données
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Définit l'identifiant de persistance de l'équipement défensif.
+     *
+     * @param id identifiant en base de données
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Indique que cet équipement n'est pas offensif.
+     *
+     * @return toujours {@code false}
+     */
     @Override
     public boolean isOffensive() {
         return false;

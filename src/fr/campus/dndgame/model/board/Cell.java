@@ -56,18 +56,38 @@ public class Cell {
         this.id = id;
     }
 
+    /**
+     * Retourne l'identifiant du plateau auquel appartient la case.
+     *
+     * @return identifiant du plateau
+     */
     public int getBoardId() {
         return boardID;
     }
 
+    /**
+     * Définit l'identifiant du plateau auquel appartient la case.
+     *
+     * @param boardID identifiant du plateau
+     */
     public void setBoardID(int boardID) {
         this.boardID = boardID;
     }
 
+    /**
+     * Retourne le personnage actuellement positionné sur la case.
+     *
+     * @return personnage présent sur la case, ou {@code null}
+     */
     public Character getCharacter() {
         return character;
     }
 
+    /**
+     * Place un personnage sur la case.
+     *
+     * @param character personnage à placer
+     */
     public void setCharacter(Character character) {
         this.character = character;
     }

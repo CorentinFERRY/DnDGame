@@ -25,6 +25,11 @@ public abstract class Equipment {
 
     // ========== GETTERS & SETTERS ==========
 
+    /**
+     * Définit le type de l'équipement.
+     *
+     * @param type type d'équipement
+     */
     public void setType(String type) {
         this.type = type;
     }
@@ -55,12 +60,40 @@ public abstract class Equipment {
     public void setName(String name){
         this.name = name;
     }
+
+    /**
+     * Retourne l'identifiant de persistance de l'équipement.
+     *
+     * @return identifiant de l'équipement
+     */
     public abstract int getId();
+
+    /**
+     * Définit l'identifiant de persistance de l'équipement.
+     *
+     * @param id identifiant de l'équipement
+     */
     public abstract void setId(int id);
 
+    /**
+     * Retourne la valeur d'effet portée par l'équipement.
+     *
+     * @return valeur d'effet
+     */
     public abstract int getEffect();
+
+    /**
+     * Définit la valeur d'effet portée par l'équipement.
+     *
+     * @param effect valeur d'effet
+     */
     public abstract void setEffect(int effect);
 
+    /**
+     * Indique si l'équipement est offensif.
+     *
+     * @return {@code true} si offensif, sinon {@code false}
+     */
     public abstract boolean isOffensive();
     /**
      * Retourne une représentation textuelle de l'équipement.

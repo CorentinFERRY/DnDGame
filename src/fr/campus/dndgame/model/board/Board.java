@@ -98,10 +98,20 @@ public class Board {
         this.id = id;
     }
 
+    /**
+     * Retourne le nom du plateau.
+     *
+     * @return nom du plateau
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Définit le nom du plateau.
+     *
+     * @param name nouveau nom du plateau
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -115,6 +125,11 @@ public class Board {
         return size;
     }
 
+    /**
+     * Définit le nombre de cases du plateau.
+     *
+     * @param size taille du plateau
+     */
     public void setSize(int size) {
         this.size = size;
     }

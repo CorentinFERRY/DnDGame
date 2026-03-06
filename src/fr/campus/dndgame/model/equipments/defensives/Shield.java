@@ -51,10 +51,22 @@ public class Shield extends DefensiveEquipment {
         System.out.println(character.getName() + " utilise le bouclier " + getName() +
                 " et gagne " + defenseBonus + " points de défense.");
     }
+
+    /**
+     * Retourne l'effet du bouclier.
+     *
+     * @return bonus de défense
+     */
     @Override
     public int getEffect() {
         return defenseBonus;
     }
+
+    /**
+     * Définit l'effet du bouclier.
+     *
+     * @param effect bonus de défense
+     */
     @Override
     public void setEffect(int effect) {
         this.defenseBonus = effect;

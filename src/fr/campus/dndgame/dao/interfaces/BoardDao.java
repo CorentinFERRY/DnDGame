@@ -23,7 +23,7 @@ public interface BoardDao {
          * @return Le plateau correspondant, ou null s'il n'existe pas
          * @throws SQLException en cas d'erreur lors de l'accès à la base de données
          */
-        public Board getBoard(int id)
+        Board getBoard(int id)
                         throws SQLException;
 
         /**
@@ -32,7 +32,7 @@ public interface BoardDao {
          * @return Une liste contenant tous les plateaux
          * @throws SQLException en cas d'erreur lors de l'accès à la base de données
          */
-        public List<Board> getBoards()
+        List<Board> getBoards()
                         throws SQLException;
 
         /**
@@ -42,7 +42,7 @@ public interface BoardDao {
          * @return L'identifiant généré du plateau ajouté
          * @throws SQLException en cas d'erreur lors de l'accès à la base de données
          */
-        public int add(Board board)
+        int add(Board board)
                         throws SQLException;
 
         /**
@@ -51,7 +51,7 @@ public interface BoardDao {
          * @param id L'identifiant du plateau à supprimer
          * @throws SQLException en cas d'erreur lors de l'accès à la base de données
          */
-        public void delete(int id)
+        void delete(int id)
                         throws SQLException;
 
         /**
@@ -60,7 +60,7 @@ public interface BoardDao {
          * @param board Le plateau avec les nouvelles données
          * @throws SQLException en cas d'erreur lors de l'accès à la base de données
          */
-        public void update(Board board)
+        void update(Board board)
                         throws SQLException;
 
         /**
@@ -69,6 +69,6 @@ public interface BoardDao {
          * @return Une liste contenant tous les plateaux avec leurs cases
          * @throws SQLException en cas d'erreur lors de l'accès à la base de données
          */
-        public List<Board> getBoardsWithCells()
+        List<Board> getBoardsWithCells()
                         throws SQLException;
 }

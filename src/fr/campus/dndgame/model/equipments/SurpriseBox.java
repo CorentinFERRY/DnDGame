@@ -35,18 +35,38 @@ public class SurpriseBox {
 
     // ========== GETTERS & SETTERS ==========
 
+    /**
+     * Définit le nom de la boîte surprise.
+     *
+     * @param name nom de la boîte
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Retourne le nom de la boîte surprise.
+     *
+     * @return nom de la boîte
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Retourne l'identifiant de la boîte surprise.
+     *
+     * @return identifiant de la boîte
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Définit l'identifiant de la boîte surprise.
+     *
+     * @param id identifiant en base de données
+     */
     public void setId(int id) {
         this.id = id;
     }

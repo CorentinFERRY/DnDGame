@@ -9,6 +9,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implémentation DAO pour la gestion des ennemis.
+ */
 public class EnemyDaoImpl implements EnemyDao {
 
     static Connection con = DatabaseConnection.getConnection();
