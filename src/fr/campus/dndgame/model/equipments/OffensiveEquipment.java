@@ -25,7 +25,8 @@ public abstract class OffensiveEquipment extends Equipment{
     }
 
     // ========== GETTERS & SETTERS ==========
-    
+
+
     /**
      * Retourne le bonus d'attaque de cet équipement.
      *
@@ -45,6 +46,21 @@ public abstract class OffensiveEquipment extends Equipment{
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public int getEffect() {
+        return attackBonus;
+    }
+
+    @Override
+    public void setEffect(int effect) {
+        this.attackBonus = effect;
+    }
+
+    @Override
+    public boolean isOffensive() {
+        return true;
     }
 
     /**

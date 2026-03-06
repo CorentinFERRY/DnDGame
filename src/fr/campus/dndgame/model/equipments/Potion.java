@@ -25,7 +25,17 @@ public class Potion extends DefensiveEquipment{
     }
 
     // ========== GETTERS & SETTERS ==========
-    
+
+    @Override
+    public void setEffect(int effect) {
+        this.healAmount = effect;
+    }
+
+    @Override
+    public int getEffect() {
+        return healAmount;
+    }
+
     /**
      * Retourne la quantité de points de vie restaurés par la potion.
      *

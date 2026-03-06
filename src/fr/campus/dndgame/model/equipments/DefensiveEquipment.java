@@ -30,6 +30,11 @@ public abstract class DefensiveEquipment extends Equipment{
         this.id = id;
     }
 
+    @Override
+    public boolean isOffensive() {
+        return false;
+    }
+
     /**
      * Utilise l'équipement défensif sur un personnage.
      * Cette méthode doit être implémentée par les sous-classes.

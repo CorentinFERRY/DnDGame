@@ -10,7 +10,7 @@ package fr.campus.dndgame.model.equipments;
  */
 public class SurpriseBox {
     private int id;
-    private int name;
+    private String name;
     private Equipment equipment;
 
 
@@ -35,11 +35,11 @@ public class SurpriseBox {
 
     // ========== GETTERS & SETTERS ==========
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 

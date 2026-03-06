@@ -10,6 +10,7 @@ package fr.campus.dndgame.model.equipments;
 public abstract class Equipment {
     private String type;
     private String name;
+    private int effect;
 
     /**
      * Constructeur protégé pour initialiser un équipement.
@@ -54,7 +55,13 @@ public abstract class Equipment {
     public void setName(String name){
         this.name = name;
     }
+    public abstract int getId();
+    public abstract void setId(int id);
 
+    public abstract int getEffect();
+    public abstract void setEffect(int effect);
+
+    public abstract boolean isOffensive();
     /**
      * Retourne une représentation textuelle de l'équipement.
      *
