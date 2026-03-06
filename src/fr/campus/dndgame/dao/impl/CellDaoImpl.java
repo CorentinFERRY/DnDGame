@@ -73,7 +73,7 @@ public class CellDaoImpl implements CellDao {
      */
     @Override
     public int add(Cell cell) throws SQLException {
-        String query = "INSERT INTO cell(position, board_id, character_id,ennemy_id,surpriseBox_id) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO cells(position, board_id, character_id,enemy_id,surpriseBox_id) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, cell.getNumber());
         stmt.setInt(2, cell.getBoardId());

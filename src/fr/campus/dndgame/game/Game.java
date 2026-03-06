@@ -144,6 +144,7 @@ public class Game {
         }
         // Affiche si la case contient un ennemi ou une boite surprise
         menu.showMessage(board.getCell(player.getPosition()).toString());
+        board.getCell(player.getPosition()).interact(player);
     }
 
     /**

@@ -12,7 +12,10 @@ import fr.campus.dndgame.model.equipments.offensives.Mace;
 import fr.campus.dndgame.model.equipments.offensives.Sword;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * Classe représentant le plateau de jeu.
@@ -55,60 +58,44 @@ public class Board {
      *
      */
     public void initBoard(){
-        int [] drakePos = {45,52,56,62};
-        int [] sorcererPos = {10,20,25,32,35,36,37,40,44,47};
-        int [] goblinPos = {3,6,9,12,15,18,21,24,27,30};
-        int [] boxMacePos = {2,11,5,22,38};
-        int [] boxSwordPos = {19,26,42,53};
-        int [] boxLightPos = {1,4,8,17,23};
-        int [] boxFireBallPos = {48,49};
-        int [] boxStandardPotionPos = {7,13,31,33,39,43};
-        int [] boxLargePotionPos = {28,41};
-        Mace mace = new Mace();
-        Sword sword = new Sword();
-        Lightning light = new Lightning();
-        FireBall fireBall = new FireBall();
-        LargePotion largePotion = new LargePotion();
-        StandardPotion standardPotion = new StandardPotion();
+        // Enemies and Boxes
         Dragon dragon = new Dragon();
         Sorcerer sorcerer = new Sorcerer();
         Goblin goblin = new Goblin();
-        SurpriseBox boxMace = new SurpriseBox(mace);
-        SurpriseBox boxSword = new SurpriseBox(sword);
-        SurpriseBox boxLight = new SurpriseBox(light);
-        SurpriseBox boxFireBall = new SurpriseBox(fireBall);
-        SurpriseBox boxLargePotion = new SurpriseBox(largePotion);
-        SurpriseBox boxStandardPotion = new SurpriseBox(standardPotion);
+        SurpriseBox boxMace = new SurpriseBox(new Mace());
+        SurpriseBox boxSword = new SurpriseBox(new Sword());
+        SurpriseBox boxLight = new SurpriseBox(new Lightning());
+        SurpriseBox boxFireBall = new SurpriseBox(new FireBall());
+        SurpriseBox boxLargePotion = new SurpriseBox(new LargePotion());
+        SurpriseBox boxStandardPotion = new SurpriseBox(new StandardPotion());
         cells.clear();
         for (int i =0 ; i < size; i++){
             cells.add(new Cell(i+1));
         }
-        for(int pos : drakePos){
-            cells.get(pos-1).setEnemy(dragon);
+        // On crée une liste de positions
+        List<Integer> positions = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            positions.add(i);
         }
-        for(int pos : sorcererPos){
-            cells.get(pos-1).setEnemy(sorcerer);
-        }
-        for(int pos : goblinPos){
-            cells.get(pos-1).setEnemy(goblin);
-        }
-        for(int pos : boxFireBallPos){
-            cells.get(pos-1).setBox(boxFireBall);
-        }
-        for(int pos : boxMacePos){
-            cells.get(pos-1).setBox(boxMace);
-        }
-        for(int pos : boxSwordPos){
-            cells.get(pos-1).setBox(boxSword);
-        }
-        for(int pos : boxLightPos){
-            cells.get(pos-1).setBox(boxLight);
-        }
-        for(int pos : boxStandardPotionPos){
-            cells.get(pos-1).setBox(boxStandardPotion);
-        }
-        for (int pos : boxLargePotionPos){
-            cells.get(pos-1).setBox(boxLargePotion);
+        // On mélange de manière aléatoire les positions
+        Collections.shuffle(positions);
+
+        // On créer un map avec les règles (4 dragons, 10 Sorciers etc ...)
+        Map<Consumer<Cell>, Integer> generationRules = Map.of(
+                cell -> cell.setEnemy(dragon), 4,
+                cell -> cell.setEnemy(sorcerer), 10,
+                cell -> cell.setEnemy(goblin), 10,
+                cell -> cell.setBox(boxMace), 5,
+                cell -> cell.setBox(boxLight), 5,
+                cell -> cell.setBox(boxSword), 4,
+                cell -> cell.setBox(boxFireBall), 2,
+                cell -> cell.setBox(boxStandardPotion), 6,
+                cell -> cell.setBox(boxLargePotion), 2
+        );
+
+        //On place nos éléments de façon aléatoire via placeRandom()
+        for (Map.Entry<Consumer<Cell>, Integer> rule : generationRules.entrySet()) {
+            placeRandom(positions, rule.getValue(), rule.getKey());
         }
     }
 
@@ -218,5 +205,13 @@ public class Board {
      */
     public String toString() {
         return "Le plateau à " + size + " cases.";
+    }
+
+    private void placeRandom(List<Integer> positions, int count, Consumer<Cell> action) {
+        for (int i = 0; i < count; i++) {
+            // On supprime de la liste la cellule qui à recupérer un élement
+            int pos = positions.remove(0);
+            action.accept(cells.get(pos));
+        }
     }
 }
