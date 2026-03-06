@@ -27,8 +27,8 @@ public class Game {
      */
     public Game() {
         menu = new Menu();
-        board = new Board(15);
-        dice = new Dice(1);
+        board = new Board(64);
+        dice = new Dice(6);
     }
 
     // ========== GESTION PRINCIPALE ==========

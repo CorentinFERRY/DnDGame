@@ -15,7 +15,7 @@ import fr.campus.dndgame.model.equipments.SurpriseBox;
 public class Cell {
     private int id;
     private int number;
-    private int boardID;
+    private int boardId;
     private Enemy enemy = null;
     private SurpriseBox box = null;
     private Character character = null;
@@ -62,16 +62,16 @@ public class Cell {
      * @return identifiant du plateau
      */
     public int getBoardId() {
-        return boardID;
+        return boardId;
     }
 
     /**
      * Définit l'identifiant du plateau auquel appartient la case.
      *
-     * @param boardID identifiant du plateau
+     * @param boardId identifiant du plateau
      */
-    public void setBoardID(int boardID) {
-        this.boardID = boardID;
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
     }
 
     /**

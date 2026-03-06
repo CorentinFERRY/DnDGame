@@ -1,6 +1,8 @@
 package fr.campus.dndgame.model.board;
 
 import fr.campus.dndgame.model.enemies.Dragon;
+import fr.campus.dndgame.model.enemies.Goblin;
+import fr.campus.dndgame.model.enemies.Sorcerer;
 import fr.campus.dndgame.model.equipments.*;
 import fr.campus.dndgame.model.equipments.defensives.LargePotion;
 import fr.campus.dndgame.model.equipments.defensives.StandardPotion;
@@ -53,6 +55,15 @@ public class Board {
      *
      */
     public void initBoard(){
+        int [] drakePos = {45,52,56,62};
+        int [] sorcererPos = {10,20,25,32,35,36,37,40,44,47};
+        int [] goblinPos = {3,6,9,12,15,18,21,24,27,30};
+        int [] boxMacePos = {2,11,5,22,38};
+        int [] boxSwordPos = {19,26,42,53};
+        int [] boxLightPos = {1,4,8,17,23};
+        int [] boxFireBallPos = {48,49};
+        int [] boxStandardPotionPos = {7,13,31,33,39,43};
+        int [] boxLargePotionPos = {28,41};
         Mace mace = new Mace();
         Sword sword = new Sword();
         Lightning light = new Lightning();
@@ -60,6 +71,8 @@ public class Board {
         LargePotion largePotion = new LargePotion();
         StandardPotion standardPotion = new StandardPotion();
         Dragon dragon = new Dragon();
+        Sorcerer sorcerer = new Sorcerer();
+        Goblin goblin = new Goblin();
         SurpriseBox boxMace = new SurpriseBox(mace);
         SurpriseBox boxSword = new SurpriseBox(sword);
         SurpriseBox boxLight = new SurpriseBox(light);
@@ -70,14 +83,33 @@ public class Board {
         for (int i =0 ; i < size; i++){
             cells.add(new Cell(i+1));
         }
-        cells.get(1).setEnemy(dragon);
-        cells.get(2).setBox(boxMace);
-        cells.get(3).setBox(boxSword);
-        cells.get(4).setBox(boxLight);
-        cells.get(5).setBox(boxFireBall);
-        cells.get(6).setBox(boxLargePotion);
-        cells.get(7).setBox(boxStandardPotion);
-
+        for(int pos : drakePos){
+            cells.get(pos-1).setEnemy(dragon);
+        }
+        for(int pos : sorcererPos){
+            cells.get(pos-1).setEnemy(sorcerer);
+        }
+        for(int pos : goblinPos){
+            cells.get(pos-1).setEnemy(goblin);
+        }
+        for(int pos : boxFireBallPos){
+            cells.get(pos-1).setBox(boxFireBall);
+        }
+        for(int pos : boxMacePos){
+            cells.get(pos-1).setBox(boxMace);
+        }
+        for(int pos : boxSwordPos){
+            cells.get(pos-1).setBox(boxSword);
+        }
+        for(int pos : boxLightPos){
+            cells.get(pos-1).setBox(boxLight);
+        }
+        for(int pos : boxStandardPotionPos){
+            cells.get(pos-1).setBox(boxStandardPotion);
+        }
+        for (int pos : boxLargePotionPos){
+            cells.get(pos-1).setBox(boxLargePotion);
+        }
     }
 
     /**
