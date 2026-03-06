@@ -1,6 +1,6 @@
 package fr.campus.dndgame.model.characters;
 
-import fr.campus.dndgame.model.equipments.Spell;
+import fr.campus.dndgame.model.equipments.offensives.Spell;
 
 /**
  * Classe représentant un Magicien dans le jeu.

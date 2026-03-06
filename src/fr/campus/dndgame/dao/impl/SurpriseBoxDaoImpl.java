@@ -1,10 +1,8 @@
 package fr.campus.dndgame.dao.impl;
 
-import fr.campus.dndgame.dao.interfaces.EquipmentDao;
 import fr.campus.dndgame.dao.interfaces.SurpriseBoxDao;
 import fr.campus.dndgame.db.DatabaseConnection;
 import fr.campus.dndgame.model.equipments.Equipment;
-import fr.campus.dndgame.model.equipments.OffensiveEquipment;
 import fr.campus.dndgame.model.equipments.SurpriseBox;
 
 import java.sql.*;

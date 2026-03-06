@@ -67,6 +67,7 @@ public abstract class Equipment {
      *
      * @return Une chaîne décrivant l'équipement
      */
+    @Override
     public String toString(){
         return type + " : " + name;
     }

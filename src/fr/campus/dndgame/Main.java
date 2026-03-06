@@ -23,19 +23,7 @@ public class Main {
      * @param args Arguments de la ligne de commande (non utilisés)
      */
     public static void main(String[] args) {
-        DatabaseConnection db = new DatabaseConnection();
-        Character test = new Warrior("test");
-        CharacterDaoImpl testAdd = new CharacterDaoImpl();
-        try {
-            testAdd.add(test);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        db.testSelectAll();
-
         Game game = new Game();
         game.start();
-
-
     }
 }

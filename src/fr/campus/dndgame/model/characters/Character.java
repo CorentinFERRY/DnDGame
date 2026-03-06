@@ -1,7 +1,7 @@
 package fr.campus.dndgame.model.characters;
 
 
-import fr.campus.dndgame.model.equipments.DefensiveEquipment;
+import fr.campus.dndgame.model.equipments.defensives.DefensiveEquipment;
 
 /**
  * Classe abstraite représentant un personnage dans le jeu.

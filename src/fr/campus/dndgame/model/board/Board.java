@@ -1,9 +1,13 @@
 package fr.campus.dndgame.model.board;
 
 import fr.campus.dndgame.model.enemies.Dragon;
-import fr.campus.dndgame.model.equipments.Potion;
-import fr.campus.dndgame.model.equipments.Weapon;
-import fr.campus.dndgame.model.equipments.SurpriseBox;
+import fr.campus.dndgame.model.equipments.*;
+import fr.campus.dndgame.model.equipments.defensives.LargePotion;
+import fr.campus.dndgame.model.equipments.defensives.StandardPotion;
+import fr.campus.dndgame.model.equipments.offensives.FireBall;
+import fr.campus.dndgame.model.equipments.offensives.Lightning;
+import fr.campus.dndgame.model.equipments.offensives.Mace;
+import fr.campus.dndgame.model.equipments.offensives.Sword;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,18 +53,31 @@ public class Board {
      *
      */
     public void initBoard(){
-        Weapon weapon = new Weapon("Epée",10);
-        Potion potion = new Potion("Petite potion",2);
+        Mace mace = new Mace();
+        Sword sword = new Sword();
+        Lightning light = new Lightning();
+        FireBall fireBall = new FireBall();
+        LargePotion largePotion = new LargePotion();
+        StandardPotion standardPotion = new StandardPotion();
         Dragon dragon = new Dragon();
-        SurpriseBox box1 = new SurpriseBox(weapon);
-        SurpriseBox box2 = new SurpriseBox(potion);
+        SurpriseBox boxMace = new SurpriseBox(mace);
+        SurpriseBox boxSword = new SurpriseBox(sword);
+        SurpriseBox boxLight = new SurpriseBox(light);
+        SurpriseBox boxFireBall = new SurpriseBox(fireBall);
+        SurpriseBox boxLargePotion = new SurpriseBox(largePotion);
+        SurpriseBox boxStandardPotion = new SurpriseBox(standardPotion);
         cells.clear();
         for (int i =0 ; i < size; i++){
             cells.add(new Cell(i+1));
         }
         cells.get(1).setEnemy(dragon);
-        cells.get(2).setBox(box1);
-        cells.get(3).setBox(box2);
+        cells.get(2).setBox(boxMace);
+        cells.get(3).setBox(boxSword);
+        cells.get(4).setBox(boxLight);
+        cells.get(5).setBox(boxFireBall);
+        cells.get(6).setBox(boxLargePotion);
+        cells.get(7).setBox(boxStandardPotion);
+
     }
 
     /**
@@ -96,6 +113,10 @@ public class Board {
      */
     public int getSize() {
         return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     /**

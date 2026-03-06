@@ -2,6 +2,10 @@ package fr.campus.dndgame.factory;
 
 
 import fr.campus.dndgame.model.equipments.*;
+import fr.campus.dndgame.model.equipments.defensives.Potion;
+import fr.campus.dndgame.model.equipments.defensives.Shield;
+import fr.campus.dndgame.model.equipments.offensives.Spell;
+import fr.campus.dndgame.model.equipments.offensives.Weapon;
 
 public class EquipmentFactory {
     public static Equipment createNewEquipment(String type,String name,int effect) {

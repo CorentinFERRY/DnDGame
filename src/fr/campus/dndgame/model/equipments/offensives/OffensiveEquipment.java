@@ -1,4 +1,6 @@
-package fr.campus.dndgame.model.equipments;
+package fr.campus.dndgame.model.equipments.offensives;
+
+import fr.campus.dndgame.model.equipments.Equipment;
 
 /**
  * Classe abstraite représentant un équipement offensif.
@@ -7,7 +9,7 @@ package fr.campus.dndgame.model.equipments;
  * @author CorentinFERRY
  * @version 1.0
  */
-public abstract class OffensiveEquipment extends Equipment{
+public abstract class OffensiveEquipment extends Equipment {
 
     private int attackBonus;
     private int id;

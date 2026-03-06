@@ -1,4 +1,4 @@
-package fr.campus.dndgame.model.equipments;
+package fr.campus.dndgame.model.equipments.offensives;
 
 /**
  * Classe représentant une arme, un équipement offensif.
@@ -7,7 +7,7 @@ package fr.campus.dndgame.model.equipments;
  * @author CorentinFERRY
  * @version 1.0
  */
-public class Weapon extends OffensiveEquipment{
+public class Weapon extends OffensiveEquipment {
     /**
      * Constructeur pour créer une arme.
      *

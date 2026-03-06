@@ -1,6 +1,7 @@
-package fr.campus.dndgame.model.equipments;
+package fr.campus.dndgame.model.equipments.defensives;
 
 import fr.campus.dndgame.model.characters.Character;
+import fr.campus.dndgame.model.equipments.Equipment;
 
 /**
  * Classe abstraite représentant un équipement défensif.
@@ -9,7 +10,7 @@ import fr.campus.dndgame.model.characters.Character;
  * @author CorentinFERRY
  * @version 1.0
  */
-public abstract class DefensiveEquipment extends Equipment{
+public abstract class DefensiveEquipment extends Equipment {
 
     private int id;
     /**

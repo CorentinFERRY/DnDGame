@@ -1,4 +1,4 @@
-package fr.campus.dndgame.model.equipments;
+package fr.campus.dndgame.model.equipments.defensives;
 
 import fr.campus.dndgame.model.characters.Character;
 
@@ -9,7 +9,7 @@ import fr.campus.dndgame.model.characters.Character;
  * @author CorentinFERRY
  * @version 1.0
  */
-public class Potion extends DefensiveEquipment{
+public class Potion extends DefensiveEquipment {
 
     private int healAmount;
 
@@ -76,6 +76,7 @@ public class Potion extends DefensiveEquipment{
      *
      * @return Une chaîne décrivant le montant de soin
      */
+    @Override
     public String toString(){
         return super.toString() + " (Soin de: " + healAmount+")";
     }

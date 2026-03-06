@@ -1,4 +1,4 @@
-package fr.campus.dndgame.model.equipments;
+package fr.campus.dndgame.model.equipments.offensives;
 
 /**
  * Classe représentant un sort, un équipement offensif.
@@ -8,7 +8,7 @@ package fr.campus.dndgame.model.equipments;
  * @version 1.0
  */
 
-public class Spell extends OffensiveEquipment{
+public class Spell extends OffensiveEquipment {
     /**
      * Constructeur pour créer un sort.
      *

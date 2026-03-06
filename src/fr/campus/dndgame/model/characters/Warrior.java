@@ -1,7 +1,7 @@
 package fr.campus.dndgame.model.characters;
 
 
-import fr.campus.dndgame.model.equipments.Weapon;
+import fr.campus.dndgame.model.equipments.offensives.Weapon;
 
 /**
  * Classe représentant un Guerrier dans le jeu.
