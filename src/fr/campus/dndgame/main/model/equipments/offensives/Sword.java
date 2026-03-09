@@ -1,0 +1,24 @@
+package fr.campus.dndgame.main.model.equipments.offensives;
+
+/**
+ * Représente l'arme offensive épée.
+ */
+public class Sword extends Weapon{
+    /**
+     * Constructeur pour créer une épée.
+     *
+     */
+    public Sword() {
+        super("Épée", 5);
+    }
+
+    /**
+     * Retourne une représentation textuelle de l'épée.
+     *
+     * @return description de l'arme
+     */
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+}

@@ -28,7 +28,7 @@ Un jeu de rôle Donjon & Dragon en Java où vous dirigez un personnage dans des 
 
 3. **Lancer le jeu**
    ```bash
-   java -cp out fr.campus.dndgame.Main
+   java -cp out fr.campus.dndgame.main.Main
    ```
 
 Ou directement depuis votre IDE, lancez la classe `Main.java`.
@@ -40,7 +40,7 @@ Ou directement depuis votre IDE, lancez la classe `Main.java`.
 Pour générer la documentation Javadoc du projet :
 
 ```bash
-javadoc -d docs/javadoc -sourcepath src fr.campus.dndgame fr.campus.dndgame.model.board fr.campus.dndgame.model.characters fr.campus.dndgame.model.enemies fr.campus.dndgame.model.equipments fr.campus.dndgame.game fr.campus.dndgame.utils
+javadoc -d docs/javadoc -sourcepath src fr.campus.dndgame fr.campus.dndgame.main.model.board fr.campus.dndgame.main.model.characters fr.campus.dndgame.main.model.enemies fr.campus.dndgame.main.model.equipments fr.campus.dndgame.main.game fr.campus.dndgame.main.utils
 ```
 
 Cela crée un dossier `docs/javadoc` contenant la documentation HTML. Ouvrez `docs/javadoc/index.html` dans votre navigateur pour consulter la documentation.
