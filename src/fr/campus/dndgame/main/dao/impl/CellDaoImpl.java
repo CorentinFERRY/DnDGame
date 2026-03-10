@@ -137,9 +137,21 @@ public class CellDaoImpl implements CellDao {
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, cell.getNumber());
         stmt.setInt(2, cell.getBoardId());
-        stmt.setInt(3, cell.getCharacter().getId());
-        stmt.setInt(4, cell.getEnemy().getId());
-        stmt.setInt(5, cell.getBox().getId());
+        if (cell.getCharacter() != null) {
+            stmt.setInt(3, cell.getCharacter().getId());
+        } else {
+            stmt.setNull(3, java.sql.Types.INTEGER);
+        }
+        if (cell.getEnemy() != null) {
+            stmt.setInt(4, cell.getEnemy().getId());
+        } else {
+            stmt.setNull(4, java.sql.Types.INTEGER);
+        }
+        if (cell.getBox() != null) {
+            stmt.setInt(5, cell.getBox().getId());
+        } else {
+            stmt.setNull(5, java.sql.Types.INTEGER);
+        }
         stmt.setInt(6, cell.getId());
         stmt.executeUpdate();
     }
@@ -153,6 +165,8 @@ public class CellDaoImpl implements CellDao {
      */
     @Override
     public List<Cell> getCellsByBoardId(int board_id) throws SQLException {
+        EnemyDaoImpl enemyDao = new EnemyDaoImpl();
+        SurpriseBoxDaoImpl surpriseBoxDao = new SurpriseBoxDaoImpl();
         String query = "SELECT * FROM cells WHERE board_id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, board_id);
@@ -162,6 +176,16 @@ public class CellDaoImpl implements CellDao {
             int position = rs.getInt("position");
             int id = rs.getInt("id");
             Cell cell = new Cell(id, position);
+            // Hydrater l'ennemi si présent
+            Integer enemyId = rs.getObject("enemy_id", Integer.class);
+            if (enemyId != null) {
+                cell.setEnemy(enemyDao.getEnemy(enemyId));
+            }
+            // Hydrater la boîte surprise si présente
+            Integer boxId = rs.getObject("surpriseBox_id", Integer.class);
+            if (boxId != null) {
+                cell.setBox(surpriseBoxDao.getSurpriseBox(boxId));
+            }
             list.add(cell);
         }
         return list;

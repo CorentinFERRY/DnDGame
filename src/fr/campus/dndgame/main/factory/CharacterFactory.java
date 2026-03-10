@@ -55,7 +55,8 @@ public class CharacterFactory {
             int maxHealth,
             int attack,
             int defense,
-            int position) {
+            int position,
+            int boardId) {
         Character character = switch (type) {
             case "Warrior" -> new Warrior(name);
             case "Wizard" -> new Wizard(name);
@@ -68,6 +69,7 @@ public class CharacterFactory {
         character.setMaxHealth(maxHealth);
         character.setDefense(defense);
         character.setPosition(position);
+        character.setBoardId(boardId);
 
         return character;
     }

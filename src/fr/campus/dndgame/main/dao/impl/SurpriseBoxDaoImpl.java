@@ -113,8 +113,8 @@ public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
             stmt.setNull(3,java.sql.Types.INTEGER);
         }
         else{
-            stmt.setInt(2,java.sql.Types.INTEGER);
-            stmt.setNull(3,box.getEquipment().getId());
+            stmt.setNull(2,java.sql.Types.INTEGER);
+            stmt.setInt(3,box.getEquipment().getId());
         }
         int affectedRows = stmt.executeUpdate();
         if (affectedRows > 0) {
@@ -136,7 +136,7 @@ public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
      */
     @Override
     public void update(SurpriseBox box) throws SQLException {
-        String query = "UPDATE surpriseboxes SET name = ?, "
+        String query = "UPDATE surpriseBoxes SET name = ?, "
                 + "offensiveEquipment_id = ?, "
                 + "defensiveEquipment_id = ? WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);

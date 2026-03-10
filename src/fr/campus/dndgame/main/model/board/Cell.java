@@ -1,6 +1,6 @@
 package fr.campus.dndgame.main.model.board;
 
-import fr.campus.dndgame.main.game.CombatService;
+import fr.campus.dndgame.main.game.FightService;
 import fr.campus.dndgame.main.game.Game;
 import fr.campus.dndgame.main.model.characters.Character;
 import fr.campus.dndgame.main.model.enemies.Enemy;
@@ -175,12 +175,12 @@ public class Cell {
      * Si la case contient une boîte surprise, l'ouvre et applique son effet au personnage.
      * 
      * @param character Le personnage qui interagit avec la case
-     * @param combatService Le service de combat à utiliser
+     * @param fightService Le service de combat à utiliser
      * @param game L'instance du jeu pour accorder les combats
      */
-    public void interact(Character character,CombatService combatService, Game game){
+    public void interact(Character character, FightService fightService, Game game){
         if(enemy != null){
-            game.startCombat(character,this,combatService);
+            game.startFight(character,this, fightService);
         }
         if(box != null){
             box.open(character);

@@ -71,4 +71,14 @@ public interface CharacterDao {
      */
     void updateHealth(Character character)
             throws SQLException;
+
+    /**
+     * Récupère un personnage avec ses équipements depuis la base de données.
+     *
+     * @param characterId L'identifiant du personnage
+     * @return Le personnage avec ses équipements, ou null s'il n'existe pas
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    Character getCharacterWithEquipment(int characterId)
+            throws SQLException;
 }

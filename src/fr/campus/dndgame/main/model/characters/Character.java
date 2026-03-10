@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.characters;
 
 import fr.campus.dndgame.main.model.equipments.defensives.DefensiveEquipment;
+import fr.campus.dndgame.main.model.equipments.defensives.Shield;
 
 /**
  * Classe abstraite représentant un personnage dans le jeu.
@@ -20,6 +21,7 @@ public abstract class Character {
     private int position;
     private int defense;
     private DefensiveEquipment defensiveEquipment;
+    private int boardId;
 
     /**
      * Constructeur protégé pour initialiser un personnage.
@@ -60,10 +62,27 @@ public abstract class Character {
     }
 
     /**
+     * Retourne l'identifiant du board lié au personnage
+     * @return l'id du board
+     */
+    public int getBoardId() {
+        return boardId;
+    }
+
+    /**
+     * Défini l'identifiant du board
+     * @param boardId l'id du board
+     */
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
+    }
+
+    /**
      * Retourne le type du personnage.
      *
      * @return Le type du personnage
      */
+
     public String getType() {
         return type;
     }
@@ -236,11 +255,14 @@ public abstract class Character {
     /**
      * Inflige des dégâts au personnage en réduisant ses points de vie.
      * La santé ne peut pas descendre en dessous de 0.
+     * Calcul la réduction de dommage en fonction de la défense
+     * Les dommages subits ne peuvent pas être négatif
      * 
      * @param damage Le nombre de points de dégâts à infliger
      */
     public void takeDamage(int damage) {
-        this.health -= damage;
+        int actualDamage = Math.max(0, damage - this.defense);
+        this.health -= actualDamage;
         if (this.health < 0) {
             this.health = 0;
         }
@@ -261,22 +283,22 @@ public abstract class Character {
      */
     public abstract void disarm();
 
+
     /**
-     * Utilise l'équipement défensif du personnage.
-     * Affiche un message si aucun équipement n'est disponible.
+     * Permet au personnage d'équiper un bouclier
+     *
+     * @param shield le bouclier à équiper
      */
-    /**
-     * Utilise l'équipement défensif du personnage.
-     * Affiche un message si aucun équipement n'est disponible.
-     * L'effet dépend de l'equipement utilisé (potion soigne, bouclier augmente la
-     * défense, etc.).
-     */
-    public void useDefensiveEquipment() {
-        if (defensiveEquipment != null) {
-            defensiveEquipment.use(this);
-        } else {
-            System.out.println(name + " n'a aucun équipement défensif !");
+    public void equipDefensiveEquipment(Shield shield) {
+        if (this.defensiveEquipment != null) {
+            Shield current = (Shield) this.defensiveEquipment;
+            if (shield.getDefenseBonus() <= current.getDefenseBonus()) {
+                return;
+            }
+            this.defense -= current.getDefenseBonus();
         }
+        this.defense += shield.getDefenseBonus();
+        this.defensiveEquipment = shield;
     }
 
 }

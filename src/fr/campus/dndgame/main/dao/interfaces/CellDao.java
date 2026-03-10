@@ -65,4 +65,5 @@ public interface CellDao {
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
     List<Cell> getCellsByBoardId(int board_id) throws SQLException;
+
 }

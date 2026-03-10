@@ -48,6 +48,7 @@ public class Shield extends DefensiveEquipment {
      */
     @Override
     public void use(Character character) {
+        character.equipDefensiveEquipment(this);
         System.out.println(character.getName() + " utilise le bouclier " + getName() +
                 " et gagne " + getEffect() + " points de défense.");
     }

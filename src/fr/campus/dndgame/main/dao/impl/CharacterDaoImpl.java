@@ -5,6 +5,12 @@ import fr.campus.dndgame.main.dao.interfaces.CharacterDao;
 
 import fr.campus.dndgame.main.model.characters.Character;
 import fr.campus.dndgame.main.db.DatabaseConnection;
+import fr.campus.dndgame.main.model.characters.Warrior;
+import fr.campus.dndgame.main.model.characters.Wizard;
+import fr.campus.dndgame.main.model.equipments.Equipment;
+import fr.campus.dndgame.main.model.equipments.defensives.DefensiveEquipment;
+import fr.campus.dndgame.main.model.equipments.offensives.Spell;
+import fr.campus.dndgame.main.model.equipments.offensives.Weapon;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -43,8 +49,9 @@ public class CharacterDaoImpl implements CharacterDao {
             int position = rs.getInt("position");
             int attack = rs.getInt("attack");
             int defense = rs.getInt("defense");
+            int boardId = rs.getInt("board_id");
             return CharacterFactory.createFromDatabase(id, type, name, health, maxHealth, attack, defense,
-                    position);
+                    position,boardId);
         }
         return null;
     }
@@ -71,8 +78,9 @@ public class CharacterDaoImpl implements CharacterDao {
             int position = rs.getInt("position");
             int attack = rs.getInt("attack");
             int defense = rs.getInt("defense");
+            int boardId = rs.getInt("board_id");
             Character hero = CharacterFactory.createFromDatabase(id, type, name, health, maxHealth, attack, defense,
-                    position);
+                    position,boardId);
             list.add(hero);
         }
         return list;
@@ -88,7 +96,7 @@ public class CharacterDaoImpl implements CharacterDao {
      */
     @Override
     public int add(Character character) throws SQLException {
-        String query = "INSERT INTO characters(name, type, health, maxHealth, attack) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO characters(name, type, health, maxHealth, attack,defense,position,board_id) VALUES (?, ?, ?, ?, ?,?,?,?)";
         // Utiliser RETURN_GENERATED_KEYS pour récupérer l'id auto-incrémenté
         PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         stmt.setString(1, character.getName());
@@ -96,6 +104,9 @@ public class CharacterDaoImpl implements CharacterDao {
         stmt.setInt(3, character.getHealth());
         stmt.setInt(4, character.getMaxHealth());
         stmt.setInt(5, character.getAttack());
+        stmt.setInt(6,character.getDefense());
+        stmt.setInt(7,character.getPosition());
+        stmt.setInt(8,character.getBoardId());
         int affectedRows = stmt.executeUpdate();
         // Récupération de l'id généré par la BDD
         if (affectedRows > 0) {
@@ -135,14 +146,16 @@ public class CharacterDaoImpl implements CharacterDao {
                 + "health = ?, "
                 + "attack = ?, "
                 + "defense = ?, "
-                + "position = ? WHERE id = ?";
+                + "position = ?, "
+                + "board_id = ? WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setString(1, character.getName());
         stmt.setInt(2, character.getHealth());
         stmt.setInt(3, character.getAttack());
         stmt.setInt(4, character.getDefense());
         stmt.setInt(5, character.getPosition());
-        stmt.setInt(6, character.getId());
+        stmt.setInt(6,character.getBoardId());
+        stmt.setInt(7, character.getId());
         stmt.executeUpdate();
     }
 
@@ -160,6 +173,41 @@ public class CharacterDaoImpl implements CharacterDao {
         stmt.setInt(1, character.getHealth());
         stmt.setInt(2, character.getId());
         stmt.executeUpdate();
+    }
+    @Override
+    public Character getCharacterWithEquipment(int id) throws SQLException {
+        // On réutilise getCharacter() pour ne pas dupliquer le code
+        Character character = getCharacter(id);
+        if (character == null) return null;
+
+        // Récupérer les FK d'équipements
+        String query = "SELECT offensiveEquipment_id, defensiveEquipment_id FROM characters WHERE id = ?";
+        PreparedStatement stmt = con.prepareStatement(query);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            OffensiveEquipmentDaoImpl offensiveDao = new OffensiveEquipmentDaoImpl();
+            DefensiveEquipmentDaoImpl defensiveDao = new DefensiveEquipmentDaoImpl();
+
+            Integer offensiveId = rs.getObject("offensive_equipment_id", Integer.class);
+            Integer defensiveId = rs.getObject("defensive_equipment_id", Integer.class);
+
+            if (offensiveId != null) {
+                Equipment equip = offensiveDao.getEquipment(offensiveId);
+                if (equip instanceof Weapon weapon && character instanceof Warrior warrior)
+                    warrior.setWeapon(weapon);
+                else if (equip instanceof Spell spell && character instanceof Wizard wizard)
+                    wizard.setSpell(spell);
+            }
+
+            if (defensiveId != null) {
+                Equipment equip = defensiveDao.getEquipment(defensiveId);
+                if (equip instanceof DefensiveEquipment def)
+                    character.setDefensiveEquipment(def);
+            }
+        }
+        return character;
     }
 
 }

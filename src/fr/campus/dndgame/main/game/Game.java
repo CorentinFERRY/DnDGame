@@ -9,7 +9,7 @@ import fr.campus.dndgame.main.utils.Dice;
 import fr.campus.dndgame.main.utils.Menu;
 
 /**
- * Classe principale gérant la logique du jeu Dond et Dragons.
+ * Classe principale gérant la logique du jeu Donjon et Dragons.
  * Gère le création des personnages, le déroulement des tours et la progression du jeu.
  * 
  * @author CorentinFERRY
@@ -21,9 +21,9 @@ public class Game {
     private final Board board;
     private final Dice dice;
     private Character player;
-    private final CombatService combatService;
+    private final FightService fightService;
     private boolean gameFinished = false;
-
+    private boolean pendingInteraction = false;
     /**
      * Constructeur pour initialiser une nouvelle partie.
      * Crée le menu, le plateau et le dé.
@@ -32,7 +32,7 @@ public class Game {
         menu = new Menu();
         board = new Board(64);
         dice = new Dice(6);
-        combatService = new CombatService();
+        fightService = new FightService();
     }
 
     // ========== GESTION PRINCIPALE ==========
@@ -129,6 +129,13 @@ public class Game {
             menu.showMessage("La partie est terminée. Choisissez Recommencer depuis le menu.");
             return;
         }
+        if (pendingInteraction) {
+            pendingInteraction = false;
+            menu.showMessage("Vous arrivez sur la case " + player.getPosition() + "...");
+            interactWithCell();
+            return;
+        }
+
         int diceResult = dice.roll();
         menu.showMessage("\nVous lancez le dé : " + diceResult);
 
@@ -144,7 +151,7 @@ public class Game {
                 return;
             }
         }
-        interactWithCell(player.getPosition());
+        interactWithCell();
 
     }
 
@@ -186,25 +193,31 @@ public class Game {
      * 
      * @param player Le personnage du joueur
      * @param cell La case contenant l'ennemi
-     * @param combatService Le service de combat à utiliser
+     * @param fightService Le service de combat à utiliser
      */
-    public void startCombat(Character player, Cell cell, CombatService combatService){
+    public void startFight(Character player, Cell cell, FightService fightService){
         Enemy enemy = cell.getEnemy();
-        boolean combatFinished = false;
-        String [] fightOptions = {"Attaque","Fuite"};
+        boolean fightFinished = false;
+
         menu.showMessage("Un ennemi apparaît : " + enemy);
-        while(!combatFinished && player.isAlive()){
+
+        while(!fightFinished && player.isAlive()){
+
+            String[] fightOptions = {"Attaque", "Fuite"};
+
             int choice = menu.displayMenu("Combat",fightOptions);
             switch (choice){
                 case 1 :
-                    combatService.fight(player,enemy);
-                    combatFinished = true;
+                    fightService.fight(player,enemy);
+                    fightFinished = true;
                     break;
                 case 2 :
                     int diceResult = dice.roll();
+                    int newPos = Math.max(1, player.getPosition() - diceResult);
                     menu.showMessage(player.getName() + " recule de " + diceResult + " cases !");
-                    interactWithCell(player.getPosition() - diceResult);
-                    combatFinished = true;
+                    player.setPosition(newPos);
+                    pendingInteraction = true;
+                    fightFinished = true;
                     break;
             }
         }
@@ -221,28 +234,14 @@ public class Game {
 
     /**
      * Gère l'interaction du joueur avec une case du plateau.
-     * Déplace le personnage à la nouvelle position, vérifie si la fin est atteinte,
-     * puis gère les interactions avec le contenu de la case (ennemi ou boîte surprise).
-     * 
-     * @param newPosition La nouvelle position du personnage
+     *
      */
-    private void interactWithCell(int newPosition){
-        if(newPosition < 1){
-            newPosition = 1;
-        }
-        player.setPosition(newPosition);
-        // Vérifier si on atteint la fin
-        if (board.isLastCell(player.getPosition())) {
-            player.setPosition(board.getSize());
-            menu.showMessage("\nVous avez atteint la fin du plateau !");
-            gameFinished = true;
-            return;
-        }
-
+    private void interactWithCell(){
         Cell cell = board.getCell(player.getPosition());
         menu.showMessage(cell.toString());
-        cell.interact(player,combatService,this);
+        cell.interact(player, fightService, this);
         menu.showMessage(player.toString() + " " + player.getOffensiveInfo());
+
 
     }
     /**

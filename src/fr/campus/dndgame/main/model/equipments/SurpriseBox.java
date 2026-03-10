@@ -28,6 +28,7 @@ public class SurpriseBox {
     /**
      * Constructeur permettant de créer une boite surprise
      *
+     * @param id l'identifiant de la box en BDD
      * @param equipment équipement contenu dans la boite
      */
     public SurpriseBox(int id,Equipment equipment){

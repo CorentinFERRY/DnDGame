@@ -80,7 +80,7 @@ public class Wizard extends Character{
      */
     public String getOffensiveInfo() {
         if (spell == null) {
-            return "Aucun sort équipée";
+            return "Aucun sort équipé";
         }
         return spell.toString();
     }
