@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
@@ -203,8 +202,15 @@ public class Board {
      *
      * @param positions Liste des positions disponible (préalablement mélangée)
      * @param count Le nombre d'élément à placer
-     *
-     * */
+    /**
+     * Place des éléments de manière aléatoire sur le plateau.
+     * Crée des instances d'ennemis ou de boîtes surprises et les place sur des positions aléatoires.
+     * Les positions utilisées sont retirées de la liste pour éviter les doublons.
+     * 
+     * @param positions Une liste de positions disponibles sur le plateau
+     * @param count Le nombre d'éléments à placer
+     * @param supplier Un supplier pour créer les instances d'éléments (Enemy ou SurpriseBox)
+     */
     private void placeRandom(List<Integer> positions, int count, Supplier<Object> supplier) {
         for (int i = 0; i < count && !positions.isEmpty(); i++) {
             int pos = positions.remove(0);  // retire la position pour éviter les doublons

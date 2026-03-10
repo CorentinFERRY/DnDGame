@@ -14,11 +14,23 @@ import java.util.List;
 
 /**
  * Implémentation DAO pour les équipements défensifs.
+ * Fournit les opérations CRUD pour les équipements défensifs en utilisant JDBC.
+ * Utilise la factory pour créer les instances des équipements depuis la base de données.
+ * 
+ * @author CorentinFERRY
+ * @version 1.0
  */
 public class DefensiveEquipmentDaoImpl implements EquipmentDao {
 
     static Connection con = DatabaseConnection.getConnection();
 
+    /**
+     * Récupère un équipement défensif par son identifiant depuis la base de données.
+     * 
+     * @param id L'identifiant de l'équipement
+     * @return L'équipement correspondant, ou null s'il n'existe pas
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public Equipment getEquipment(int id) throws SQLException {
         String query = "SELECT * FROM defensiveEquipments WHERE id = ?";
@@ -34,6 +46,12 @@ public class DefensiveEquipmentDaoImpl implements EquipmentDao {
         return null;
     }
 
+    /**
+     * Récupère tous les équipements défensifs de la base de données.
+     * 
+     * @return Une liste contenant tous les équipements défensifs
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public List<Equipment> getEquipments() throws SQLException {
         String query = "SELECT * FROM defensiveEquipments";
@@ -51,6 +69,14 @@ public class DefensiveEquipmentDaoImpl implements EquipmentDao {
         return list;
     }
 
+    /**
+     * Ajoute un nouvel équipement défensif à la base de données.
+     * Génère un identifiant unique et l'affecte à l'équipement passé en paramètre.
+     * 
+     * @param equipment L'équipement à ajouter
+     * @return Le nombre de lignes affectées (1 si succès)
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public int add(Equipment equipment) throws SQLException {
         String query = "INSERT INTO defensiveEquipments(name, type, effect) VALUES (?, ?, ?)";
@@ -69,6 +95,13 @@ public class DefensiveEquipmentDaoImpl implements EquipmentDao {
         return affectedRows;
     }
 
+    /**
+     * Met à jour un équipement défensif existant dans la base de données.
+     * Actualise tous les attributs (type, nom, effet).
+     * 
+     * @param equipment L'équipement avec les nouvelles données
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void update(Equipment equipment) throws SQLException {
         String query = "UPDATE defensiveequipments SET type = ?, "
@@ -82,6 +115,12 @@ public class DefensiveEquipmentDaoImpl implements EquipmentDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Supprime un équipement défensif de la base de données.
+     * 
+     * @param id L'identifiant de l'équipement à supprimer
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM defensiveEquipments WHERE id = ?";

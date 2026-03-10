@@ -96,6 +96,13 @@ public abstract class Equipment {
      */
     public abstract boolean isOffensive();
 
+    /**
+     * Utilise l'équipement sur un personnage.
+     * L'effet dépend du type d'équipement (arme/sort augmente l'attaque,
+     * potion/bouclier augmente la défense ou soigne, etc.).
+     * 
+     * @param character Le personnage sur lequel utiliser l'équipement
+     */
     public abstract void use(Character character);
     /**
      * Retourne une représentation textuelle de l'équipement.

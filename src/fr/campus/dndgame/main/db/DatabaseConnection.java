@@ -15,6 +15,10 @@ import java.util.Properties;
  * @version 1.0
  */
 public class DatabaseConnection {
+    /**
+     * Connexion statique à la base de données initialisée au chargement de la classe.
+     * Charge les paramétres de connexion depuis le fichier db.properties.
+     */
     private static Connection con = null;
     static {
         Properties props = new Properties();

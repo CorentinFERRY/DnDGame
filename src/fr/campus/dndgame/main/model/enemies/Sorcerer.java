@@ -10,7 +10,7 @@ package fr.campus.dndgame.main.model.enemies;
  */
 public class Sorcerer extends Enemy{
     /**
-     * Contructeur pour créer un Sorcier.
+     * Constructeur pour créer un Sorcier.
      *
      */
     public Sorcerer(){

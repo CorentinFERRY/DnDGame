@@ -179,6 +179,15 @@ public class Game {
         menu.showMessage("Nom modifié avec succès !");
     }
 
+    /**
+     * Gère un combat entre le personnage joueur et un ennemi.
+     * Affiche le menu de combat permettant au joueur d'attaquer ou de fuir.
+     * Le combat se termine si l'ennemi est vaincu ou si le joueur fuit ou meurt.
+     * 
+     * @param player Le personnage du joueur
+     * @param cell La case contenant l'ennemi
+     * @param combatService Le service de combat à utiliser
+     */
     public void startCombat(Character player, Cell cell, CombatService combatService){
         Enemy enemy = cell.getEnemy();
         boolean combatFinished = false;
@@ -210,6 +219,13 @@ public class Game {
         }
     }
 
+    /**
+     * Gère l'interaction du joueur avec une case du plateau.
+     * Déplace le personnage à la nouvelle position, vérifie si la fin est atteinte,
+     * puis gère les interactions avec le contenu de la case (ennemi ou boîte surprise).
+     * 
+     * @param newPosition La nouvelle position du personnage
+     */
     private void interactWithCell(int newPosition){
         if(newPosition < 1){
             newPosition = 1;

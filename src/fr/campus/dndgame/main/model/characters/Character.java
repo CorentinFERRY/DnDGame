@@ -1,7 +1,5 @@
 package fr.campus.dndgame.main.model.characters;
 
-
-import fr.campus.dndgame.main.model.equipments.Equipment;
 import fr.campus.dndgame.main.model.equipments.defensives.DefensiveEquipment;
 
 /**
@@ -23,17 +21,16 @@ public abstract class Character {
     private int defense;
     private DefensiveEquipment defensiveEquipment;
 
-
     /**
      * Constructeur protégé pour initialiser un personnage.
      * Il défini également les points de vie maximum du personnage.
      *
-     * @param type Le type de personnage (ex: "Warrior", "Wizard")
-     * @param name Le nom du personnage
+     * @param type   Le type de personnage (ex: "Warrior", "Wizard")
+     * @param name   Le nom du personnage
      * @param health La santé initiale du personnage
      * @param attack La force d'attaque du personnage
      */
-    protected Character (String type, String name, int health, int attack){
+    protected Character(String type, String name, int health, int attack) {
         this.type = type;
         this.name = name;
         this.health = health;
@@ -42,9 +39,11 @@ public abstract class Character {
         this.defensiveEquipment = null;
         this.defense = 0;
     }
+
     // ========== GETTERS et SETTERS ==========
     /**
      * Retourne l'identifiant du personnage
+     * 
      * @return l'id
      */
     public int getId() {
@@ -65,19 +64,19 @@ public abstract class Character {
      *
      * @return Le type du personnage
      */
-    public String getType(){
+    public String getType() {
         return type;
     }
-    
+
     /**
      * Retourne la santé maximale du personnage.
      *
      * @return La santé maximale
      */
-    public int getMaxHealth(){
+    public int getMaxHealth() {
         return maxHealth;
     }
-    
+
     /**
      * Retourne la santé actuelle du personnage.
      *
@@ -86,16 +85,16 @@ public abstract class Character {
     public int getHealth() {
         return health;
     }
-    
+
     /**
      * Définit la santé actuelle du personnage.
      *
      * @param health Nouvelle valeur de santé
      */
-    public void setHealth(int health){
+    public void setHealth(int health) {
         this.health = health;
     }
-    
+
     /**
      * Retourne la force d'attaque du personnage.
      *
@@ -104,7 +103,7 @@ public abstract class Character {
     public int getAttack() {
         return attack;
     }
-    
+
     /**
      * Retourne le nom du personnage.
      *
@@ -113,16 +112,16 @@ public abstract class Character {
     public String getName() {
         return name;
     }
-    
+
     /**
      * Définit le nom du personnage.
      *
      * @param name Nouveau nom
      */
-    public void setName (String name){
+    public void setName(String name) {
         this.name = name;
     }
-    
+
     /**
      * Retourne la position actuelle du personnage sur le plateau.
      *
@@ -131,7 +130,7 @@ public abstract class Character {
     public int getPosition() {
         return position;
     }
-    
+
     /**
      * Définit la position du personnage sur le plateau.
      *
@@ -140,7 +139,7 @@ public abstract class Character {
     public void setPosition(int position) {
         this.position = position;
     }
-    
+
     /**
      * Définit l'équipement défensif du personnage.
      *
@@ -196,19 +195,19 @@ public abstract class Character {
     }
 
     // ========== MÉTHODES D'AFFICHAGE ==========
-    
+
     /**
      * Retourne une chaîne de caractères représentant l'équipement défensif actuel.
      *
      * @return Informations sur l'équipement défensif ou message si aucun équipement
      */
-    public String getDefensiveInfo(){
+    public String getDefensiveInfo() {
         if (defensiveEquipment != null) {
             return defensiveEquipment.getType() + " : " + defensiveEquipment.getName();
         }
         return "Aucun équipement défensif";
     }
-    
+
     /**
      * Retourne une chaîne de caractères représentant l'équipement offensif actuel.
      * Cette méthode doit être implémentée par les sous-classes.
@@ -230,10 +229,16 @@ public abstract class Character {
     /**
      * Déplace le personnage d'une case sur le plateau.
      */
-    public void move(){
+    public void move() {
         this.position += 1;
     }
 
+    /**
+     * Inflige des dégâts au personnage en réduisant ses points de vie.
+     * La santé ne peut pas descendre en dessous de 0.
+     * 
+     * @param damage Le nombre de points de dégâts à infliger
+     */
     public void takeDamage(int damage) {
         this.health -= damage;
         if (this.health < 0) {
@@ -241,15 +246,30 @@ public abstract class Character {
         }
     }
 
+    /**
+     * Vérifie si le personnage est toujours vivant (santé > 0).
+     * 
+     * @return true si le personnage est vivant, false sinon
+     */
     public boolean isAlive() {
         return health > 0;
     }
 
+    /**
+     * Désarme le personnage en supprimant son équipement offensif.
+     * Cette méthode est abstraite et doit être implémentée par les sous-classes.
+     */
     public abstract void disarm();
 
     /**
      * Utilise l'équipement défensif du personnage.
      * Affiche un message si aucun équipement n'est disponible.
+     */
+    /**
+     * Utilise l'équipement défensif du personnage.
+     * Affiche un message si aucun équipement n'est disponible.
+     * L'effet dépend de l'equipement utilisé (potion soigne, bouclier augmente la
+     * défense, etc.).
      */
     public void useDefensiveEquipment() {
         if (defensiveEquipment != null) {

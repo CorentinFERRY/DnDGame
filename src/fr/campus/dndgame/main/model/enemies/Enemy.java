@@ -15,19 +15,20 @@ public abstract class Enemy {
     private int health;
     private int maxHealth;
     private int defense;
+
     /**
      * Constructeur protégé pour initialiser un ennemi.
      * Il défini également les points de vie maximum de l'ennemi
      *
-     * @param name Le nom de l'ennemi
+     * @param name   Le nom de l'ennemi
      * @param health La santé initiale de l'ennemi
      * @param attack La force d'attaque de l'ennemi
      */
-    protected Enemy(String name, int health, int attack){
+    protected Enemy(String name, int health, int attack) {
         this.name = name;
         this.attack = attack;
         this.health = health;
-        this.maxHealth =health;
+        this.maxHealth = health;
         this.defense = 0;
     }
 
@@ -37,9 +38,10 @@ public abstract class Enemy {
      *
      * @return Le nom de l'ennemi
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
+
     /**
      * Retourne la force d'attaque de l'ennemi.
      *
@@ -131,6 +133,12 @@ public abstract class Enemy {
     }
 
     // ========== UTILITAIRES ==========
+    /**
+     * Inflige des dégâts à l'ennemi en réduisant ses points de vie.
+     * La santé ne peut pas descendre en dessous de 0.
+     * 
+     * @param damage Le nombre de points de dégâts à infliger
+     */
     public void takeDamage(int damage) {
         this.health -= damage;
         if (this.health < 0) {
@@ -138,6 +146,11 @@ public abstract class Enemy {
         }
     }
 
+    /**
+     * Vérifie si l'ennemi est toujours vivant (santé > 0).
+     * 
+     * @return true si l'ennemi est vivant, false sinon
+     */
     public boolean isAlive() {
         return health > 0;
     }
@@ -149,8 +162,7 @@ public abstract class Enemy {
      */
     @Override
     public String toString() {
-        return name + " (HP: " + health + " attaque: " + attack +")";
+        return name + " (HP: " + health + " attaque: " + attack + ")";
     }
-
 
 }

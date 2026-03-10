@@ -6,7 +6,7 @@ import fr.campus.dndgame.main.model.characters.Wizard;
  * Classe représentant un sort, un équipement offensif.
  * Un sort augmente la force d'attaque du magicien.
  *
- * @author CorentinFEERY
+ * @author CorentinFERRY
  * @version 1.0
  */
 

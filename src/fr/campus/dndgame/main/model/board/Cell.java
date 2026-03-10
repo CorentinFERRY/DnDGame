@@ -169,6 +169,15 @@ public class Cell {
         }
     }
 
+    /**
+     * Gère l'interaction du personnage avec le contenu de la case.
+     * Si la case contient un ennemi, lance un combat.
+     * Si la case contient une boîte surprise, l'ouvre et applique son effet au personnage.
+     * 
+     * @param character Le personnage qui interagit avec la case
+     * @param combatService Le service de combat à utiliser
+     * @param game L'instance du jeu pour accorder les combats
+     */
     public void interact(Character character,CombatService combatService, Game game){
         if(enemy != null){
             game.startCombat(character,this,combatService);

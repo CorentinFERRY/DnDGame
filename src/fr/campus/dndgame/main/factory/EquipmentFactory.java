@@ -9,6 +9,11 @@ import fr.campus.dndgame.main.model.equipments.offensives.*;
 
 /**
  * Fabrique utilitaire pour créer des équipements.
+ * Fournit des méthodes pour créer de nouveaux équipements ou les charger depuis la base de données.
+ * Supporte les types d'équipement suivants : Weapon, Spell, Potion, Shield.
+ * 
+ * @author CorentinFERRY
+ * @version 1.0
  */
 public class EquipmentFactory {
     /**

@@ -78,6 +78,14 @@ public class CharacterDaoImpl implements CharacterDao {
         return list;
     }
 
+    /**
+     * Ajoute un nouveau personnage à la base de données.
+     * Génère un identifiant unique et l'affecte au personnage passé en paramètre.
+     * 
+     * @param character Le personnage à ajouter
+     * @return Le nombre de lignes affectées (1 si succès)
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public int add(Character character) throws SQLException {
         String query = "INSERT INTO characters(name, type, health, maxHealth, attack) VALUES (?, ?, ?, ?, ?)";
@@ -100,6 +108,12 @@ public class CharacterDaoImpl implements CharacterDao {
         return affectedRows;
     }
 
+    /**
+     * Supprime un personnage de la base de données.
+     * 
+     * @param id L'identifiant du personnage à supprimer
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM characters WHERE id = ?";
@@ -108,6 +122,13 @@ public class CharacterDaoImpl implements CharacterDao {
         ps.executeUpdate();
     }
 
+    /**
+     * Met à jour un personnage existant dans la base de données.
+     * Actualise tous les attributs du personnage (nom, santé, attaque, défense, position).
+     * 
+     * @param character Le personnage avec les nouvelles données
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void update(Character character) throws SQLException {
         String query = "UPDATE characters SET name = ?, "
@@ -125,6 +146,13 @@ public class CharacterDaoImpl implements CharacterDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Met à jour uniquement les points de vie d'un personnage.
+     * Utilisé lors des combats pour mettre à jour la santé du personnage.
+     * 
+     * @param character Le personnage dont la santé doit être mise à jour
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void updateHealth(Character character) throws SQLException {
         String query = "UPDATE characters SET health = ? WHERE id = ?";

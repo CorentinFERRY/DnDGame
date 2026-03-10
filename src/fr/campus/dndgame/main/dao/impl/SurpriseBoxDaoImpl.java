@@ -11,11 +11,24 @@ import java.util.List;
 
 /**
  * Implémentation DAO pour la gestion des boîtes surprises.
+ * Fournit les opérations CRUD pour les boîtes surprises en utilisant JDBC.
+ * Gère les relations avec les équipements offensifs et défensifs.
+ * 
+ * @author CorentinFERRY
+ * @version 1.0
  */
 public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
 
     static Connection con = DatabaseConnection.getConnection();
 
+    /**
+     * Récupère une boîte surprise par son identifiant depuis la base de données.
+     * Charge aussi l'équipement associé (offensif ou défensif).
+     * 
+     * @param id L'identifiant de la boîte surprise
+     * @return La boîte surprise correspondante, ou null si elle n'existe pas
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public SurpriseBox getSurpriseBox(int id) throws SQLException {
         String query = "SELECT * FROM surpriseBoxes WHERE id = ?";
@@ -44,6 +57,13 @@ public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
         return null;
     }
 
+    /**
+     * Récupère toutes les boîtes surprises de la base de données.
+     * Charge aussi les équipements associés (offensifs ou défensifs).
+     * 
+     * @return Une liste contenant toutes les boîtes surprises
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public List<SurpriseBox> getAllSurpriseBox() throws SQLException {
         String query = "SELECT * FROM surpriseBoxes";
@@ -74,6 +94,15 @@ public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
         return list;
     }
 
+    /**
+     * Ajoute une nouvelle boîte surprise à la base de données.
+     * Génère un identifiant unique et l'affecte à la boîte passée en paramètre.
+     * Gère l'association avec l'équipement (offensif ou défensif).
+     * 
+     * @param box La boîte surprise à ajouter
+     * @return Le nombre de lignes affectées (1 si succès)
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public int add(SurpriseBox box) throws SQLException {
         String query = "INSERT INTO surpriseBoxes(name,offensiveEquipment_id,defensiveEquipment_id) VALUES (?,?,?)";
@@ -98,6 +127,13 @@ public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
         return affectedRows;
     }
 
+    /**
+     * Met à jour une boîte surprise existante dans la base de données.
+     * Actualise le nom et l'association avec l'équipement.
+     * 
+     * @param box La boîte surprise avec les nouvelles données
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void update(SurpriseBox box) throws SQLException {
         String query = "UPDATE surpriseboxes SET name = ?, "
@@ -116,6 +152,12 @@ public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Supprime une boîte surprise de la base de données.
+     * 
+     * @param id L'identifiant de la boîte surprise à supprimer
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM surpriseBoxes WHERE id = ?";

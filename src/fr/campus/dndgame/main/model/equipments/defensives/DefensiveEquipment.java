@@ -1,6 +1,5 @@
 package fr.campus.dndgame.main.model.equipments.defensives;
 
-import fr.campus.dndgame.main.model.characters.Character;
 import fr.campus.dndgame.main.model.equipments.Equipment;
 
 /**

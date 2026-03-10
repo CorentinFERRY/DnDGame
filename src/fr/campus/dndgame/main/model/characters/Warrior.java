@@ -44,6 +44,13 @@ public class Warrior extends Character{
         this.weapon = weapon;
     }
 
+    /**
+     * Équipe une nouvelle arme si elle est meilleure que celle actuellement équipée.
+     * Si une arme est déjà équipée, elle sera désarme et remplacée uniquement si la nouvelle est supérieure.
+     * Augmente la puissance d'attaque du guerrier en fonction du bonus d'attaque de l'arme.
+     * 
+     * @param newWeapon La nouvelle arme à équiper
+     */
     public void equip(Weapon newWeapon){
         if (this.weapon != null) {
             if (newWeapon.getAttackBonus() <= this.weapon.getAttackBonus()) {
@@ -55,6 +62,11 @@ public class Warrior extends Character{
         this.weapon = newWeapon;
     }
 
+    /**
+     * Désarme le guerrier en supprimant son arme actuelle.
+     * Réduit la puissance d'attaque du guerrier du bonus de l'arme.
+     * N'a aucun effet si aucune arme n'est équipée.
+     */
     public void disarm(){
         if (weapon != null){
             this.setAttack(this.getAttack()- this.weapon.getAttackBonus());

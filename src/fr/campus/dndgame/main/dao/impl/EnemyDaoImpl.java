@@ -11,11 +11,23 @@ import java.util.List;
 
 /**
  * Implémentation DAO pour la gestion des ennemis.
+ * Fournit les opérations CRUD pour les ennemis en utilisant JDBC.
+ * Utilise le DatabaseConnection pour obtenir la connexion à la base de données.
+ * 
+ * @author CorentinFERRY
+ * @version 1.0
  */
 public class EnemyDaoImpl implements EnemyDao {
 
     static Connection con = DatabaseConnection.getConnection();
 
+    /**
+     * Récupère un ennemi par son identifiant depuis la base de données.
+     * 
+     * @param id L'identifiant de l'ennemi
+     * @return L'ennemi correspondant, ou null s'il n'existe pas
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public Enemy getEnemy(int id) throws SQLException {
         String query = "SELECT * FROM enemies WHERE id = ?";
@@ -33,6 +45,12 @@ public class EnemyDaoImpl implements EnemyDao {
         return null;
     }
 
+    /**
+     * Récupère tous les ennemis de la base de données.
+     * 
+     * @return Une liste contenant tous les ennemis
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public List<Enemy> getAllEnemies() throws SQLException {
         String query = "SELECT * FROM enemies";
@@ -52,6 +70,14 @@ public class EnemyDaoImpl implements EnemyDao {
         return list;
     }
 
+    /**
+     * Ajoute un nouvel ennemi à la base de données.
+     * Génère un identifiant unique et l'affecte à l'ennemi passé en paramètre.
+     * 
+     * @param enemy L'ennemi à ajouter
+     * @return Le nombre de lignes affectées (1 si succès)
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public int add(Enemy enemy) throws SQLException {
         String query = "INSERT INTO enemies(name, health, maxHealth, attack,defense) VALUES (?, ?, ?, ?,?)";
@@ -73,6 +99,13 @@ public class EnemyDaoImpl implements EnemyDao {
         return affectedRows;
     }
 
+    /**
+     * Met à jour un ennemi existant dans la base de données.
+     * Actualise tous les attributs de l'ennemi (nom, attaque, défense).
+     * 
+     * @param enemy L'ennemi avec les nouvelles données
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void update(Enemy enemy) throws SQLException {
         String query = "UPDATE enemies SET name = ?, "
@@ -88,6 +121,12 @@ public class EnemyDaoImpl implements EnemyDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Supprime un ennemi de la base de données.
+     * 
+     * @param id L'identifiant de l'ennemi à supprimer
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM enemies WHERE id = ? ";
@@ -96,6 +135,13 @@ public class EnemyDaoImpl implements EnemyDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Met à jour uniquement les points de vie d'un ennemi.
+     * Utilisé lors des combats pour mettre à jour la santé de l'ennemi.
+     * 
+     * @param enemy L'ennemi dont la santé doit être mise à jour
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public void updateHealth(Enemy enemy) throws SQLException {
         String query = "UPDATE enemies SET health = ? WHERE id = ?";

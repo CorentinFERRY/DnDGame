@@ -1,7 +1,7 @@
 package fr.campus.dndgame.main.model.characters;
 
 import fr.campus.dndgame.main.model.equipments.offensives.Spell;
-import fr.campus.dndgame.main.model.equipments.offensives.Weapon;
+
 
 /**
  * Classe représentant un Magicien dans le jeu.
@@ -44,6 +44,13 @@ public class Wizard extends Character{
         this.spell = spell;
     }
 
+    /**
+     * Équipe un nouveau sort si celui-ci est meilleur que celui actuellement équipé.
+     * Si un sort est déjà équipé, il sera désarmé et remplacé uniquement si le nouveau est supérieur.
+     * Augmente la puissance d'attaque du magicien en fonction du bonus d'attaque du sort.
+     * 
+     * @param newSpell Le nouveau sort à équiper
+     */
     public void equip(Spell newSpell){
         if (this.spell != null){
             if (newSpell.getAttackBonus() <= this.spell.getAttackBonus()){
@@ -55,6 +62,11 @@ public class Wizard extends Character{
         this.spell = newSpell;
     }
 
+    /**
+     * Désarme le magicien en supprimant son sort actuel.
+     * Réduit la puissance d'attaque du magicien du bonus du sort.
+     * N'a aucun effet si aucun sort n'est équipé.
+     */
     public void disarm(){
         if (spell != null){
             this.setAttack(this.getAttack()- this.spell.getAttackBonus());
