@@ -82,7 +82,7 @@ Cela crée un dossier `docs/javadoc` contenant la documentation HTML. Ouvrez `do
 
 ### 🎲 Mécanique de hasard
 
-- Système de dés
+- Système de dés : Défini le déplacement du joueur & Coup Critique / Echec Critique lors de combats
 - Boîte surprise avec récompenses aléatoires
 
 ---
@@ -91,16 +91,24 @@ Cela crée un dossier `docs/javadoc` contenant la documentation HTML. Ouvrez `do
 
 ```
 src/fr/campus/dndgame/
-├── Main.java                 # Point d'entrée du jeu
-├── characters/               # Classes de personnages
-├── enemies/                  # Classes d'ennemis
-├── equipments/               # Système d'équipements
-├── board/                    # Plateau de jeu
-├── game/                     # Logique principale du jeu
-└── utils/                    # Utilitaires (menu, dés, etc.)
+├── main/
+│   ├── Main.java                 # Point d'entrée du jeu
+│   ├── dao/                      # Accès aux données
+│   ├── db/                       # Connexion base de données
+│   ├── factory/                  # Patterns factory
+│   ├── game/                     # Logique principale du jeu
+│   ├── model/
+│   │   ├── board/                # Plateau de jeu
+│   │   ├── characters/           # Classes de personnages
+│   │   ├── enemies/              # Classes d'ennemis
+│   │   └── equipments/           # Système d'équipements
+│   └── utils/                    # Utilitaires (menu, dés, etc.)
+└── test/                         # Tests unitaires
 ```
 
 ---
+
+## 📊 Diagramme UML
 
 ```mermaid
 classDiagram
@@ -117,12 +125,15 @@ direction TB
 	    +Board board
 	    +Dice dice
 	    +Character player
+      +FightService fightService
 	    +boolean gameFinished
 	    +start()
 	    +startGame()
 	    +restartGame()
 	    +lauchGame()
 	    +playTurn()
+      +startFight(Character,Cell,FightService)
+      +interactWithCell(int)
 	    +createCharacter()
 	    +updateCharacter()
 	    +getCharacter()
@@ -135,14 +146,15 @@ direction TB
 	    Cell[] cells
 	    +initBoard()
 	    +isLastCell()
+      +placeRandom(List<Integere>,int,Supplier<Object>)
     }
 
     class Cell {
 	    +Enemy enemy
 	    +SurpriseBox box
+      +Character character
 	    +isEmpty()
-	    +removeEnemy()
-	    +removeBox()
+	    +interact(Character,FightService,Game)
     }
 
     class Dice {
@@ -156,42 +168,56 @@ direction TB
 	    +int health
 	    +int maxHealth
 	    +int attack
+      +int defense
 	    +String name
 	    +int position
 	    +DefensiveEquipment defensiveEquipment
 	    +getOffensiveInfo()
 	    +getDefensiveInfo()
 	    +move()
+      +takeDamage(int)
+      +isAlive()
 	    +useDefensiveEquip(defensiveEquipment)
+      +disarm()
     }
 
     class Warrior {
 	    +Weapon weapon
 	    +equip(Weapon)
+      +disarm()
+      +getOffensiveInfo()
     }
 
     class Wizard {
 	    +Spell spell
 	    +equip(Spell)
+      +disarm()
+      +getOffensiveInfo()
     }
 
     class Equipment {
 	    +String type
 	    +String name
+      +int effect
+      +isOffensive()
+      +use(Character)
     }
 
     class OffensiveEQuipment {
 	    +int attackBonus
+      +isOffensive()
     }
 
     class DefensiveEquipment {
-        +use(Character)
+      +isOffensive()
     }
 
     class Weapon {
+      +use(Character)
     }
 
     class Spell {
+      +use(Character)
     }
 
     class Potion {
@@ -200,8 +226,8 @@ direction TB
     }
     
     class Shield {
-        +int defenseBonus
-        +use(Character)
+      +int defenseBonus
+      +use(Character)
     }
 
     class Enemy {
@@ -209,7 +235,6 @@ direction TB
 	    +int attack
 	    +int health
 	    +int maxHealth
-	    +attack(Character)
 	    +takeDamage(int)
 	    +isAlive()
     }
