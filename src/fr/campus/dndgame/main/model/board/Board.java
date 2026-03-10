@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.board;
 
 import fr.campus.dndgame.main.model.enemies.Dragon;
+import fr.campus.dndgame.main.model.enemies.Enemy;
 import fr.campus.dndgame.main.model.enemies.Goblin;
 import fr.campus.dndgame.main.model.enemies.Sorcerer;
 import fr.campus.dndgame.main.model.equipments.*;
@@ -16,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Classe représentant le plateau de jeu.
@@ -58,16 +60,6 @@ public class Board {
      *
      */
     public void initBoard(){
-        // Enemies and Boxes
-        Dragon dragon = new Dragon();
-        Sorcerer sorcerer = new Sorcerer();
-        Goblin goblin = new Goblin();
-        SurpriseBox boxMace = new SurpriseBox(new Mace());
-        SurpriseBox boxSword = new SurpriseBox(new Sword());
-        SurpriseBox boxLight = new SurpriseBox(new Lightning());
-        SurpriseBox boxFireBall = new SurpriseBox(new FireBall());
-        SurpriseBox boxLargePotion = new SurpriseBox(new LargePotion());
-        SurpriseBox boxStandardPotion = new SurpriseBox(new StandardPotion());
         cells.clear();
         // On crée une liste de positions
         List<Integer> positions = new ArrayList<>();
@@ -80,20 +72,20 @@ public class Board {
         Collections.shuffle(positions);
 
         // On créer un map avec les règles (4 dragons, 10 Sorciers etc ...)
-        Map<Consumer<Cell>, Integer> generationRules = Map.of(
-                cell -> cell.setEnemy(dragon), 4,
-                cell -> cell.setEnemy(sorcerer), 10,
-                cell -> cell.setEnemy(goblin), 10,
-                cell -> cell.setBox(boxMace), 5,
-                cell -> cell.setBox(boxLight), 5,
-                cell -> cell.setBox(boxSword), 4,
-                cell -> cell.setBox(boxFireBall), 2,
-                cell -> cell.setBox(boxStandardPotion), 6,
-                cell -> cell.setBox(boxLargePotion), 2
+        Map<Supplier<Object>, Integer> generationRules = Map.of(
+                Dragon::new, 4,
+                Sorcerer::new, 10,
+                Goblin::new, 10,
+                () -> new SurpriseBox(new Mace()),             5,
+                () -> new SurpriseBox(new Lightning()),        5,
+                () -> new SurpriseBox(new Sword()),            4,
+                () -> new SurpriseBox(new FireBall()),         2,
+                () -> new SurpriseBox(new StandardPotion()),   6,
+                () -> new SurpriseBox(new LargePotion()),      2
         );
 
         //On place nos éléments de façon aléatoire via placeRandom()
-        for (Map.Entry<Consumer<Cell>, Integer> rule : generationRules.entrySet()) {
+        for (Map.Entry<Supplier<Object>, Integer> rule : generationRules.entrySet()) {
             placeRandom(positions, rule.getValue(), rule.getKey());
         }
     }
@@ -211,13 +203,17 @@ public class Board {
      *
      * @param positions Liste des positions disponible (préalablement mélangée)
      * @param count Le nombre d'élément à placer
-     * @param action L'action à appliquer à la cellule selectionnée défini dans le Consumer
+     *
      * */
-    private void placeRandom(List<Integer> positions, int count, Consumer<Cell> action) {
-        for (int i = 0; i < count; i++) {
-            // On supprime de la liste la cellule qui à recupérer un élement
-            int pos = positions.remove(0);
-            action.accept(cells.get(pos));
+    private void placeRandom(List<Integer> positions, int count, Supplier<Object> supplier) {
+        for (int i = 0; i < count && !positions.isEmpty(); i++) {
+            int pos = positions.remove(0);  // retire la position pour éviter les doublons
+            Object entity = supplier.get();
+            if (entity instanceof Enemy enemy) {
+                cells.get(pos).setEnemy(enemy);
+            } else if (entity instanceof SurpriseBox box) {
+                cells.get(pos).setBox(box);
+            }
         }
     }
 }

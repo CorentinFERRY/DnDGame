@@ -1,15 +1,11 @@
 package fr.campus.dndgame.main.model.board;
 
+import fr.campus.dndgame.main.game.CombatService;
+import fr.campus.dndgame.main.game.Game;
 import fr.campus.dndgame.main.model.characters.Character;
-import fr.campus.dndgame.main.model.characters.Warrior;
-import fr.campus.dndgame.main.model.characters.Wizard;
 import fr.campus.dndgame.main.model.enemies.Enemy;
-import fr.campus.dndgame.main.model.equipments.Equipment;
 import fr.campus.dndgame.main.model.equipments.SurpriseBox;
-import fr.campus.dndgame.main.model.equipments.defensives.Potion;
-import fr.campus.dndgame.main.model.equipments.defensives.Shield;
-import fr.campus.dndgame.main.model.equipments.offensives.Spell;
-import fr.campus.dndgame.main.model.equipments.offensives.Weapon;
+
 
 /**
  * Classe représentant une case du plateau de jeu.
@@ -173,36 +169,14 @@ public class Cell {
         }
     }
 
-    public void interact(Character character){
-
+    public void interact(Character character,CombatService combatService, Game game){
         if(enemy != null){
-            System.out.println("Un ennemi apparaît : " + enemy);
+            game.startCombat(character,this,combatService);
         }
         if(box != null){
-            Equipment equipment = box.getEquipment();
-            if (equipment instanceof Potion){
-                System.out.println("Vous utilisez la potion.");
-            }
-            else if (equipment instanceof Shield){
-                System.out.println("Vous equipez le bouclier.");
-            }
-            else {
-                if (character instanceof Warrior){
-                    if (equipment instanceof Weapon) {
-                        System.out.println("Le guerrier équipe l'arme.");
-                    } else {
-                        System.out.println("Le guerrier ne peut pas utiliser ce sort.");
-                    }
-                }
-                else if (character instanceof Wizard) {
-
-                    if (equipment instanceof Spell) {
-                        System.out.println("Le magicien apprend le sort.");
-                    } else {
-                        System.out.println("Le magicien ne peut pas utiliser cette arme.");
-                    }
-                }
-            }
+            box.open(character);
+            box = null;
         }
     }
 }
+

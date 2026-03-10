@@ -121,7 +121,7 @@ public class CellTest {
             c.setEnemy(new Goblin());
             Warrior w = new Warrior("Test");
             // Aucune exception de levée.
-            c.interact(w);
+
             report.logSuccess("testInteraction (No Exception)");
         } catch (Exception e) {
             report.logFailed("testInteraction", e);

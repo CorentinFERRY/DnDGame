@@ -2,7 +2,9 @@ package fr.campus.dndgame.main.game;
 
 import fr.campus.dndgame.main.factory.CharacterFactory;
 import fr.campus.dndgame.main.model.board.Board;
+import fr.campus.dndgame.main.model.board.Cell;
 import fr.campus.dndgame.main.model.characters.Character;
+import fr.campus.dndgame.main.model.enemies.Enemy;
 import fr.campus.dndgame.main.utils.Dice;
 import fr.campus.dndgame.main.utils.Menu;
 
@@ -19,6 +21,7 @@ public class Game {
     private final Board board;
     private final Dice dice;
     private Character player;
+    private final CombatService combatService;
     private boolean gameFinished = false;
 
     /**
@@ -29,6 +32,7 @@ public class Game {
         menu = new Menu();
         board = new Board(64);
         dice = new Dice(6);
+        combatService = new CombatService();
     }
 
     // ========== GESTION PRINCIPALE ==========
@@ -78,6 +82,8 @@ public class Game {
             menu.showMessage("Vous devez créer un personnage avant de commencer !");
             return;
         }
+        player.setHealth(player.getMaxHealth());
+        player.disarm();
         menu.showMessage("\nDébut de la partie !");
         launchGame();
     }
@@ -104,7 +110,7 @@ public class Game {
         menu.showMessage("Position actuelle : " + player.getPosition() + " / " + board.getSize());
 
         // Rejouer tour par tour
-        while (!gameFinished) {
+        while (!gameFinished && player.isAlive()) {
             menu.getStringInput("\nAppuyez sur Entrée pour lancer le tour...");
             playTurn();
         }
@@ -133,18 +139,13 @@ public class Game {
             // Vérifier si on atteint la fin
             if (board.isLastCell(player.getPosition())) {
                 player.setPosition(board.getSize());
-                menu.showMessage("Vous êtes en case " + player.getPosition() + " / " + board.getSize());
                 menu.showMessage("\nVous avez atteint la fin du plateau !");
                 gameFinished = true;
                 return;
             }
-            // Afficher la position après chaque case
-            menu.showMessage(player.getName() + " avance d'un case, nouvelle position : "
-                    + player.getPosition() + " / " + board.getSize());
         }
-        // Affiche si la case contient un ennemi ou une boite surprise
-        menu.showMessage(board.getCell(player.getPosition()).toString());
-        board.getCell(player.getPosition()).interact(player);
+        interactWithCell(player.getPosition());
+
     }
 
     /**
@@ -176,6 +177,57 @@ public class Game {
         player.setName(name);
         menu.showMessage(player.toString() + " " + player.getOffensiveInfo() + ", " + player.getDefensiveInfo());
         menu.showMessage("Nom modifié avec succès !");
+    }
+
+    public void startCombat(Character player, Cell cell, CombatService combatService){
+        Enemy enemy = cell.getEnemy();
+        boolean combatFinished = false;
+        String [] fightOptions = {"Attaque","Fuite"};
+        menu.showMessage("Un ennemi apparaît : " + enemy);
+        while(!combatFinished && player.isAlive()){
+            int choice = menu.displayMenu("Combat",fightOptions);
+            switch (choice){
+                case 1 :
+                    combatService.fight(player,enemy);
+                    combatFinished = true;
+                    break;
+                case 2 :
+                    int diceResult = dice.roll();
+                    menu.showMessage(player.getName() + " recule de " + diceResult + " cases !");
+                    interactWithCell(player.getPosition() - diceResult);
+                    combatFinished = true;
+                    break;
+            }
+        }
+        if(!enemy.isAlive()){
+            cell.setEnemy(null);
+            menu.showMessage("L'ennemi est vaincu !");
+        }
+        if (!player.isAlive()){
+            menu.showMessage("You lose !");
+            gameFinished = true;
+            this.player = null;
+        }
+    }
+
+    private void interactWithCell(int newPosition){
+        if(newPosition < 1){
+            newPosition = 1;
+        }
+        player.setPosition(newPosition);
+        // Vérifier si on atteint la fin
+        if (board.isLastCell(player.getPosition())) {
+            player.setPosition(board.getSize());
+            menu.showMessage("\nVous avez atteint la fin du plateau !");
+            gameFinished = true;
+            return;
+        }
+
+        Cell cell = board.getCell(player.getPosition());
+        menu.showMessage(cell.toString());
+        cell.interact(player,combatService,this);
+        menu.showMessage(player.toString() + " " + player.getOffensiveInfo());
+
     }
     /**
      * Retourne le personnage actuel du jeu.

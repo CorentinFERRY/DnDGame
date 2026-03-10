@@ -1,5 +1,5 @@
 package fr.campus.dndgame.main.model.equipments;
-
+import fr.campus.dndgame.main.model.characters.Character;
 /**
  * Classe abstraite représentant un équipement dans le jeu.
  * Un équipement possède un type et un nom.
@@ -95,6 +95,8 @@ public abstract class Equipment {
      * @return {@code true} si offensif, sinon {@code false}
      */
     public abstract boolean isOffensive();
+
+    public abstract void use(Character character);
     /**
      * Retourne une représentation textuelle de l'équipement.
      *

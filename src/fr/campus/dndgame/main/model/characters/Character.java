@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.characters;
 
 
+import fr.campus.dndgame.main.model.equipments.Equipment;
 import fr.campus.dndgame.main.model.equipments.defensives.DefensiveEquipment;
 
 /**
@@ -42,8 +43,6 @@ public abstract class Character {
         this.defense = 0;
     }
     // ========== GETTERS et SETTERS ==========
-
-
     /**
      * Retourne l'identifiant du personnage
      * @return l'id
@@ -234,6 +233,19 @@ public abstract class Character {
     public void move(){
         this.position += 1;
     }
+
+    public void takeDamage(int damage) {
+        this.health -= damage;
+        if (this.health < 0) {
+            this.health = 0;
+        }
+    }
+
+    public boolean isAlive() {
+        return health > 0;
+    }
+
+    public abstract void disarm();
 
     /**
      * Utilise l'équipement défensif du personnage.

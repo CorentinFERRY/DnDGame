@@ -1,4 +1,6 @@
 package fr.campus.dndgame.main.model.equipments.offensives;
+import fr.campus.dndgame.main.model.characters.Character;
+import fr.campus.dndgame.main.model.characters.Wizard;
 
 /**
  * Classe représentant un sort, un équipement offensif.
@@ -18,4 +20,14 @@ public class Spell extends OffensiveEquipment {
     public Spell(String name, int attackLevel) {
         super("Spell", name, attackLevel);
     }
+
+    @Override
+    public void use(Character character) {
+        if(character instanceof Wizard wizard){
+            wizard.equip(this);
+        } else {
+            System.out.println("Seul une mage peut utiliser ce sort.");
+        }
+    }
+
 }

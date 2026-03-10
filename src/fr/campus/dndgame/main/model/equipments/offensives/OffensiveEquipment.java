@@ -27,8 +27,6 @@ public abstract class OffensiveEquipment extends Equipment {
     }
 
     // ========== GETTERS & SETTERS ==========
-
-
     /**
      * Retourne le bonus d'attaque de cet équipement.
      *

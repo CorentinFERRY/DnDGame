@@ -1,5 +1,8 @@
 package fr.campus.dndgame.main.model.equipments.offensives;
 
+import fr.campus.dndgame.main.model.characters.Character;
+import fr.campus.dndgame.main.model.characters.Warrior;
+
 /**
  * Classe représentant une arme, un équipement offensif.
  * Une arme augmente la force d'attaque du guerrier.
@@ -16,5 +19,14 @@ public class Weapon extends OffensiveEquipment {
      */
     public Weapon(String name, int attackLevel) {
         super("Weapon", name, attackLevel);
+    }
+
+    @Override
+    public void use(Character character) {
+        if(character instanceof Warrior warrior){
+            warrior.equip(this);
+        } else {
+            System.out.println("Seul un guerrier peut utiliser cette arme.");
+        }
     }
 }

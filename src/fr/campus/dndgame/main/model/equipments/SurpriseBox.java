@@ -1,5 +1,7 @@
 package fr.campus.dndgame.main.model.equipments;
 
+import fr.campus.dndgame.main.model.characters.Character;
+
 /**
  * Classe représentant une boite surprise dans le jeu.
  * Une boite surprise peut contenir un equipement aléatoire.
@@ -88,6 +90,12 @@ public class SurpriseBox {
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
     }
+
+
+    public void open(Character character){
+        equipment.use(character);
+    }
+
     /**
      * Retourne une représentation du contenu de la boite.
      * Utilise la méthode toString() de l'équipement contenu.

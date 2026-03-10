@@ -44,6 +44,23 @@ public class Warrior extends Character{
         this.weapon = weapon;
     }
 
+    public void equip(Weapon newWeapon){
+        if (this.weapon != null) {
+            if (newWeapon.getAttackBonus() <= this.weapon.getAttackBonus()) {
+                return;
+            }
+            disarm();
+        }
+        this.setAttack(this.getAttack() + newWeapon.getAttackBonus());
+        this.weapon = newWeapon;
+    }
+
+    public void disarm(){
+        if (weapon != null){
+            this.setAttack(this.getAttack()- this.weapon.getAttackBonus());
+            weapon = null;
+        }
+    }
     /**
      * Retourne une chaîne décrivant l'arme offensif du guerrier.
      *

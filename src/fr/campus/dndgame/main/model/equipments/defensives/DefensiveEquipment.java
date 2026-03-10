@@ -51,12 +51,5 @@ public abstract class DefensiveEquipment extends Equipment {
         return false;
     }
 
-    /**
-     * Utilise l'équipement défensif sur un personnage.
-     * Cette méthode doit être implémentée par les sous-classes.
-     *
-     * @param character Le personnage qui utilise l'équipement
-     */
-    public abstract void use(Character character);
 
 }

@@ -130,6 +130,18 @@ public abstract class Enemy {
         this.defense = defense;
     }
 
+    // ========== UTILITAIRES ==========
+    public void takeDamage(int damage) {
+        this.health -= damage;
+        if (this.health < 0) {
+            this.health = 0;
+        }
+    }
+
+    public boolean isAlive() {
+        return health > 0;
+    }
+
     /**
      * Retourne une représentation textuelle de l'ennemi.
      *
@@ -139,4 +151,6 @@ public abstract class Enemy {
     public String toString() {
         return name + " (HP: " + health + " attaque: " + attack +")";
     }
+
+
 }

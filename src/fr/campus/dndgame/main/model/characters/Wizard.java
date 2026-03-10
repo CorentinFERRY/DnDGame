@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.characters;
 
 import fr.campus.dndgame.main.model.equipments.offensives.Spell;
+import fr.campus.dndgame.main.model.equipments.offensives.Weapon;
 
 /**
  * Classe représentant un Magicien dans le jeu.
@@ -42,7 +43,24 @@ public class Wizard extends Character{
     public void setSpell(Spell spell){
         this.spell = spell;
     }
-    
+
+    public void equip(Spell newSpell){
+        if (this.spell != null){
+            if (newSpell.getAttackBonus() <= this.spell.getAttackBonus()){
+                return;
+            }
+            disarm();
+        }
+        this.setAttack(this.getAttack()+newSpell.getAttackBonus());
+        this.spell = newSpell;
+    }
+
+    public void disarm(){
+        if (spell != null){
+            this.setAttack(this.getAttack()- this.spell.getAttackBonus());
+            spell = null;
+        }
+    }
     /**
      * Retourne une chaîne décrivant le sort offensif du magicien.
      *
