@@ -1,5 +1,7 @@
 package fr.campus.dndgame.main.model.equipments;
+
 import fr.campus.dndgame.main.model.characters.Character;
+
 /**
  * Classe abstraite représentant un équipement dans le jeu.
  * Un équipement possède un type et un nom.
@@ -18,7 +20,7 @@ public abstract class Equipment {
      * @param type Le type d'équipement
      * @param name Le nom de l'équipement
      */
-    protected Equipment(String type, String name){
+    protected Equipment(String type, String name) {
         this.type = type;
         this.name = name;
     }
@@ -39,10 +41,10 @@ public abstract class Equipment {
      *
      * @return Le type d'équipement
      */
-    public String getType(){
+    public String getType() {
         return type;
     }
-    
+
     /**
      * Retourne le nom de l'équipement.
      *
@@ -51,13 +53,13 @@ public abstract class Equipment {
     public String getName() {
         return name;
     }
-    
+
     /**
      * Définit le nom de l'équipement.
      *
      * @param name Le nouveau nom
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -80,14 +82,18 @@ public abstract class Equipment {
      *
      * @return valeur d'effet
      */
-    public abstract int getEffect();
+    public int getEffect() {
+        return effect;
+    }
 
     /**
      * Définit la valeur d'effet portée par l'équipement.
      *
      * @param effect valeur d'effet
      */
-    public abstract void setEffect(int effect);
+    public void setEffect(int effect) {
+        this.effect = effect;
+    }
 
     /**
      * Indique si l'équipement est offensif.
@@ -104,13 +110,14 @@ public abstract class Equipment {
      * @param character Le personnage sur lequel utiliser l'équipement
      */
     public abstract void use(Character character);
+
     /**
      * Retourne une représentation textuelle de l'équipement.
      *
      * @return Une chaîne décrivant l'équipement
      */
     @Override
-    public String toString(){
+    public String toString() {
         return type + " : " + name;
     }
 }

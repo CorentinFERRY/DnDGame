@@ -21,10 +21,11 @@ public class TestReport {
     /**
      * Enregistre un échec, affiche l'erreur et incrémente le compteur.
      */
-    public void logFailed(String testName, Exception e) {
+    public void logFailed(String testName, Throwable e) {
         System.out.println("[ÉCHEC] " + testName);
         System.out.println("       > Erreur: " + e.getMessage());
-        // e.printStackTrace(); // Décommente pour voir la pile d'appel complète en cas de bug complexe
+        // e.printStackTrace(); // Décommente pour voir la pile d'appel complète en cas
+        // de bug complexe
         failed++;
     }
 

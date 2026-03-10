@@ -7,7 +7,7 @@ import fr.campus.dndgame.test.model.rapports.TestReport;
 public class EquipmentTest {
     private static TestReport report;
 
-    public static void main (String[] args){
+    public static void main(String[] args) {
         report = new TestReport("EQUIPMENT (Base)");
         testNameGetterSetter();
         testTypeGetterSetter();
@@ -34,7 +34,7 @@ public class EquipmentTest {
                 throw new AssertionError("Setter/Getter Name échoué (Potion)");
 
             report.logSuccess("testNameGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testNameGetterSetter", e);
         }
     }
@@ -54,7 +54,7 @@ public class EquipmentTest {
                 throw new AssertionError("getType() incorrect après construction (Potion)");
 
             report.logSuccess("testTypeGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testTypeGetterSetter", e);
         }
     }
@@ -76,7 +76,7 @@ public class EquipmentTest {
                 throw new AssertionError("toString() doit contenir le nom : " + ps);
 
             report.logSuccess("testToString");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testToString", e);
         }
     }

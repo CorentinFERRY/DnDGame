@@ -35,7 +35,7 @@ public class SurpriseBoxTest {
                 throw new AssertionError("L'id doit être 0 par défaut (constructeur sans id)");
 
             report.logSuccess("testConstructorWithEquipmentOnly");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testConstructorWithEquipmentOnly", e);
         }
     }
@@ -53,7 +53,7 @@ public class SurpriseBoxTest {
                 throw new AssertionError("L'équipement retourné doit être celui passé au constructeur");
 
             report.logSuccess("testConstructorWithIdAndEquipment");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testConstructorWithIdAndEquipment", e);
         }
     }
@@ -67,7 +67,7 @@ public class SurpriseBoxTest {
                 throw new AssertionError("Setter/Getter ID échoué");
 
             report.logSuccess("testIdGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testIdGetterSetter", e);
         }
     }
@@ -82,7 +82,7 @@ public class SurpriseBoxTest {
                 throw new AssertionError("Setter/Getter Name échoué");
 
             report.logSuccess("testNameGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testNameGetterSetter", e);
         }
     }
@@ -101,7 +101,7 @@ public class SurpriseBoxTest {
                 throw new AssertionError("L'ancien équipement ne doit plus être retourné après setEquipment()");
 
             report.logSuccess("testEquipmentGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testEquipmentGetterSetter", e);
         }
     }
@@ -121,7 +121,7 @@ public class SurpriseBoxTest {
                 throw new AssertionError("La boîte doit pouvoir contenir un sort offensif");
 
             report.logSuccess("testEquipmentCanBeOffensive");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testEquipmentCanBeOffensive", e);
         }
     }
@@ -135,7 +135,7 @@ public class SurpriseBoxTest {
                 throw new AssertionError("La boîte doit pouvoir contenir un équipement défensif");
 
             report.logSuccess("testEquipmentCanBeDefensive");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testEquipmentCanBeDefensive", e);
         }
     }
@@ -148,17 +148,20 @@ public class SurpriseBoxTest {
             String boxStr = box.toString();
             String equipmentStr = w.toString();
             if (!boxStr.equals(equipmentStr))
-                throw new AssertionError("toString() de SurpriseBox doit déléguer à l'équipement : attendu '" + equipmentStr + "', obtenu '" + boxStr + "'");
+                throw new AssertionError("toString() de SurpriseBox doit déléguer à l'équipement : attendu '"
+                        + equipmentStr + "', obtenu '" + boxStr + "'");
 
             Potion p = new Potion("Grande Potion", 15);
             box.setEquipment(p);
             boxStr = box.toString();
             equipmentStr = p.toString();
             if (!boxStr.equals(equipmentStr))
-                throw new AssertionError("toString() doit refléter le nouvel équipement après setEquipment() : attendu '" + equipmentStr + "', obtenu '" + boxStr + "'");
+                throw new AssertionError(
+                        "toString() doit refléter le nouvel équipement après setEquipment() : attendu '" + equipmentStr
+                                + "', obtenu '" + boxStr + "'");
 
             report.logSuccess("testToString");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testToString", e);
         }
     }

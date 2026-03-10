@@ -37,7 +37,7 @@ public class DefensiveEquipmentTest {
                 throw new AssertionError("Le montant de soin doit être 10");
 
             report.logSuccess("testPotionConstructorAndStats");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testPotionConstructorAndStats", e);
         }
     }
@@ -49,7 +49,7 @@ public class DefensiveEquipmentTest {
             if (p.getId() != 99)
                 throw new AssertionError("Setter/Getter ID échoué sur Potion");
             report.logSuccess("testIdGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testIdGetterSetter", e);
         }
     }
@@ -61,7 +61,7 @@ public class DefensiveEquipmentTest {
             if (p.getHealAmount() != 20)
                 throw new AssertionError("Setter/Getter HealAmount échoué");
             report.logSuccess("testHealAmountGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testHealAmountGetterSetter", e);
         }
     }
@@ -72,7 +72,7 @@ public class DefensiveEquipmentTest {
             if (p.getEffect() != 12)
                 throw new AssertionError("getEffect() doit retourner healAmount");
             report.logSuccess("testGetEffect");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testGetEffect", e);
         }
     }
@@ -87,7 +87,7 @@ public class DefensiveEquipmentTest {
             if (p.getHealAmount() != 25)
                 throw new AssertionError("setEffect() n'est pas cohérent avec getHealAmount()");
             report.logSuccess("testSetEffect");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testSetEffect", e);
         }
     }
@@ -98,7 +98,7 @@ public class DefensiveEquipmentTest {
             if (p.isOffensive())
                 throw new AssertionError("Une Potion ne doit pas être offensive");
             report.logSuccess("testIsOffensive");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testIsOffensive", e);
         }
     }
@@ -111,9 +111,10 @@ public class DefensiveEquipmentTest {
             Potion p = new Potion("Potion de soin", 4);
             p.use(character);
             if (character.getHealth() != 5)
-                throw new AssertionError("use() doit restaurer " + 4 + " PV : attendu 5, obtenu " + character.getHealth());
+                throw new AssertionError(
+                        "use() doit restaurer " + 4 + " PV : attendu 5, obtenu " + character.getHealth());
             report.logSuccess("testUseRestoresHealth");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testUseRestoresHealth", e);
         }
     }
@@ -126,9 +127,10 @@ public class DefensiveEquipmentTest {
             Potion p = new Potion("Grande Potion", 10);
             p.use(character);
             if (character.getHealth() != 15)
-                throw new AssertionError("use() ne doit pas dépasser les PV max : attendu 15, obtenu " + character.getHealth());
+                throw new AssertionError(
+                        "use() ne doit pas dépasser les PV max : attendu 15, obtenu " + character.getHealth());
             report.logSuccess("testUseCannotExceedMaxHealth");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testUseCannotExceedMaxHealth", e);
         }
     }
@@ -145,7 +147,7 @@ public class DefensiveEquipmentTest {
                 throw new AssertionError("toString() doit contenir le montant de soin : " + ps);
 
             report.logSuccess("testToString");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testToString", e);
         }
     }

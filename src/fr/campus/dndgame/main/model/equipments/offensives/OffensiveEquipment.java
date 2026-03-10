@@ -11,19 +11,18 @@ import fr.campus.dndgame.main.model.equipments.Equipment;
  */
 public abstract class OffensiveEquipment extends Equipment {
 
-    private int attackBonus;
     private int id;
 
     /**
      * Constructeur protégé pour initialiser un équipement offensif.
      *
-     * @param type Le type d'équipement
-     * @param name Le nom de l'équipement
+     * @param type        Le type d'équipement
+     * @param name        Le nom de l'équipement
      * @param attackBonus Le bonus d'attaque fourni par cet équipement
      */
-    protected OffensiveEquipment(String type,String name, int attackBonus){
-        super(type,name);
-        this.attackBonus = attackBonus;
+    protected OffensiveEquipment(String type, String name, int attackBonus) {
+        super(type, name);
+        setEffect(attackBonus);
     }
 
     // ========== GETTERS & SETTERS ==========
@@ -32,8 +31,8 @@ public abstract class OffensiveEquipment extends Equipment {
      *
      * @return Le bonus d'attaque
      */
-    public int getAttackBonus(){
-        return attackBonus;
+    public int getAttackBonus() {
+        return getEffect();
     }
 
     /**
@@ -42,7 +41,7 @@ public abstract class OffensiveEquipment extends Equipment {
      * @param attackBonus nouvelle valeur du bonus d'attaque
      */
     public void setAttackBonus(int attackBonus) {
-        this.attackBonus = attackBonus;
+        setEffect(attackBonus);
     }
 
     /**
@@ -64,26 +63,6 @@ public abstract class OffensiveEquipment extends Equipment {
     }
 
     /**
-     * Retourne l'effet de l'équipement offensif.
-     *
-     * @return bonus d'attaque
-     */
-    @Override
-    public int getEffect() {
-        return attackBonus;
-    }
-
-    /**
-     * Définit l'effet de l'équipement offensif.
-     *
-     * @param effect bonus d'attaque
-     */
-    @Override
-    public void setEffect(int effect) {
-        this.attackBonus = effect;
-    }
-
-    /**
      * Indique qu'il s'agit d'un équipement offensif.
      *
      * @return toujours {@code true}
@@ -98,7 +77,7 @@ public abstract class OffensiveEquipment extends Equipment {
      *
      * @return Une chaîne décrivant le bonus d'attaque
      */
-    public String toString(){
-        return super.toString() + " (Attaque: " + attackBonus + ")";
+    public String toString() {
+        return super.toString() + " (Attaque: " + getEffect() + ")";
     }
 }

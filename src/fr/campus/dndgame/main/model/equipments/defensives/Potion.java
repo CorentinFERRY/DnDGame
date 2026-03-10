@@ -11,57 +11,35 @@ import fr.campus.dndgame.main.model.characters.Character;
  */
 public class Potion extends DefensiveEquipment {
 
-    private int healAmount;
-
     /**
      * Constructeur pour créer une potion.
      *
-     * @param name Le nom de la potion
+     * @param name       Le nom de la potion
      * @param healAmount Le nombre de points de vie restaurés par la potion
      */
     public Potion(String name, int healAmount) {
         super("Potion", name);
-        this.healAmount = healAmount;
+        setEffect(healAmount);
     }
 
     // ========== GETTERS & SETTERS ==========
-
-    /**
-     * Définit l'effet de la potion.
-     *
-     * @param effect points de soin à appliquer
-     */
-    @Override
-    public void setEffect(int effect) {
-        this.healAmount = effect;
-    }
-
-    /**
-     * Retourne l'effet de la potion.
-     *
-     * @return points de soin
-     */
-    @Override
-    public int getEffect() {
-        return healAmount;
-    }
 
     /**
      * Retourne la quantité de points de vie restaurés par la potion.
      *
      * @return Le montant de guérison
      */
-    public int getHealAmount(){
-        return healAmount;
+    public int getHealAmount() {
+        return getEffect();
     }
-    
+
     /**
      * Définit la quantité de points de vie restaurés par la potion.
      *
      * @param healAmount Nouveau montant de guérison
      */
-    public void setHealAmount(int healAmount){
-        this.healAmount =healAmount;
+    public void setHealAmount(int healAmount) {
+        setEffect(healAmount);
     }
 
     /**
@@ -71,13 +49,13 @@ public class Potion extends DefensiveEquipment {
      * @param character Le personnage qui utilise la potion
      */
     @Override
-    public void use(Character character){
-        int newHealth = character.getHealth() + healAmount;
+    public void use(Character character) {
+        int newHealth = character.getHealth() + getEffect();
         if (newHealth > character.getMaxHealth()) {
             newHealth = character.getMaxHealth();
         }
         character.setHealth(newHealth);
-        System.out.println(character.getName() + " utilise " + getName() + " et récupère " + healAmount + " PV ! " +
+        System.out.println(character.getName() + " utilise " + getName() + " et récupère " + getEffect() + " PV ! " +
                 "PV actuels : " + character.getHealth());
     }
 
@@ -87,8 +65,8 @@ public class Potion extends DefensiveEquipment {
      * @return Une chaîne décrivant le montant de soin
      */
     @Override
-    public String toString(){
-        return super.toString() + " (Soin de: " + healAmount+")";
+    public String toString() {
+        return super.toString() + " (Soin de: " + getEffect() + ")";
     }
 
 }

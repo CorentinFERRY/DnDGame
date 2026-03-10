@@ -34,7 +34,7 @@ public class OffensiveEquipmentTest {
                 throw new AssertionError("Le bonus d'attaque doit être 5");
 
             report.logSuccess("testWeaponConstructorAndStats");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testWeaponConstructorAndStats", e);
         }
     }
@@ -53,7 +53,7 @@ public class OffensiveEquipmentTest {
                 throw new AssertionError("Le bonus d'attaque doit être 8");
 
             report.logSuccess("testSpellConstructorAndStats");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testSpellConstructorAndStats", e);
         }
     }
@@ -71,7 +71,7 @@ public class OffensiveEquipmentTest {
                 throw new AssertionError("Setter/Getter ID échoué sur Spell");
 
             report.logSuccess("testIdGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testIdGetterSetter", e);
         }
     }
@@ -89,7 +89,7 @@ public class OffensiveEquipmentTest {
                 throw new AssertionError("Setter/Getter AttackBonus échoué sur Spell");
 
             report.logSuccess("testAttackBonusGetterSetter");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testAttackBonusGetterSetter", e);
         }
     }
@@ -105,7 +105,7 @@ public class OffensiveEquipmentTest {
                 throw new AssertionError("getEffect() doit retourner attackBonus sur Spell");
 
             report.logSuccess("testGetEffect");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testGetEffect", e);
         }
     }
@@ -128,7 +128,7 @@ public class OffensiveEquipmentTest {
                 throw new AssertionError("setEffect() n'est pas cohérent avec getAttackBonus() sur Spell");
 
             report.logSuccess("testSetEffect");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testSetEffect", e);
         }
     }
@@ -144,7 +144,7 @@ public class OffensiveEquipmentTest {
                 throw new AssertionError("Un Spell doit être offensif");
 
             report.logSuccess("testIsOffensive");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testIsOffensive", e);
         }
     }
@@ -170,7 +170,7 @@ public class OffensiveEquipmentTest {
                 throw new AssertionError("toString() de Spell doit contenir le bonus d'attaque : " + ss);
 
             report.logSuccess("testToString");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             report.logFailed("testToString", e);
         }
     }

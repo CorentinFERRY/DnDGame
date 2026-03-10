@@ -10,7 +10,6 @@ import fr.campus.dndgame.main.model.characters.Character;
  * @version 1.0
  */
 public class Shield extends DefensiveEquipment {
-    private int defenseBonus;
 
     /**
      * Crée un nouveau bouclier.
@@ -20,7 +19,7 @@ public class Shield extends DefensiveEquipment {
      */
     public Shield(String name, int defenseBonus) {
         super("Shield", name);
-        this.defenseBonus = defenseBonus;
+        setEffect(defenseBonus);
     }
 
     // ========== GETTERS & SETTERS ==========
@@ -30,15 +29,16 @@ public class Shield extends DefensiveEquipment {
      * @return valeur du bonus de défense
      */
     public int getDefenseBonus() {
-        return defenseBonus;
+        return getEffect();
     }
+
     /**
      * Modifie le bonus de défense du bouclier.
      *
      * @param defenseBonus nouvelle valeur du bonus de défense
      */
     public void setDefenseBonus(int defenseBonus) {
-        this.defenseBonus = defenseBonus;
+        setEffect(defenseBonus);
     }
 
     /**
@@ -49,28 +49,9 @@ public class Shield extends DefensiveEquipment {
     @Override
     public void use(Character character) {
         System.out.println(character.getName() + " utilise le bouclier " + getName() +
-                " et gagne " + defenseBonus + " points de défense.");
+                " et gagne " + getEffect() + " points de défense.");
     }
 
-    /**
-     * Retourne l'effet du bouclier.
-     *
-     * @return bonus de défense
-     */
-    @Override
-    public int getEffect() {
-        return defenseBonus;
-    }
-
-    /**
-     * Définit l'effet du bouclier.
-     *
-     * @param effect bonus de défense
-     */
-    @Override
-    public void setEffect(int effect) {
-        this.defenseBonus = effect;
-    }
     /**
      * Retourne une représentation textuelle du bouclier.
      *
@@ -78,6 +59,6 @@ public class Shield extends DefensiveEquipment {
      */
     @Override
     public String toString() {
-        return super.toString() + " (" + defenseBonus + " de defense bonus)";
+        return super.toString() + " (" + getEffect() + " de defense bonus)";
     }
 }
