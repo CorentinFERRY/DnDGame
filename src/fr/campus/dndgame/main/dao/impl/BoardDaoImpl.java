@@ -148,6 +148,5 @@ public class BoardDaoImpl implements BoardDao {
             list.add(board);
         }
         return list;
-
     }
 }

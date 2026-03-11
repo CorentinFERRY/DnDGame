@@ -1,6 +1,5 @@
 package fr.campus.dndgame.main.model.characters;
 
-import fr.campus.dndgame.main.model.equipments.Equipment;
 import fr.campus.dndgame.main.model.equipments.defensives.DefensiveEquipment;
 import fr.campus.dndgame.main.model.equipments.defensives.Shield;
 import fr.campus.dndgame.main.model.equipments.offensives.OffensiveEquipment;

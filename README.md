@@ -108,7 +108,7 @@ src/fr/campus/dndgame/
 
 ---
 
-## 📊 Diagramme UML
+## 📊 Diagramme UML
 
 ```mermaid
 classDiagram

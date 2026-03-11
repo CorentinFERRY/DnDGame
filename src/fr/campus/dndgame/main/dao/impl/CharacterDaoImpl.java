@@ -99,26 +99,26 @@ public class CharacterDaoImpl implements CharacterDao {
         String query = "INSERT INTO characters(name, type, health, maxHealth, attack,defense,position,board_id,offensiveEquipment_id,defensiveEquipment_id) VALUES (?, ?, ?, ?, ?,?,?,?,?,?)";
         // Utiliser RETURN_GENERATED_KEYS pour récupérer l'id auto-incrémenté
         PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        stmt.setString(1, character.getName());
-        stmt.setString(2, character.getType());
-        stmt.setInt(3, character.getHealth());
+        stmt.setString(1, character.getName()); // Name
+        stmt.setString(2, character.getType()); // Type
+        stmt.setInt(3, character.getHealth());  // Vie
         stmt.setInt(4, character.getMaxHealth());
         stmt.setInt(5, character.getAttack());
         stmt.setInt(6,character.getDefense());
         stmt.setInt(7,character.getPosition());
+        stmt.setInt(8,character.getBoardId());
         if(character.getOffensiveEquipment() != null) {
-            stmt.setInt(8,character.getOffensiveEquipment().getId());
-        }
-        else {
-            stmt.setNull(8,java.sql.Types.INTEGER);
-        }
-        if(character.getDefensiveEquipment() != null) {
-            stmt.setInt(9,character.getDefensiveEquipment().getId());
+            stmt.setInt(9,character.getOffensiveEquipment().getId());
         }
         else {
             stmt.setNull(9,java.sql.Types.INTEGER);
         }
-        stmt.setInt(10,character.getBoardId());
+        if(character.getDefensiveEquipment() != null) {
+            stmt.setInt(10,character.getDefensiveEquipment().getId());
+        }
+        else {
+            stmt.setNull(10,java.sql.Types.INTEGER);
+        }
         int affectedRows = stmt.executeUpdate();
         // Récupération de l'id généré par la BDD
         if (affectedRows > 0) {
@@ -159,7 +159,9 @@ public class CharacterDaoImpl implements CharacterDao {
                 + "attack = ?, "
                 + "defense = ?, "
                 + "position = ?, "
-                + "board_id = ? WHERE id = ?";
+                + "board_id = ?, "
+                + "offensiveEquipment_id = ?, "
+                + "defensiveEquipment_id = ? WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setString(1, character.getName());
         stmt.setInt(2, character.getHealth());
@@ -167,7 +169,19 @@ public class CharacterDaoImpl implements CharacterDao {
         stmt.setInt(4, character.getDefense());
         stmt.setInt(5, character.getPosition());
         stmt.setInt(6,character.getBoardId());
-        stmt.setInt(7, character.getId());
+        if(character.getOffensiveEquipment() != null) {
+            stmt.setInt(7,character.getOffensiveEquipment().getId());
+        }
+        else {
+            stmt.setNull(7,java.sql.Types.INTEGER);
+        }
+        if(character.getDefensiveEquipment() != null) {
+            stmt.setInt(8,character.getDefensiveEquipment().getId());
+        }
+        else {
+            stmt.setNull(8,java.sql.Types.INTEGER);
+        }
+        stmt.setInt(9, character.getId());
         stmt.executeUpdate();
     }
 

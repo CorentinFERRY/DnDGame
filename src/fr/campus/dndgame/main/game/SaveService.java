@@ -41,7 +41,7 @@ public class SaveService {
         saveCharacter(player);            // 7. le joueur en dernier
     }
 
-    // Pattern "save or update" : insert si id=0, update sinon
+    // Pattern "save or update" : add si id = 0, update sinon (existant)
     private void saveCharacter(Character player) throws SQLException {
         if (player.getId() > 0) characterDao.update(player);
         else characterDao.add(player);
@@ -92,7 +92,8 @@ public class SaveService {
             if (equip.isOffensive()) {
                 if (equip.getId() > 0) offensiveEquipmentDao.update(equip);
                 else offensiveEquipmentDao.add(equip);
-            } else {
+            }
+            else {
                 if (equip.getId() > 0) defensiveEquipmentDao.update(equip);
                 else defensiveEquipmentDao.add(equip);
             }
@@ -110,13 +111,10 @@ public class SaveService {
     public Object[] loadGame(int characterId) throws SQLException {
         Character player = characterDao.getCharacterWithEquipment(characterId);
         if (player == null) throw new SQLException("Personnage introuvable : " + characterId);
-
         Board board = boardDao.getBoard(player.getBoardId());
         if (board == null) throw new SQLException("Plateau introuvable : " + player.getBoardId());
-
-        List<Cell> cells = cellDao.getCellsByBoardId(board.getId()); // hydrate déjà tout
+        List<Cell> cells = cellDao.getCellsByBoardId(board.getId());
         board.setCells(cells);
-
         return new Object[]{player, board};
     }
 }

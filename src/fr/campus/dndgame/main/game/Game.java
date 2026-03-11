@@ -242,7 +242,6 @@ public class Game {
         cell.interact(player, fightService, this);
         menu.showMessage(player.toString() + " " + player.getOffensiveInfo());
 
-
     }
     /**
      * Retourne le personnage actuel du jeu.

@@ -32,11 +32,9 @@ public class CellDaoImpl implements CellDao {
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
-        Cell cell = null;
         if (rs.next()) {
             int position = rs.getInt("position");
-            cell = new Cell(id, position);
-            return cell;
+            return new Cell(id, position);
         }
         return null;
     }
