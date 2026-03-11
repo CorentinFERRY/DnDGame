@@ -24,36 +24,29 @@ public class FightService {
      * Les résultats du dé déterminent :
      * - Echec critique (1) : l'attaque échoue
      * - Coup critique (20) : dégâts doublés
-     * - Normale : dégâts normaux
+     * - Normal : dégâts normaux
      * 
      * @param character Le personnage du joueur qui attaque
      * @param enemy L'ennemi qui se défend et riposte
      */
     public void fight(Character character, Enemy enemy){
-        int diceResult = d20.roll();
-        menu.showMessage("Vous lancez le dé : ");
-        menu.showMessage("Résultat : " + diceResult);
-        //Attaque du joueur
-        if(diceResult == 1){
-            menu.showMessage("Echec critique ! ");
-        }
-        else if (diceResult == 20) {
-            menu.showMessage("Coup critique !");
-            enemy.takeDamage(character.getAttack()*2);
-        }
-        else {
-            enemy.takeDamage(character.getAttack());
-        }
-        menu.showMessage("L'ennemi a maintenant " + enemy.getHealth() + " HP.");
-        //Vérification si l'ennemi est toujours en vie ou non
-        if (!enemy.isAlive()) {
-            menu.showMessage("L'ennemi est mort !");
-            return;
-        }
-        //Riposte de l'ennemi
-        character.takeDamage(enemy.getAttack());
-        menu.showMessage(character.getName() + " a maintenant " + character.getHealth() + " HP");
-        menu.showMessage("L'ennemi s'enfuit !");
+            int diceResult = d20.roll();
+            menu.showMessage("Vous lancez un dé 20: " + diceResult + "/20");
+            //Attaque du joueur
+            if (diceResult == 1) {
+                menu.showMessage("Echec critique ! ");
+            } else if (diceResult == 20) {
+                menu.showMessage("Coup critique !");
+                enemy.takeDamage(character.getAttack() * 2);
+            } else {
+                enemy.takeDamage(character.getAttack());
+            }
+            menu.showMessage("L'ennemi a maintenant " + enemy.getHealth() + " HP.");
+            //Vérification si l'ennemi est toujours en vie ou non
+            if (!enemy.isAlive()) return;
 
+            //Riposte de l'ennemi
+            character.takeDamage(enemy.getAttack());
+            menu.showMessage(character.getName() + " a maintenant " + character.getHealth() + " HP");
     }
 }

@@ -209,24 +209,24 @@ public class Game {
             switch (choice){
                 case 1 :
                     fightService.fight(player,enemy);
-                    fightFinished = true;
+                    if(!enemy.isAlive()){
+                        cell.setEnemy(null);
+                        menu.showMessage("L'ennemi est vaincu !");
+                        fightFinished = true;
+                    }
                     break;
                 case 2 :
-                    int diceResult = dice.roll();
-                    int newPos = Math.max(1, player.getPosition() - diceResult);
-                    menu.showMessage(player.getName() + " recule de " + diceResult + " cases !");
+                    int newPos = Math.max(1, player.getPosition() - 2);
+                    menu.showMessage(player.getName() + " recule de " + 2 + " cases !");
                     player.setPosition(newPos);
                     pendingInteraction = true;
                     fightFinished = true;
                     break;
             }
         }
-        if(!enemy.isAlive()){
-            cell.setEnemy(null);
-            menu.showMessage("L'ennemi est vaincu !");
-        }
+
         if (!player.isAlive()){
-            menu.showMessage("You lose !");
+            menu.showMessage("Game Over !");
             gameFinished = true;
             this.player = null;
         }
