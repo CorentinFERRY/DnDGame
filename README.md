@@ -258,7 +258,11 @@ direction TB
     Board -- Cell
     Game -- Dice
     Game -- Character
+    Warrior -- Weapon
+    Wizard -- Spell
+    Cell -- Enemy
     Character -- DefensiveEquipment
+    Cell -- SurpriseBox
     Warrior --|> Character
     Wizard --|> Character
     OffensiveEQuipment --|> Equipment
@@ -267,13 +271,10 @@ direction TB
     Spell --|> OffensiveEQuipment
     Potion --|> DefensiveEquipment
     Shield --|> DefensiveEquipment
-    Warrior -- Weapon
-    Wizard -- Spell
-    Cell -- Enemy
     Sorcerer --|> Enemy
     Goblin --|> Enemy
     Dragon --|> Enemy
-    Cell -- SurpriseBox
+   
 ```
 
 ---
