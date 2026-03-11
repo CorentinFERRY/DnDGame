@@ -6,6 +6,7 @@ import fr.campus.dndgame.main.db.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -75,22 +76,20 @@ public class CellDaoImpl implements CellDao {
         PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, cell.getNumber());
         stmt.setInt(2, cell.getBoardId());
-        if (!cell.isEmpty()) {
-            if (cell.getCharacter() != null) {
-                stmt.setInt(3, cell.getCharacter().getId());
-            } else {
-                stmt.setNull(3, java.sql.Types.INTEGER);
-            }
-            if (cell.getEnemy() != null) {
-                stmt.setInt(4, cell.getEnemy().getId());
-            } else {
-                stmt.setNull(4, java.sql.Types.INTEGER);
-            }
-            if (cell.getBox() != null) {
-                stmt.setInt(5, cell.getBox().getId());
-            } else {
-                stmt.setNull(5, java.sql.Types.INTEGER);
-            }
+        if (cell.getCharacter() != null) {
+            stmt.setInt(3, cell.getCharacter().getId());
+        } else {
+            stmt.setNull(3, java.sql.Types.INTEGER);
+        }
+        if (cell.getEnemy() != null) {
+            stmt.setInt(4, cell.getEnemy().getId());
+        } else {
+            stmt.setNull(4, java.sql.Types.INTEGER);
+        }
+        if (cell.getBox() != null) {
+            stmt.setInt(5, cell.getBox().getId());
+        } else {
+            stmt.setNull(5, java.sql.Types.INTEGER);
         }
         int affectedRows = stmt.executeUpdate();
         // récupérer l'id généré pour la cellule
@@ -186,6 +185,7 @@ public class CellDaoImpl implements CellDao {
             }
             list.add(cell);
         }
+        list.sort(Comparator.comparingInt(Cell::getNumber));
         return list;
     }
 }

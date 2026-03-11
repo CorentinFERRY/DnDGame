@@ -9,7 +9,7 @@ public class StandardPotion extends Potion{
      *
      */
     public StandardPotion() {
-        super("Potion standard", 2);
+        super("StandardPotion", 2);
     }
 
     /**

@@ -117,4 +117,35 @@ public class SaveService {
         board.setCells(cells);
         return new Object[]{player, board};
     }
+
+    public void deleteGame(Character player, Board board) throws SQLException {
+        // 1. Supprimer l'équipement offensif du joueur
+        if (player instanceof Warrior warrior && warrior.getWeapon() != null)
+            offensiveEquipmentDao.delete(warrior.getWeapon().getId());
+        else if (player instanceof Wizard wizard && wizard.getSpell() != null)
+            offensiveEquipmentDao.delete(wizard.getSpell().getId());
+
+        // 2. Supprimer l'équipement défensif du joueur
+        if (player.getDefensiveEquipment() != null)
+            defensiveEquipmentDao.delete(player.getDefensiveEquipment().getId());
+
+        // 3. Supprimer les ennemis, boîtes et cells
+        for (Cell cell : board.getCells()) {
+            if (cell.getEnemy() != null) enemyDao.delete(cell.getEnemy().getId());
+            if (cell.getBox() != null) {
+                if (cell.getBox().getEquipment().isOffensive())
+                    offensiveEquipmentDao.delete(cell.getBox().getEquipment().getId());
+                else
+                    defensiveEquipmentDao.delete(cell.getBox().getEquipment().getId());
+                surpriseBoxDao.delete(cell.getBox().getId());
+            }
+            if (cell.getId() > 0) cellDao.delete(cell.getId());
+        }
+
+        // 4. Supprimer le board
+        if (board.getId() > 0) boardDao.delete(board.getId());
+
+        // 5. Supprimer le personnage en dernier
+        if (player.getId() > 0) characterDao.delete(player.getId());
+    }
 }

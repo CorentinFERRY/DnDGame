@@ -8,7 +8,7 @@ public class Lightning extends Spell{
      * Constructeur pour créer un éclair.
      */
     public Lightning() {
-        super("Éclair", 2);
+        super("Lightning", 2);
     }
 
     /**

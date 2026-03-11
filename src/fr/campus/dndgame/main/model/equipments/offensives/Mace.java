@@ -9,7 +9,7 @@ public class Mace extends Weapon{
      *
      */
     public Mace() {
-        super("Massue", 3);
+        super("Mace", 3);
     }
 
     /**

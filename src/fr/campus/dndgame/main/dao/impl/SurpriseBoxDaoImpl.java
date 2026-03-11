@@ -146,8 +146,8 @@ public class SurpriseBoxDaoImpl implements SurpriseBoxDao {
             stmt.setNull(3,java.sql.Types.INTEGER);
         }
         else{
-            stmt.setInt(2,java.sql.Types.INTEGER);
-            stmt.setNull(3,box.getEquipment().getId());
+            stmt.setNull(2,java.sql.Types.INTEGER);
+            stmt.setInt(3,box.getEquipment().getId());
         }
         stmt.executeUpdate();
     }

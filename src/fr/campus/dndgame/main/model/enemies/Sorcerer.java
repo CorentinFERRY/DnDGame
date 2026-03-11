@@ -14,6 +14,6 @@ public class Sorcerer extends Enemy{
      *
      */
     public Sorcerer(){
-        super("Sorcier",9,2);
+        super("Sorcerer",9,2);
     }
 }

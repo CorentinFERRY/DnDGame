@@ -15,9 +15,16 @@ import fr.campus.dndgame.main.utils.Menu;
  */
 public class FightService {
 
-    Menu menu = new Menu();
+    Menu menu;
     Dice d20 = new Dice(20);
 
+    /**
+     * Constructeur permettant de gérer les combats
+     * @param menu le menu de Game
+     */
+    public FightService (Menu menu){
+        this.menu = menu;
+    }
     /**
      * Gère un tour de combat entre un personnage et un ennemi.
      * Le personnage attaque en premier, l'ennemi riposte s'il reste vivant.

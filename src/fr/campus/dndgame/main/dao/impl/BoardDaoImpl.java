@@ -36,7 +36,8 @@ public class BoardDaoImpl implements BoardDao {
         Board board;
         if (rs.next()) {
             int size = rs.getInt("size");
-            board = new Board(size);
+            String name = rs.getString("name");
+            board = new Board(id,size,name);
             return board;
         }
         return null;
@@ -119,6 +120,7 @@ public class BoardDaoImpl implements BoardDao {
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setString(1, board.getName());
         stmt.setInt(2, board.getSize());
+        stmt.setInt(3,board.getId());
         stmt.executeUpdate();
     }
 

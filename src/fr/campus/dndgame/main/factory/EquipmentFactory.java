@@ -67,7 +67,7 @@ public class EquipmentFactory {
                 default -> throw new IllegalArgumentException("Nom inconnu : " + name);
             };
             case "Spell" -> switch (name) {
-                case "Lightling" -> new Lightning();
+                case "Lightning" -> new Lightning();
                 case "FireBall" -> new FireBall();
                 default -> throw new IllegalArgumentException("Nom inconnu : " + name);
             };

@@ -224,8 +224,8 @@ public class CharacterDaoImpl implements CharacterDao {
             OffensiveEquipmentDaoImpl offensiveDao = new OffensiveEquipmentDaoImpl();
             DefensiveEquipmentDaoImpl defensiveDao = new DefensiveEquipmentDaoImpl();
 
-            Integer offensiveId = rs.getObject("offensive_equipment_id", Integer.class);
-            Integer defensiveId = rs.getObject("defensive_equipment_id", Integer.class);
+            Integer offensiveId = rs.getObject("offensiveEquipment_id", Integer.class);
+            Integer defensiveId = rs.getObject("defensiveEquipment_id", Integer.class);
             if (offensiveId != null) {
                 Equipment equip = offensiveDao.getEquipment(offensiveId);
                 if (equip instanceof Weapon weapon && character instanceof Warrior warrior)

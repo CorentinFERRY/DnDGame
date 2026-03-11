@@ -9,7 +9,7 @@ public class FireBall extends Spell{
      *
      */
     public FireBall() {
-        super("Boule de feu", 7);
+        super("FireBall", 7);
     }
 
     /**
