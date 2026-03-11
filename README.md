@@ -253,12 +253,7 @@ direction TB
 	    +open()
     }
 
-    Game -- Menu
-    Game -- Board
-    Board -- Cell
-    Game -- Dice
-    Game -- Character
-    Character -- DefensiveEquipment
+    
     Warrior --|> Character
     Wizard --|> Character
     OffensiveEQuipment --|> Equipment
@@ -267,13 +262,10 @@ direction TB
     Spell --|> OffensiveEQuipment
     Potion --|> DefensiveEquipment
     Shield --|> DefensiveEquipment
-    Warrior -- Weapon
-    Wizard -- Spell
-    Cell -- Enemy
     Sorcerer --|> Enemy
     Goblin --|> Enemy
     Dragon --|> Enemy
-    Cell -- SurpriseBox
+    
 ```
 
 ---

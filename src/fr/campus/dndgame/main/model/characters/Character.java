@@ -1,7 +1,9 @@
 package fr.campus.dndgame.main.model.characters;
 
+import fr.campus.dndgame.main.model.equipments.Equipment;
 import fr.campus.dndgame.main.model.equipments.defensives.DefensiveEquipment;
 import fr.campus.dndgame.main.model.equipments.defensives.Shield;
+import fr.campus.dndgame.main.model.equipments.offensives.OffensiveEquipment;
 
 /**
  * Classe abstraite représentant un personnage dans le jeu.
@@ -213,6 +215,12 @@ public abstract class Character {
         this.defense = defense;
     }
 
+    /**
+     * Getter pour récuperer l'équipement offensif du personnage
+     * Méthode implémentée par les enfants
+     * @return OffensiveEquipment l'équipement offensif du personnage
+     */
+    public abstract OffensiveEquipment getOffensiveEquipment();
     // ========== MÉTHODES D'AFFICHAGE ==========
 
     /**

@@ -1,5 +1,6 @@
 package fr.campus.dndgame.main.model.characters;
 
+import fr.campus.dndgame.main.model.equipments.offensives.OffensiveEquipment;
 import fr.campus.dndgame.main.model.equipments.offensives.Spell;
 
 
@@ -44,6 +45,11 @@ public class Wizard extends Character{
         this.spell = spell;
     }
 
+    @Override
+    public OffensiveEquipment getOffensiveEquipment() {
+        return spell;
+    }
+
     /**
      * Équipe un nouveau sort si celui-ci est meilleur que celui actuellement équipé.
      * Si un sort est déjà équipé, il sera désarmé et remplacé uniquement si le nouveau est supérieur.
@@ -73,6 +79,9 @@ public class Wizard extends Character{
             spell = null;
         }
     }
+
+
+
     /**
      * Retourne une chaîne décrivant le sort offensif du magicien.
      *

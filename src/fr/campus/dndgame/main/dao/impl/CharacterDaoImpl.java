@@ -96,7 +96,7 @@ public class CharacterDaoImpl implements CharacterDao {
      */
     @Override
     public int add(Character character) throws SQLException {
-        String query = "INSERT INTO characters(name, type, health, maxHealth, attack,defense,position,board_id) VALUES (?, ?, ?, ?, ?,?,?,?)";
+        String query = "INSERT INTO characters(name, type, health, maxHealth, attack,defense,position,board_id,offensiveEquipment_id,defensiveEquipment_id) VALUES (?, ?, ?, ?, ?,?,?,?,?,?)";
         // Utiliser RETURN_GENERATED_KEYS pour récupérer l'id auto-incrémenté
         PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         stmt.setString(1, character.getName());
@@ -106,7 +106,19 @@ public class CharacterDaoImpl implements CharacterDao {
         stmt.setInt(5, character.getAttack());
         stmt.setInt(6,character.getDefense());
         stmt.setInt(7,character.getPosition());
-        stmt.setInt(8,character.getBoardId());
+        if(character.getOffensiveEquipment() != null) {
+            stmt.setInt(8,character.getOffensiveEquipment().getId());
+        }
+        else {
+            stmt.setNull(8,java.sql.Types.INTEGER);
+        }
+        if(character.getDefensiveEquipment() != null) {
+            stmt.setInt(9,character.getDefensiveEquipment().getId());
+        }
+        else {
+            stmt.setNull(9,java.sql.Types.INTEGER);
+        }
+        stmt.setInt(10,character.getBoardId());
         int affectedRows = stmt.executeUpdate();
         // Récupération de l'id généré par la BDD
         if (affectedRows > 0) {
@@ -174,13 +186,21 @@ public class CharacterDaoImpl implements CharacterDao {
         stmt.setInt(2, character.getId());
         stmt.executeUpdate();
     }
+
+    /**
+     * Permet de récupérer un personnage avec ces équipements
+     * Reutilisation de getCharacter()
+     * @param id L'identifiant du personnage
+     * @return Le personnage avec son équipement
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
     @Override
     public Character getCharacterWithEquipment(int id) throws SQLException {
         // On réutilise getCharacter() pour ne pas dupliquer le code
         Character character = getCharacter(id);
         if (character == null) return null;
 
-        // Récupérer les FK d'équipements
+        // Récupérer les équipements
         String query = "SELECT offensiveEquipment_id, defensiveEquipment_id FROM characters WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, id);
@@ -192,7 +212,6 @@ public class CharacterDaoImpl implements CharacterDao {
 
             Integer offensiveId = rs.getObject("offensive_equipment_id", Integer.class);
             Integer defensiveId = rs.getObject("defensive_equipment_id", Integer.class);
-
             if (offensiveId != null) {
                 Equipment equip = offensiveDao.getEquipment(offensiveId);
                 if (equip instanceof Weapon weapon && character instanceof Warrior warrior)
@@ -200,7 +219,6 @@ public class CharacterDaoImpl implements CharacterDao {
                 else if (equip instanceof Spell spell && character instanceof Wizard wizard)
                     wizard.setSpell(spell);
             }
-
             if (defensiveId != null) {
                 Equipment equip = defensiveDao.getEquipment(defensiveId);
                 if (equip instanceof DefensiveEquipment def)

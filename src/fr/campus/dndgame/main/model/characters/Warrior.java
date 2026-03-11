@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.characters;
 
 
+import fr.campus.dndgame.main.model.equipments.offensives.OffensiveEquipment;
 import fr.campus.dndgame.main.model.equipments.offensives.Weapon;
 
 /**
@@ -44,6 +45,10 @@ public class Warrior extends Character{
         this.weapon = weapon;
     }
 
+    @Override
+    public OffensiveEquipment getOffensiveEquipment() {
+        return weapon;
+    }
     /**
      * Équipe une nouvelle arme si elle est meilleure que celle actuellement équipée.
      * Si une arme est déjà équipée, elle sera désarme et remplacée uniquement si la nouvelle est supérieure.
@@ -73,6 +78,8 @@ public class Warrior extends Character{
             weapon = null;
         }
     }
+
+
     /**
      * Retourne une chaîne décrivant l'arme offensif du guerrier.
      *
