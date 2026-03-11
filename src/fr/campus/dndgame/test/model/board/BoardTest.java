@@ -2,7 +2,7 @@ package fr.campus.dndgame.test.model.board;
 
 import fr.campus.dndgame.main.model.board.Board;
 import fr.campus.dndgame.main.model.board.Cell;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class BoardTest {
 

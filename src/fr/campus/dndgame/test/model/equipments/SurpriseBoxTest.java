@@ -4,7 +4,7 @@ import fr.campus.dndgame.main.model.equipments.SurpriseBox;
 import fr.campus.dndgame.main.model.equipments.offensives.Weapon;
 import fr.campus.dndgame.main.model.equipments.offensives.Spell;
 import fr.campus.dndgame.main.model.equipments.defensives.Potion;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class SurpriseBoxTest {
     private static TestReport report;

@@ -2,7 +2,7 @@ package fr.campus.dndgame.test.model.equipments.offensives;
 
 import fr.campus.dndgame.main.model.equipments.offensives.Weapon;
 import fr.campus.dndgame.main.model.equipments.offensives.Spell;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class OffensiveEquipmentTest {
     private static TestReport report;

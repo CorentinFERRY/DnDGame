@@ -4,7 +4,7 @@ import fr.campus.dndgame.main.model.characters.Character;
 import fr.campus.dndgame.main.model.characters.Warrior;
 import fr.campus.dndgame.main.model.characters.Wizard;
 import fr.campus.dndgame.main.model.equipments.defensives.Potion;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class DefensiveEquipmentTest {
     private static TestReport report;

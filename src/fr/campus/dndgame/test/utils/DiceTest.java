@@ -1,7 +1,7 @@
 package fr.campus.dndgame.test.utils;
 
 import fr.campus.dndgame.main.utils.Dice;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class DiceTest {
     private static TestReport report;

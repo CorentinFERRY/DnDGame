@@ -5,7 +5,7 @@ import fr.campus.dndgame.main.model.characters.Warrior;
 import fr.campus.dndgame.main.model.enemies.Goblin;
 import fr.campus.dndgame.main.model.equipments.SurpriseBox;
 import fr.campus.dndgame.main.model.equipments.offensives.Mace;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class CellTest {
     // Compteur de tests passés ou echoués

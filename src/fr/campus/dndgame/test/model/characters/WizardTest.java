@@ -3,7 +3,7 @@ package fr.campus.dndgame.test.model.characters;
 import fr.campus.dndgame.main.model.characters.Wizard;
 import fr.campus.dndgame.main.model.equipments.offensives.Lightning;
 import fr.campus.dndgame.main.model.equipments.offensives.Spell;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class WizardTest {
     private static TestReport report;

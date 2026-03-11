@@ -3,7 +3,7 @@ package fr.campus.dndgame.test.model.characters;
 import fr.campus.dndgame.main.model.characters.Warrior;
 import fr.campus.dndgame.main.model.equipments.offensives.Sword;
 import fr.campus.dndgame.main.model.equipments.offensives.Weapon;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class WarriorTest {
     private static TestReport report;

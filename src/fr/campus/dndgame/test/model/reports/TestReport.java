@@ -1,4 +1,4 @@
-package fr.campus.dndgame.test.model.rapports;
+package fr.campus.dndgame.test.model.reports;
 
 public class TestReport {
     private final String className;

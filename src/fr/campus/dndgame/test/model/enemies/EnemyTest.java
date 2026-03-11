@@ -4,7 +4,7 @@ import fr.campus.dndgame.main.model.enemies.Dragon;
 import fr.campus.dndgame.main.model.enemies.Enemy;
 import fr.campus.dndgame.main.model.enemies.Goblin;
 import fr.campus.dndgame.main.model.enemies.Sorcerer;
-import fr.campus.dndgame.test.model.rapports.TestReport;
+import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class EnemyTest {
     private static TestReport report;
