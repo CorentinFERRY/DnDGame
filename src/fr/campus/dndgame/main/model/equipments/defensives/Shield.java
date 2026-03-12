@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.equipments.defensives;
 
 import fr.campus.dndgame.main.model.characters.Character;
+import fr.campus.dndgame.main.utils.Menu;
 
 /**
  * Classe représentant un bouclier, un équipement défensif.
@@ -47,9 +48,9 @@ public class Shield extends DefensiveEquipment {
      * @param character personnage qui utilise le bouclier
      */
     @Override
-    public void use(Character character) {
+    public void use(Character character, Menu menu) {
         character.equipDefensiveEquipment(this);
-        System.out.println(character.getName() + " utilise le bouclier " + getName() +
+        menu.showMessage(character.getName() + " utilise le bouclier " + getName() +
                 " et gagne " + getEffect() + " points de défense.");
     }
 
@@ -60,6 +61,6 @@ public class Shield extends DefensiveEquipment {
      */
     @Override
     public String toString() {
-        return super.toString() + " (" + getEffect() + " de defense bonus)";
+        return "Shield : Bouclier (Augmente la défense de: " + getEffect() + ")";
     }
 }

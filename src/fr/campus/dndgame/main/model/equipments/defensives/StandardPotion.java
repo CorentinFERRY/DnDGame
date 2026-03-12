@@ -19,6 +19,6 @@ public class StandardPotion extends Potion{
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Potion : Potion standard (Soin de: " + getEffect() + ")";
     }
 }

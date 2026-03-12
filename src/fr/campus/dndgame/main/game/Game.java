@@ -84,11 +84,11 @@ public class Game {
      * Vérifie qu'un personnage a été créé avant de commencer.
      */
     private void startGame() {
-        board.initBoard();
         if (isPlayerNotReady()) {
             menu.showMessage("Vous devez créer un personnage avant de commencer !");
             return;
         }
+        board.initBoard();
         player.setHealth(player.getMaxHealth());
         player.disarm();
         menu.showMessage("\nDébut de la partie !");
@@ -344,7 +344,7 @@ public class Game {
     private void interactWithCell(){
         Cell cell = board.getCell(player.getPosition());
         menu.showMessage(cell.toString());
-        cell.interact(player, fightService, this);
+        cell.interact(player, fightService, this,menu);
         menu.showMessage(player.toString() + " " + player.getOffensiveInfo());
 
     }

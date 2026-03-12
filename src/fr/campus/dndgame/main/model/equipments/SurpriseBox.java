@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.equipments;
 
 import fr.campus.dndgame.main.model.characters.Character;
+import fr.campus.dndgame.main.utils.Menu;
 
 /**
  * Classe représentant une boite surprise dans le jeu.
@@ -98,8 +99,8 @@ public class SurpriseBox {
      * 
      * @param character Le personnage qui ouvre la boîte
      */
-    public void open(Character character){
-        equipment.use(character);
+    public void open(Character character, Menu menu){
+        equipment.use(character,menu);
     }
 
     /**

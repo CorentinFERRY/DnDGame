@@ -19,6 +19,6 @@ public class Sword extends Weapon{
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Weapon : Épée (Attaque: " + getEffect() + ")";
     }
 }

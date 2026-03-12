@@ -2,6 +2,7 @@ package fr.campus.dndgame.main.model.equipments.offensives;
 
 import fr.campus.dndgame.main.model.characters.Character;
 import fr.campus.dndgame.main.model.characters.Warrior;
+import fr.campus.dndgame.main.utils.Menu;
 
 /**
  * Classe représentant une arme, un équipement offensif.
@@ -22,11 +23,11 @@ public class Weapon extends OffensiveEquipment {
     }
 
     @Override
-    public void use(Character character) {
+    public void use(Character character, Menu menu) {
         if(character instanceof Warrior warrior){
             warrior.equip(this);
         } else {
-            System.out.println("Seul un guerrier peut utiliser cette arme.");
+            menu.showMessage("Seul un guerrier peut utiliser cette arme.");
         }
     }
 }

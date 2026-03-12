@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.equipments.defensives;
 
 import fr.campus.dndgame.main.model.characters.Character;
+import fr.campus.dndgame.main.utils.Menu;
 
 /**
  * Classe représentant une potion, un équipement défensif.
@@ -49,13 +50,13 @@ public class Potion extends DefensiveEquipment {
      * @param character Le personnage qui utilise la potion
      */
     @Override
-    public void use(Character character) {
+    public void use(Character character, Menu menu) {
         int newHealth = character.getHealth() + getEffect();
         if (newHealth > character.getMaxHealth()) {
             newHealth = character.getMaxHealth();
         }
         character.setHealth(newHealth);
-        System.out.println(character.getName() + " utilise " + getName() + " et récupère " + getEffect() + " PV ! " +
+        menu.showMessage(character.getName() + " utilise " + getName() + " et récupère " + getEffect() + " PV ! " +
                 "PV actuels : " + character.getHealth());
     }
 

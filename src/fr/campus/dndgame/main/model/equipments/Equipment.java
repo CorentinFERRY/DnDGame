@@ -1,6 +1,7 @@
 package fr.campus.dndgame.main.model.equipments;
 
 import fr.campus.dndgame.main.model.characters.Character;
+import fr.campus.dndgame.main.utils.Menu;
 
 /**
  * Classe abstraite représentant un équipement dans le jeu.
@@ -109,7 +110,7 @@ public abstract class Equipment {
      * 
      * @param character Le personnage sur lequel utiliser l'équipement
      */
-    public abstract void use(Character character);
+    public abstract void use(Character character, Menu menu);
 
     /**
      * Retourne une représentation textuelle de l'équipement.
@@ -118,6 +119,6 @@ public abstract class Equipment {
      */
     @Override
     public String toString() {
-        return type + " : " + name;
+        return type + " : ";
     }
 }

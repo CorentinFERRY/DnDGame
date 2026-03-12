@@ -49,25 +49,4 @@ public class DatabaseConnection {
         return con;
     }
 
-    /**
-     * Teste la connexion à la base de données en récupérant tous les personnages.
-     * Affiche les informations de chaque personnage après récupération.
-     */
-    public void testSelectAll() {
-        String query = "SELECT * FROM characters";
-
-        try (Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                System.out.println(
-                        rs.getInt("id") +
-                                " | name: " + rs.getString("name") +
-                                " | vie: " + rs.getInt("health") +
-                                " | attaque: " + rs.getInt("attack"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

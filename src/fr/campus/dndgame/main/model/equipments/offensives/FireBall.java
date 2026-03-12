@@ -19,6 +19,6 @@ public class FireBall extends Spell{
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Spell : Boule de feu (Attaque: " + getEffect() + ")";
     }
 }

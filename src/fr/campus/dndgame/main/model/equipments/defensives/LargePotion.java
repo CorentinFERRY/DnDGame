@@ -19,6 +19,6 @@ public class LargePotion extends Potion{
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Potion : Grande potion (Soin de: " + getEffect() + ")";
     }
 }

@@ -19,6 +19,6 @@ public class Mace extends Weapon{
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Weapon : Massue (Attaque: " + getEffect() + ")";
     }
 }

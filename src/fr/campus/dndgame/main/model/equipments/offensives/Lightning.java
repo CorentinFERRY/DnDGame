@@ -18,6 +18,6 @@ public class Lightning extends Spell{
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Spell : Éclair (Attaque: " + getEffect() + ")";
     }
 }

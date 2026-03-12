@@ -5,6 +5,7 @@ import fr.campus.dndgame.main.game.Game;
 import fr.campus.dndgame.main.model.characters.Character;
 import fr.campus.dndgame.main.model.enemies.Enemy;
 import fr.campus.dndgame.main.model.equipments.SurpriseBox;
+import fr.campus.dndgame.main.utils.Menu;
 
 
 /**
@@ -178,12 +179,12 @@ public class Cell {
      * @param fightService Le service de combat à utiliser
      * @param game L'instance du jeu pour accorder les combats
      */
-    public void interact(Character character, FightService fightService, Game game){
+    public void interact(Character character, FightService fightService, Game game, Menu menu){
         if(enemy != null){
             game.startFight(character,this, fightService);
         }
         if(box != null){
-            box.open(character);
+            box.open(character,menu);
             box = null;
         }
     }
