@@ -8,9 +8,31 @@ Un jeu de rôle Donjon & Dragon en Java où vous dirigez un personnage dans des 
 
 ### Prérequis
 
-- Java 11 ou supérieur
+- JDK Java SE 17 (LTS)
 - Un IDE Java (IntelliJ IDEA, Eclipse, etc.) ou compilateur Java
-- IDK Java SE 17 (LTS)
+- MySQL 8.0 ou supérieur
+
+### Configuration de la base de données
+
+1. **Créer une base de données MySQL vide**
+
+   ```sql
+   CREATE DATABASE dndgame;
+   ```
+
+2. **Configurer le fichier de connexion**
+
+   Créez le fichier `src/resources/db.properties` avec vos informations de connexion :
+
+   ```properties
+   db.url=jdbc:mysql://localhost:3306/dndgame
+   db.user=user
+   db.pass=password
+   ```
+
+   > ⚠️ Ne commitez pas ce fichier si votre projet est public. Ajoutez-le à votre `.gitignore`.
+
+3. **Les tables sont créées automatiquement** au premier lancement via `DatabaseInitializer`.
 
 ### Instructions
 
@@ -103,7 +125,9 @@ src/fr/campus/dndgame/
 │   │   ├── enemies/              # Classes d'ennemis
 │   │   └── equipments/           # Système d'équipements
 │   └── utils/                    # Utilitaires (menu, dés, etc.)
-└── test/                         # Tests unitaires
+│── test/                         # Tests unitaires
+└── resources/
+    └── db.properties             # Configuration BDD (à créer, ne pas commiter)
 ```
 
 ---

@@ -34,6 +34,7 @@ public class DatabaseConnection {
             String pass = props.getProperty("db.pass");
 
             con = DriverManager.getConnection(url, user, pass);
+            DatabaseInitializer.init(con);
 
         } catch (IOException | SQLException e) {
             e.printStackTrace();
