@@ -28,13 +28,30 @@ public interface CharacterDao {
 
     /**
      * Récupère tous les personnages de la base de données.
+     *
+     * @return Une liste contenant tous les personnages
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    List<Character> getAllCharacters()
+            throws SQLException;
+
+    /**
+     * Récupère tous les personnages de la base de données associé à un plateau.
      * 
      * @return Une liste contenant tous les personnages
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    List<Character> getCharacters()
+    List<Character> getCharactersInGame()
             throws SQLException;
 
+    /**
+     * Récupère tous les personnages de la base de données qui n'ont pas de partie en cours.
+     *
+     * @return Une liste contenant tous les personnages
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    List<Character> getCharactersWithoutBoard()
+            throws SQLException;
     /**
      * Ajoute un nouveau personnage à la base de données.
      * 

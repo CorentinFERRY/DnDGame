@@ -4,21 +4,24 @@ import fr.campus.dndgame.main.model.characters.Character;
 import fr.campus.dndgame.main.model.characters.Warrior;
 import fr.campus.dndgame.main.model.characters.Wizard;
 import fr.campus.dndgame.main.model.equipments.defensives.Potion;
+import fr.campus.dndgame.main.utils.Menu;
 import fr.campus.dndgame.test.model.reports.TestReport;
 
 public class DefensiveEquipmentTest {
     private static TestReport report;
+    private static Menu menu;
 
     public static void main(String[] args) {
         report = new TestReport("EQUIPMENT (Défensif)");
+        menu = new Menu();
         testPotionConstructorAndStats();
         testIdGetterSetter();
         testHealAmountGetterSetter();
         testGetEffect();
         testSetEffect();
         testIsOffensive();
-        testUseRestoresHealth();
-        testUseCannotExceedMaxHealth();
+        testUseRestoresHealth(menu);
+        testUseCannotExceedMaxHealth(menu);
         testToString();
         report.printSummary();
     }
@@ -103,13 +106,13 @@ public class DefensiveEquipmentTest {
         }
     }
 
-    private static void testUseRestoresHealth() {
+    private static void testUseRestoresHealth(Menu menu) {
         try {
             // On crée un stub minimal de Character pour tester use()
             Character character = new Wizard("Héros");
             character.setHealth(1);
             Potion p = new Potion("Potion de soin", 4);
-            p.use(character);
+            p.use(character,menu);
             if (character.getHealth() != 5)
                 throw new AssertionError(
                         "use() doit restaurer " + 4 + " PV : attendu 5, obtenu " + character.getHealth());
@@ -119,13 +122,13 @@ public class DefensiveEquipmentTest {
         }
     }
 
-    private static void testUseCannotExceedMaxHealth() {
+    private static void testUseCannotExceedMaxHealth(Menu menu) {
         try {
 
             Character character = new Warrior("Héros");
             character.setMaxHealth(15);
             Potion p = new Potion("Grande Potion", 10);
-            p.use(character);
+            p.use(character,menu);
             if (character.getHealth() != 15)
                 throw new AssertionError(
                         "use() ne doit pas dépasser les PV max : attendu 15, obtenu " + character.getHealth());

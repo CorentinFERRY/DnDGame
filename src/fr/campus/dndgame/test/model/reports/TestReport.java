@@ -1,10 +1,16 @@
 package fr.campus.dndgame.test.model.reports;
 
+/**
+ * Permet l'affichage du rapport de test d'une méthode
+ */
 public class TestReport {
     private final String className;
     private int passed = 0;
     private int failed = 0;
 
+    /**
+     * @param className Nom de la classe testé
+     */
     public TestReport(String className) {
         this.className = className;
         System.out.println("=== Lancement des tests pour " + className.toUpperCase() + " ===\n");
@@ -12,6 +18,7 @@ public class TestReport {
 
     /**
      * Enregistre un succès et l'affiche.
+     * @param testName Nom de la classe testé
      */
     public void logSuccess(String testName) {
         System.out.println("[OK] " + testName);
@@ -20,12 +27,13 @@ public class TestReport {
 
     /**
      * Enregistre un échec, affiche l'erreur et incrémente le compteur.
+     * @param testName Nom de la classe testé
+     * @param e Exception levée
      */
     public void logFailed(String testName, Throwable e) {
         System.out.println("[ÉCHEC] " + testName);
         System.out.println("       > Erreur: " + e.getMessage());
-        // e.printStackTrace(); // Décommente pour voir la pile d'appel complète en cas
-        // de bug complexe
+        e.printStackTrace();
         failed++;
     }
 
@@ -43,13 +51,5 @@ public class TestReport {
         } else {
             System.out.println("STATUS : ❌ DES TESTS ONT ÉCHOUÉ\n");
         }
-    }
-
-    public int getFailedCount() {
-        return failed;
-    }
-
-    public int getPassedCount() {
-        return passed;
     }
 }

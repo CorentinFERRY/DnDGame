@@ -57,8 +57,10 @@ public class DatabaseInitializer {
                     name VARCHAR(50),
                     offensiveEquipment_id INT DEFAULT NULL,
                     defensiveEquipment_id INT DEFAULT NULL,
-                    FOREIGN KEY (offensiveEquipment_id) REFERENCES offensiveEquipments(id),
+                    FOREIGN KEY (offensiveEquipment_id) REFERENCES offensiveEquipments(id)
+                        ON DELETE SET NULL,
                     FOREIGN KEY (defensiveEquipment_id) REFERENCES defensiveEquipments(id)
+                        ON DELETE SET NULL
                 );
                 
                 CREATE TABLE IF NOT EXISTS characters (
@@ -70,25 +72,29 @@ public class DatabaseInitializer {
                     attack TINYINT,
                     defense TINYINT,
                     position INT,
-                    board_id INT ,
+                    board_id INT DEFAULT NULL,
                     offensiveEquipment_id INT DEFAULT NULL,
                     defensiveEquipment_id INT DEFAULT NULL,
-                    FOREIGN KEY (board_id) REFERENCES boards(id),
-                    FOREIGN KEY (offensiveEquipment_id) REFERENCES offensiveEquipments(id),
+                    FOREIGN KEY (board_id) REFERENCES boards(id)
+                        ON DELETE SET NULL,
+                    FOREIGN KEY (offensiveEquipment_id) REFERENCES offensiveEquipments(id)
+                        ON DELETE SET NULL,
                     FOREIGN KEY (defensiveEquipment_id) REFERENCES defensiveEquipments(id)
+                        ON DELETE SET NULL
                 );
                 
                 CREATE TABLE IF NOT EXISTS cells (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     position INT,
                     board_id INT ,
-                    character_id INT DEFAULT NULL,
                     enemy_id INT  DEFAULT NULL,
                     surpriseBox_id INT DEFAULT NULL,
-                    FOREIGN KEY (board_id) REFERENCES boards(id),
-                    FOREIGN KEY (character_id) REFERENCES characters(id),
-                    FOREIGN KEY (enemy_id) REFERENCES enemies(id),
+                    FOREIGN KEY (board_id) REFERENCES boards(id)
+                        ON DELETE CASCADE,
+                    FOREIGN KEY (enemy_id) REFERENCES enemies(id)
+                        ON DELETE SET NULL,
                     FOREIGN KEY (surpriseBox_id) REFERENCES surpriseBoxes(id)
+                        ON DELETE SET NULL
                 );
                 """;
         try (Statement stmt = con.createStatement()) {

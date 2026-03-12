@@ -22,7 +22,6 @@ public class Cell {
     private int boardId;
     private Enemy enemy = null;
     private SurpriseBox box = null;
-    private Character character = null;
     /**
      * Constructeur pour créer une case.
      *
@@ -76,24 +75,6 @@ public class Cell {
      */
     public void setBoardId(int boardId) {
         this.boardId = boardId;
-    }
-
-    /**
-     * Retourne le personnage actuellement positionné sur la case.
-     *
-     * @return personnage présent sur la case, ou {@code null}
-     */
-    public Character getCharacter() {
-        return character;
-    }
-
-    /**
-     * Place un personnage sur la case.
-     *
-     * @param character personnage à placer
-     */
-    public void setCharacter(Character character) {
-        this.character = character;
     }
 
     /**
@@ -151,7 +132,7 @@ public class Cell {
      * @return true si la case vie false sinon
      */
     public boolean isEmpty(){
-        return (enemy==null && box==null && character==null);
+        return (enemy==null && box==null);
     }
     /**
      * Retourne une représentation textuelle de la case.
@@ -174,7 +155,8 @@ public class Cell {
      * Gère l'interaction du personnage avec le contenu de la case.
      * Si la case contient un ennemi, lance un combat.
      * Si la case contient une boîte surprise, l'ouvre et applique son effet au personnage.
-     * 
+     *
+     * @param menu Le menu permettant l'affichage
      * @param character Le personnage qui interagit avec la case
      * @param fightService Le service de combat à utiliser
      * @param game L'instance du jeu pour accorder les combats

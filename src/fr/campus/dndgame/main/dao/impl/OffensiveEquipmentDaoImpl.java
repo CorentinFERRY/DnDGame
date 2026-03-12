@@ -104,7 +104,7 @@ public class OffensiveEquipmentDaoImpl implements EquipmentDao {
      */
     @Override
     public void update(Equipment equipment) throws SQLException {
-        String query = "UPDATE offensiveequipments SET type = ?, "
+        String query = "UPDATE offensiveEquipments SET type = ?, "
                 + "name = ?, "
                 + "effect = ? WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);

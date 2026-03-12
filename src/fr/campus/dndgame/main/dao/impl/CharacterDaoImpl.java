@@ -29,6 +29,46 @@ public class CharacterDaoImpl implements CharacterDao {
     static Connection con = DatabaseConnection.getConnection();
 
     /**
+     * Méthode privée permettant de recupérer le personnage en BDD et ses equipements
+     *
+     * @param rs Le résultat de la requête SQL
+     * @return Character le personnage crée depuis la Factory avec ses équipements
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    private Character mapWithEquipment(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        String type = rs.getString("type");
+        String name = rs.getString("name");
+        int health = rs.getInt("health");
+        int maxHealth = rs.getInt("maxHealth");
+        int position = rs.getInt("position");
+        int attack = rs.getInt("attack");
+        int defense = rs.getInt("defense");
+        int boardId = rs.getInt("board_id");
+
+        Character hero = CharacterFactory.createFromDatabase(id, type, name, health, maxHealth, attack, defense, position, boardId);
+        // Charger les équipements
+        OffensiveEquipmentDaoImpl offensiveDao = new OffensiveEquipmentDaoImpl();
+        DefensiveEquipmentDaoImpl defensiveDao = new DefensiveEquipmentDaoImpl();
+
+        Integer offensiveId = rs.getObject("offensiveEquipment_id", Integer.class);
+        Integer defensiveId = rs.getObject("defensiveEquipment_id", Integer.class);
+
+        if (offensiveId != null) {
+            Equipment equip = offensiveDao.getEquipment(offensiveId);
+            if (equip instanceof Weapon weapon && hero instanceof Warrior warrior)
+                warrior.setWeapon(weapon);
+            else if (equip instanceof Spell spell && hero instanceof Wizard wizard)
+                wizard.setSpell(spell);
+        }
+        if (defensiveId != null) {
+            Equipment equip = defensiveDao.getEquipment(defensiveId);
+            if (equip instanceof DefensiveEquipment def)
+                hero.setDefensiveEquipment(def);
+        }
+        return hero;
+    }
+    /**
      * Récupère un personnage par son identifiant depuis la base de données.
      * 
      * @param id L'identifiant du personnage
@@ -55,33 +95,58 @@ public class CharacterDaoImpl implements CharacterDao {
         }
         return null;
     }
-
     /**
      * Récupère tous les personnages de la base de données.
+     *
+     * @return Une liste contenant tous les personnages
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    @Override
+    public List<Character> getAllCharacters() throws SQLException {
+        String query = "SELECT * FROM characters";
+        PreparedStatement stmt = con.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+        List<Character> list = new ArrayList<>();
+        while (rs.next()) {
+            list.add(mapWithEquipment(rs));
+        }
+        return list;
+    }
+
+    /**
+     * Récupère tous les personnages de la base de données associé à un plateau.
      * 
      * @return Une liste contenant tous les personnages
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
     @Override
-    public List<Character> getCharacters() throws SQLException {
-        String query = "SELECT * FROM characters";
+    public List<Character> getCharactersInGame() throws SQLException {
+        String query = "SELECT * FROM characters WHERE board_id IS NOT NULL";
         PreparedStatement stmt = con.prepareStatement(query);
         ResultSet rs = stmt.executeQuery();
         List<Character> list = new ArrayList<>();
 
         while (rs.next()) {
-            int id = rs.getInt("id");
-            String type = rs.getString("type");
-            String name = rs.getString("name");
-            int health = rs.getInt("health");
-            int maxHealth = rs.getInt("maxHealth");
-            int position = rs.getInt("position");
-            int attack = rs.getInt("attack");
-            int defense = rs.getInt("defense");
-            int boardId = rs.getInt("board_id");
-            Character hero = CharacterFactory.createFromDatabase(id, type, name, health, maxHealth, attack, defense,
-                    position,boardId);
-            list.add(hero);
+            list.add(mapWithEquipment(rs));
+        }
+        return list;
+    }
+
+    /**
+     * Récupère tous les personnages de la base de données qui n'ont pas de partie en cours.
+     *
+     * @return Une liste contenant tous les personnages
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    @Override
+    public List<Character> getCharactersWithoutBoard() throws SQLException {
+        String query = "SELECT * FROM characters WHERE board_id IS NULL";
+        PreparedStatement stmt = con.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+        List<Character> list = new ArrayList<>();
+
+        while (rs.next()) {
+            list.add(mapWithEquipment(rs));
         }
         return list;
     }
@@ -106,7 +171,11 @@ public class CharacterDaoImpl implements CharacterDao {
         stmt.setInt(5, character.getAttack());
         stmt.setInt(6,character.getDefense());
         stmt.setInt(7,character.getPosition());
-        stmt.setInt(8,character.getBoardId());
+        if (character.getBoardId() <= 0) {
+            stmt.setNull(8, java.sql.Types.INTEGER);
+        } else {
+            stmt.setInt(8, character.getBoardId());
+        }
         if(character.getOffensiveEquipment() != null) {
             stmt.setInt(9,character.getOffensiveEquipment().getId());
         }
@@ -168,7 +237,11 @@ public class CharacterDaoImpl implements CharacterDao {
         stmt.setInt(3, character.getAttack());
         stmt.setInt(4, character.getDefense());
         stmt.setInt(5, character.getPosition());
-        stmt.setInt(6,character.getBoardId());
+        if (character.getBoardId() <= 0) {
+            stmt.setNull(6, java.sql.Types.INTEGER);
+        } else {
+            stmt.setInt(6, character.getBoardId());
+        }
         if(character.getOffensiveEquipment() != null) {
             stmt.setInt(7,character.getOffensiveEquipment().getId());
         }
@@ -210,36 +283,14 @@ public class CharacterDaoImpl implements CharacterDao {
      */
     @Override
     public Character getCharacterWithEquipment(int id) throws SQLException {
-        // On réutilise getCharacter() pour ne pas dupliquer le code
-        Character character = getCharacter(id);
-        if (character == null) return null;
-
-        // Récupérer les équipements
-        String query = "SELECT offensiveEquipment_id, defensiveEquipment_id FROM characters WHERE id = ?";
+        String query = "SELECT * FROM characters WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
-
         if (rs.next()) {
-            OffensiveEquipmentDaoImpl offensiveDao = new OffensiveEquipmentDaoImpl();
-            DefensiveEquipmentDaoImpl defensiveDao = new DefensiveEquipmentDaoImpl();
-
-            Integer offensiveId = rs.getObject("offensiveEquipment_id", Integer.class);
-            Integer defensiveId = rs.getObject("defensiveEquipment_id", Integer.class);
-            if (offensiveId != null) {
-                Equipment equip = offensiveDao.getEquipment(offensiveId);
-                if (equip instanceof Weapon weapon && character instanceof Warrior warrior)
-                    warrior.setWeapon(weapon);
-                else if (equip instanceof Spell spell && character instanceof Wizard wizard)
-                    wizard.setSpell(spell);
-            }
-            if (defensiveId != null) {
-                Equipment equip = defensiveDao.getEquipment(defensiveId);
-                if (equip instanceof DefensiveEquipment def)
-                    character.setDefensiveEquipment(def);
-            }
+            return mapWithEquipment(rs);
         }
-        return character;
+        return null;
     }
 
 }

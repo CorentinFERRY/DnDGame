@@ -96,7 +96,8 @@ public class SurpriseBox {
 
     /**
      * Ouvre la boîte surprise et utilise l'équipement qu'elle contient sur le personnage.
-     * 
+     *
+     * @param menu Le menu
      * @param character Le personnage qui ouvre la boîte
      */
     public void open(Character character, Menu menu){

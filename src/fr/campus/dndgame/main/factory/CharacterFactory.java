@@ -44,6 +44,7 @@ public class CharacterFactory {
      * @param attack    La force d'attaque du personnage
      * @param defense   La valeur de défense du personnage
      * @param position  La position actuelle du personnage sur le plateau
+     * @param boardId   Le Board actuel du personnage
      * @return Un objet Character initialisé avec les données fournies
      * @throws IllegalArgumentException si le type de personnage est inconnu
      */

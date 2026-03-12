@@ -72,24 +72,19 @@ public class CellDaoImpl implements CellDao {
      */
     @Override
     public int add(Cell cell) throws SQLException {
-        String query = "INSERT INTO cells(position, board_id, character_id,enemy_id,surpriseBox_id) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO cells(position, board_id,enemy_id,surpriseBox_id) VALUES (?, ?,?, ?)";
         PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, cell.getNumber());
         stmt.setInt(2, cell.getBoardId());
-        if (cell.getCharacter() != null) {
-            stmt.setInt(3, cell.getCharacter().getId());
+        if (cell.getEnemy() != null) {
+            stmt.setInt(3, cell.getEnemy().getId());
         } else {
             stmt.setNull(3, java.sql.Types.INTEGER);
         }
-        if (cell.getEnemy() != null) {
-            stmt.setInt(4, cell.getEnemy().getId());
+        if (cell.getBox() != null) {
+            stmt.setInt(4, cell.getBox().getId());
         } else {
             stmt.setNull(4, java.sql.Types.INTEGER);
-        }
-        if (cell.getBox() != null) {
-            stmt.setInt(5, cell.getBox().getId());
-        } else {
-            stmt.setNull(5, java.sql.Types.INTEGER);
         }
         int affectedRows = stmt.executeUpdate();
         // récupérer l'id généré pour la cellule
@@ -128,28 +123,22 @@ public class CellDaoImpl implements CellDao {
     public void update(Cell cell) throws SQLException {
         String query = "UPDATE cells SET position = ?, "
                 + "board_id = ?, "
-                + "character_id = ?, "
                 + "enemy_id = ?, "
                 + "surpriseBox_id = ? WHERE id = ?";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, cell.getNumber());
         stmt.setInt(2, cell.getBoardId());
-        if (cell.getCharacter() != null) {
-            stmt.setInt(3, cell.getCharacter().getId());
+        if (cell.getEnemy() != null) {
+            stmt.setInt(3, cell.getEnemy().getId());
         } else {
             stmt.setNull(3, java.sql.Types.INTEGER);
         }
-        if (cell.getEnemy() != null) {
-            stmt.setInt(4, cell.getEnemy().getId());
+        if (cell.getBox() != null) {
+            stmt.setInt(4, cell.getBox().getId());
         } else {
             stmt.setNull(4, java.sql.Types.INTEGER);
         }
-        if (cell.getBox() != null) {
-            stmt.setInt(5, cell.getBox().getId());
-        } else {
-            stmt.setNull(5, java.sql.Types.INTEGER);
-        }
-        stmt.setInt(6, cell.getId());
+        stmt.setInt(5, cell.getId());
         stmt.executeUpdate();
     }
 

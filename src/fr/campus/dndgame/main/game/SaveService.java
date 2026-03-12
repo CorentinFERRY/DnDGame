@@ -59,6 +59,17 @@ public class SaveService {
     }
 
     /**
+     * Sauvegarde l'état d'un personnage seulement
+     * @param player le personnage du joueur à sauvegarder
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    public void saveCharacterOnly(Character player) throws SQLException {
+        saveOffensiveEquipment(player);
+        saveDefensiveEquipment(player);
+        saveCharacter(player);
+    }
+
+    /**
      * Insère ou met à jour le personnage joueur en base de données.
      *
      * @param player le personnage à persister
@@ -181,14 +192,35 @@ public class SaveService {
     }
 
     /**
-     * Retourne la liste de tous les personnages sauvegardés, utilisée pour afficher
+     * Retourne la liste de tous les personnages sauvegardés dans des parties en cours, utilisée pour afficher
      * le menu de chargement de partie.
      *
      * @return la liste des personnages présents en base de données
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
     public List<Character> listSaves() throws SQLException {
-        return characterDao.getCharacters();
+        return characterDao.getCharactersInGame();
+    }
+
+    /**
+     * Retourne la liste de tous les personnages sauvegardés sans parties en cours, utilisée pour afficher
+     * le menu de chargement de partie.
+     *
+     * @return la liste des personnages sans plateau présents en base de données
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    public List<Character> listCharactersWithoutBoard() throws SQLException {
+        return characterDao.getCharactersWithoutBoard();
+    }
+
+    /**
+     * Retourne la liste de tous les personnages sauvegardés
+     *
+     * @return la liste des personnages sans plateau présents en base de données
+     * @throws SQLException en cas d'erreur lors de l'accès à la base de données
+     */
+    public List<Character> listAllCharacters() throws SQLException {
+        return characterDao.getAllCharacters();
     }
 
     /**
@@ -206,6 +238,8 @@ public class SaveService {
         Character player = characterDao.getCharacterWithEquipment(characterId);
         if (player == null)
             throw new SQLException("Personnage introuvable : " + characterId);
+        if (player.getBoardId() == 0)
+            throw new SQLException("Ce personnage n'a pas de partie en cours.");
         Board board = boardDao.getBoard(player.getBoardId());
         if (board == null)
             throw new SQLException("Plateau introuvable : " + player.getBoardId());
@@ -219,22 +253,10 @@ public class SaveService {
      * L'ordre de suppression respecte les contraintes de clés étrangères :
      * équipements → ennemis → boîtes → cases → plateau → joueur.
      *
-     * @param player le personnage de la partie à supprimer
      * @param board  le plateau de la partie à supprimer
      * @throws SQLException en cas d'erreur lors de l'accès à la base de données
      */
-    public void deleteGame(Character player, Board board) throws SQLException {
-        // Supprimer l'équipement offensif du joueur
-        if (player instanceof Warrior warrior && warrior.getWeapon() != null)
-            offensiveEquipmentDao.delete(warrior.getWeapon().getId());
-        else if (player instanceof Wizard wizard && wizard.getSpell() != null)
-            offensiveEquipmentDao.delete(wizard.getSpell().getId());
-
-        // Supprimer l'équipement défensif du joueur
-        if (player.getDefensiveEquipment() != null)
-            defensiveEquipmentDao.delete(player.getDefensiveEquipment().getId());
-
-        // Supprimer les ennemis, boîtes et cells
+    public void deleteGame(Board board) throws SQLException {
         for (Cell cell : board.getCells()) {
             if (cell.getEnemy() != null)
                 enemyDao.delete(cell.getEnemy().getId());
@@ -248,13 +270,40 @@ public class SaveService {
             if (cell.getId() > 0)
                 cellDao.delete(cell.getId());
         }
-
-        // Supprimer le board
         if (board.getId() > 0)
             boardDao.delete(board.getId());
+    }
 
-        // Supprimer le personnage en dernier
-        if (player.getId() > 0)
-            characterDao.delete(player.getId());
+    /**
+     * Sauvegarde la victoire d'un personnage sur le plateau
+     * Supprime le board gagné
+     * Détache le personnage du plateau
+     * Sauvegarde uniquement le personnage
+     * @param player Le personnage
+     * @param board Le plateau
+     * @throws SQLException en cas d'erreur d'accès à la base de données
+     */
+    public void saveVictory(Character player, Board board) throws SQLException {
+        deleteGame(board);
+        player.setBoardId(0);
+        saveCharacterOnly(player);
+    }
+
+    public void deleteEnemy(Enemy enemy) throws SQLException{
+        enemyDao.delete(enemy.getId());
+    }
+
+    public void deleteBox(SurpriseBox box) throws SQLException {
+        // Supprimer la box
+        if (box.getId() > 0)
+            surpriseBoxDao.delete(box.getId());
+
+        // Supprimer l'équipement qu'elle contenait
+        if (box.getEquipment() != null && box.getEquipment().getId() > 0) {
+            if (box.getEquipment().isOffensive())
+                offensiveEquipmentDao.delete(box.getEquipment().getId());
+            else
+                defensiveEquipmentDao.delete(box.getEquipment().getId());
+        }
     }
 }
