@@ -149,7 +149,7 @@ direction TB
 	    +Board board
 	    +Dice dice
 	    +Character player
-      +FightService fightService
+        +FightService fightService
 	    +boolean gameFinished
 	    +start()
 	    +startGame()
@@ -175,13 +175,13 @@ direction TB
 	    Cell[] cells
 	    +initBoard()
 	    +isLastCell()
-      +placeRandom(List<Integere>,int,Supplier<Object>)
+        +placeRandom(List<Integere>,int,Supplier<Object>)
     }
 
     class Cell {
 	    +Enemy enemy
 	    +SurpriseBox box
-      +Character character
+        +Character character
 	    +isEmpty()
 	    +interact(Character,FightService,Game)
     }
@@ -197,44 +197,44 @@ direction TB
 	    +int health
 	    +int maxHealth
 	    +int attack
-      +int defense
+        +int defense
 	    +String name
 	    +int position
 	    +DefensiveEquipment defensiveEquipment
 	    +getOffensiveInfo()
 	    +getDefensiveInfo()
 	    +move()
-      +takeDamage(int)
-      +isAlive()
+        +takeDamage(int)
+        +isAlive()
 	    +useDefensiveEquip(defensiveEquipment)
-      +disarm()
+        +disarm()
     }
 
     class Warrior {
 	    +Weapon weapon
 	    +equip(Weapon)
-      +disarm()
-      +getOffensiveInfo()
+        +disarm()
+        +getOffensiveInfo()
     }
 
     class Wizard {
 	    +Spell spell
 	    +equip(Spell)
-      +disarm()
-      +getOffensiveInfo()
+        +disarm()
+        +getOffensiveInfo()
     }
 
     class Equipment {
 	    +String type
 	    +String name
-      +int effect
-      +isOffensive()
-      +use(Character)
+        +int effect
+        +isOffensive()
+        +use(Character)
     }
 
     class OffensiveEQuipment {
 	    +int attackBonus
-      +isOffensive()
+        +isOffensive()
     }
 
     class DefensiveEquipment {

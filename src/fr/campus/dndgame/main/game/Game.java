@@ -1,5 +1,6 @@
 package fr.campus.dndgame.main.game;
 
+import fr.campus.dndgame.main.db.DatabaseMaintenance;
 import fr.campus.dndgame.main.factory.CharacterFactory;
 import fr.campus.dndgame.main.model.board.Board;
 import fr.campus.dndgame.main.model.board.Cell;
@@ -48,6 +49,11 @@ public class Game {
      */
     public void start() {
         menu.showMessage("Bienvenue sur mon jeu DnD !");
+        try {
+            new DatabaseMaintenance().purgeOrphans();
+        } catch (SQLException e) {
+            menu.showMessage("Avertissement nettoyage BDD : " + e.getMessage());
+        }
         boolean exit = false;
         while (!exit) {
 
@@ -112,23 +118,13 @@ public class Game {
             return;
         }
         if (isPlayerNotReady()) return;
-        if (board.getId() == 0) {
-            // Pas de plateau existant (après victoire ou nouvelle session)
+        if (board.getCells() == null || board.getCells().isEmpty()) {
+            // Aucun plateau en mémoire, on en génère un nouveau
             board.initBoard();
+            board.setId(0);
             player.setHealth(player.getMaxHealth());
             player.setDefense(0);
             player.disarm();
-        } else {
-            // Un plateau existe en mémoire, on propose le choix
-            String[] restartOptions = {"Garder le plateau", "Nouveau plateau"};
-            int choice = menu.displayMenu("Recommencer", restartOptions);
-            if (choice == 2) {
-                board.initBoard();
-                board.setId(0);
-                player.setHealth(player.getMaxHealth());
-                player.setDefense(0);
-                player.disarm();
-            }
         }
         launchGame();
     }
@@ -215,7 +211,7 @@ public class Game {
         while(!fightFinished && player.isAlive()){
 
             String[] fightOptions = {"Attaque", "Fuite"};
-            menu.showMessage(player + " " + player.getOffensiveInfo());
+            menu.showMessage(player + " " + player.getOffensiveInfo() + " " + player.getDefensiveInfo());
             int choice = menu.displayMenu("Combat",fightOptions);
             switch (choice){
                 case 1 :
@@ -255,7 +251,7 @@ public class Game {
     private void interactWithCell(){
         Cell cell = board.getCell(player.getPosition());
         menu.showMessage(cell.toString());
-        SurpriseBox box = cell.getBox(); // ← récupère la box avant interaction
+        SurpriseBox box = cell.getBox();
         cell.interact(player, fightService, this, menu);
         // Si une box existait avant et a été ramassée (cell.getBox() == null après)
         if (box != null && cell.getBox() == null) {
@@ -265,7 +261,7 @@ public class Game {
                 menu.showMessage("Erreur suppression boîte : " + e.getMessage());
             }
         }
-        menu.showMessage(player.toString() + " " + player.getOffensiveInfo());
+        menu.showMessage(player.toString() + " " + player.getOffensiveInfo() + " " + player.getDefensiveInfo());
     }
 
     /**
@@ -274,17 +270,25 @@ public class Game {
     private void handleVictory() {
         menu.showMessage("Vous avez atteint la fin du plateau !");
         gameFinished = true;
-        try {
-            saveService.saveVictory(player, board);
-        } catch (SQLException e) {
-            menu.showMessage("Erreur lors de la sauvegarde : " + e.getMessage());
-        }
-        String[] winOptions = {"Rejouer", "Menu Principal"};
+        String[] winOptions = {"Rejouer sur ce plateau", "Nouvelle partie", "Menu Principal"};
         int choice = menu.displayMenu("Que voulez-vous faire ?", winOptions);
         switch (choice) {
-            case 1 -> restartGame();
+            case 1 -> {
+                // On garde le plateau, on sauvegarde juste le personnage sans supprimer le board
+                try { saveService.saveCharacterOnly(player); }
+                catch (SQLException e) { menu.showMessage("Erreur : " + e.getMessage()); }
+                restartGame();
+            }
             case 2 -> {
-                return;
+                // On supprime le plateau et on repart sur une nouvelle partie
+                try { saveService.saveVictory(player, board); }
+                catch (SQLException e) { menu.showMessage("Erreur : " + e.getMessage()); }
+                startGame();
+            }
+            case 3 -> {
+                // On supprime le plateau et on repart sur le menu pricipal
+                try { saveService.saveVictory(player, board); }
+                catch (SQLException e) { menu.showMessage("Erreur : " + e.getMessage()); }
             }
         }
     }
@@ -355,7 +359,7 @@ public class Game {
             int action = menu.displayMenu("Que voulez-vous modifier ?", actions);
             switch (action) {
                 case 1 -> updateCharacterName(target);
-                case 2 -> { return; }
+                case 2 -> {}
             }
 
         } catch (SQLException e) {

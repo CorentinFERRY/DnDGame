@@ -77,6 +77,10 @@ public class Warrior extends Character{
             this.setAttack(this.getAttack()- this.weapon.getAttackBonus());
             weapon = null;
         }
+        if(this.getDefensiveEquipment() != null){
+            this.setDefense(0);
+            this.setDefensiveEquipment(null);
+        }
     }
 
 

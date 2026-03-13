@@ -6,6 +6,7 @@ import fr.campus.dndgame.main.model.enemies.Goblin;
 import fr.campus.dndgame.main.model.enemies.Sorcerer;
 import fr.campus.dndgame.main.model.equipments.*;
 import fr.campus.dndgame.main.model.equipments.defensives.LargePotion;
+import fr.campus.dndgame.main.model.equipments.defensives.Shield;
 import fr.campus.dndgame.main.model.equipments.defensives.StandardPotion;
 import fr.campus.dndgame.main.model.equipments.offensives.FireBall;
 import fr.campus.dndgame.main.model.equipments.offensives.Lightning;
@@ -80,7 +81,8 @@ public class Board {
                 () -> new SurpriseBox(new Sword()),            4,
                 () -> new SurpriseBox(new FireBall()),         2,
                 () -> new SurpriseBox(new StandardPotion()),   6,
-                () -> new SurpriseBox(new LargePotion()),      2
+                () -> new SurpriseBox(new LargePotion()),      2,
+                () -> new SurpriseBox(new Shield("Bouclier du débutant",1)), 2
         );
 
         //On place nos éléments de façon aléatoire via placeRandom()
@@ -197,11 +199,6 @@ public class Board {
         return "Le plateau à " + size + " cases.";
     }
 
-    /**
-     * Place aléatoirement les éléments de sur mon plateau
-     *
-     * @param positions Liste des positions disponible (préalablement mélangée)
-     * @param count Le nombre d'élément à placer
     /**
      * Place des éléments de manière aléatoire sur le plateau.
      * Crée des instances d'ennemis ou de boîtes surprises et les place sur des positions aléatoires.

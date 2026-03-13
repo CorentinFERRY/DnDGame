@@ -107,7 +107,8 @@ public abstract class Equipment {
      * Utilise l'équipement sur un personnage.
      * L'effet dépend du type d'équipement (arme/sort augmente l'attaque,
      * potion/bouclier augmente la défense ou soigne, etc.).
-     * 
+     *
+     * @param menu  Le menu pour l'affichage
      * @param character Le personnage sur lequel utiliser l'équipement
      */
     public abstract void use(Character character, Menu menu);

@@ -10,6 +10,7 @@ import fr.campus.dndgame.main.model.enemies.Enemy;
 import fr.campus.dndgame.main.model.equipments.Equipment;
 import fr.campus.dndgame.main.model.equipments.SurpriseBox;
 import fr.campus.dndgame.main.model.equipments.defensives.DefensiveEquipment;
+import fr.campus.dndgame.main.model.equipments.defensives.Potion;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -285,25 +286,34 @@ public class SaveService {
      */
     public void saveVictory(Character player, Board board) throws SQLException {
         deleteGame(board);
+        board.setId(0);
         player.setBoardId(0);
         saveCharacterOnly(player);
     }
 
+    /**
+     * Permet la suppression d'un enemy en BDD
+     * @param enemy L'ennemi à supprimer
+     * @throws SQLException en cas d'erreur d'accès à la base de données
+     */
     public void deleteEnemy(Enemy enemy) throws SQLException{
         enemyDao.delete(enemy.getId());
     }
 
+    /**
+     * Permet la suppression d'une boite surprise utilisée en BDD
+     * Suppression automatique de la potion car consommer imédiatement
+     * @param box La box à supprimer
+     * @throws SQLException en cas d'erreur d'accès à la base de données
+     */
     public void deleteBox(SurpriseBox box) throws SQLException {
-        // Supprimer la box
         if (box.getId() > 0)
             surpriseBoxDao.delete(box.getId());
+        Equipment equip = box.getEquipment();
+        if (equip == null || equip.getId() <= 0) return;
 
-        // Supprimer l'équipement qu'elle contenait
-        if (box.getEquipment() != null && box.getEquipment().getId() > 0) {
-            if (box.getEquipment().isOffensive())
-                offensiveEquipmentDao.delete(box.getEquipment().getId());
-            else
-                defensiveEquipmentDao.delete(box.getEquipment().getId());
+        if(equip instanceof Potion){
+            defensiveEquipmentDao.delete(equip.getId());
         }
     }
 }
