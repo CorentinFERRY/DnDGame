@@ -145,7 +145,7 @@ public class Game {
     private void runGameLoop() {
         menu.showMessage("Position actuelle : " + player.getPosition() + " / " + board.getSize());
         // Rejouer tour par tour
-        while (!gameFinished && player.isAlive()) {
+        while (!gameFinished && !isPlayerNotReady() && player.isAlive()) {
             String[] turnOptions = {"Jouer le tour", "Sauvegarder", "Quitter au menu"};
             int choice = menu.displayMenu("Que voulez-vous faire ?", turnOptions);
             switch (choice) {
@@ -209,7 +209,6 @@ public class Game {
         menu.showMessage("Un ennemi apparaît : " + enemy);
 
         while(!fightFinished && player.isAlive()){
-
             String[] fightOptions = {"Attaque", "Fuite"};
             menu.showMessage(player + " " + player.getOffensiveInfo() + " " + player.getDefensiveInfo());
             int choice = menu.displayMenu("Combat",fightOptions);
@@ -235,7 +234,6 @@ public class Game {
                     break;
             }
         }
-
         if (!player.isAlive()){
             menu.showMessage("Game Over !");
             gameFinished = true;
@@ -249,6 +247,7 @@ public class Game {
      *
      */
     private void interactWithCell(){
+        if (isPlayerNotReady()) return;
         Cell cell = board.getCell(player.getPosition());
         menu.showMessage(cell.toString());
         SurpriseBox box = cell.getBox();
