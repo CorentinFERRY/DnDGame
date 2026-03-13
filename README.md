@@ -62,7 +62,21 @@ Ou directement depuis votre IDE, lancez la classe `Main.java`.
 Pour générer la documentation Javadoc du projet :
 
 ```bash
-javadoc -d docs/javadoc -sourcepath src fr.campus.dndgame fr.campus.dndgame.main.model.board fr.campus.dndgame.main.model.characters fr.campus.dndgame.main.model.enemies fr.campus.dndgame.main.model.equipments fr.campus.dndgame.main.game fr.campus.dndgame.main.utils
+javadoc -d docs/javadoc -sourcepath src \
+  fr.campus.dndgame.main \
+  fr.campus.dndgame.main.dao \
+  fr.campus.dndgame.main.dao.impl \
+  fr.campus.dndgame.main.dao.interfaces \
+  fr.campus.dndgame.main.db \
+  fr.campus.dndgame.main.factory \
+  fr.campus.dndgame.main.game \
+  fr.campus.dndgame.main.model.board \
+  fr.campus.dndgame.main.model.characters \
+  fr.campus.dndgame.main.model.enemies \
+  fr.campus.dndgame.main.model.equipments \
+  fr.campus.dndgame.main.model.equipments.defensives \
+  fr.campus.dndgame.main.model.equipments.offensives \
+  fr.campus.dndgame.main.utils
 ```
 
 Cela crée un dossier `docs/javadoc` contenant la documentation HTML. Ouvrez `docs/javadoc/index.html` dans votre navigateur pour consulter la documentation.
