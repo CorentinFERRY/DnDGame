@@ -64,7 +64,6 @@ Pour générer la documentation Javadoc du projet :
 ```bash
 javadoc -d docs/javadoc -sourcepath src \
   fr.campus.dndgame.main \
-  fr.campus.dndgame.main.dao \
   fr.campus.dndgame.main.dao.impl \
   fr.campus.dndgame.main.dao.interfaces \
   fr.campus.dndgame.main.db \
@@ -108,7 +107,7 @@ Cela crée un dossier `docs/javadoc` contenant la documentation HTML. Ouvrez `do
 - **Armes** : Augmentent les dégâts réservées au Warrior
 - **Sorts** : Capacités spéciales pour les wizards
 - **Potions** : Récupération de santé
-- **Shields** : Reduction de dommage 
+- **Shields** : Reduction de dommage
 
 ### 🗺️ Plateau de jeu
 
@@ -183,7 +182,7 @@ direction TB
 	    +isGameFinished()
 	    +playerIsNotReady()
     }
-    
+
     class Board {
 	    +int size
 	    Cell[] cells
@@ -267,7 +266,7 @@ direction TB
 	    +int healAmount
 	    +use(Character)
     }
-    
+
     class Shield {
       +int defenseBonus
       +use(Character)
@@ -317,7 +316,7 @@ direction TB
     Sorcerer --|> Enemy
     Goblin --|> Enemy
     Dragon --|> Enemy
-   
+
 ```
 
 ---
